@@ -1,0 +1,17 @@
+type: group
+fields:
+  og_headline:
+    type: headline
+    label: fabianmichael.meta.og.headline
+    numbered: false
+    help: fabianmichael.meta.og.help
+  og_site_name:
+    type: text
+    label: fabianmichael.meta.og_site_name.label
+    placeholder: "{{ site.title }}"
+    help: fabianmichael.meta.og_site_name.help
+  og_image:
+    extends: fields/meta/og-image
+    query: site.images.metaFilterOgImages
+    label: fabianmichael.meta.global_og_image.label
+    help: fabianmichael.meta.global_og_image.help

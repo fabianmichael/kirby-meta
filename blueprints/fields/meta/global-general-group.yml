@@ -1,0 +1,30 @@
+type: group
+fields:
+  meta_general_headline:
+    type: headline
+    label: fabianmichael.meta.global_general.headline
+    numbered: false
+  meta_description:
+    type: text
+    label: fabianmichael.meta.description.label
+    help: fabianmichael.meta.global_description.help
+  meta_title_separator:
+    type: select
+    label: fabianmichael.meta.title_separator.label
+    default: ""
+    placeholder: "|"
+    options: ["~" , "-" , "–" , "—" , ":" , "/" , "⋆" , "·" , "•" , "~" , "×" , "*" , "‣", "→", "←", "<" , ">" , "«" , "»" , "‹" , "›", "♠︎", "♣︎", "♥︎", "♦︎", "☙", "❦", "❧", "☭"]
+    width: 1/3
+    help: fabianmichael.meta.title_separator.help
+  meta_title_preview:
+    type: meta-title-preview
+    label: Preview
+    width: 2/3
+  sitemap_priority:
+    extends: fields/meta/sitemap-priority
+    help: fabianmichael.meta.sitemap.global_priority.help
+    width: 1/2
+  sitemap_changefreq:
+    extends: fields/meta/global-sitemap-changefreq
+    width: 1/2
+

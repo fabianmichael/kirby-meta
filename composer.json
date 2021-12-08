@@ -1,0 +1,35 @@
+{
+    "name": "fabianmichael/kirb-meta",
+    "type": "kirby-plugin",
+    "version": "0.0.1-alpha",
+    "license": "MIT",
+    "description": "Your all-in-one powerhouse for any SEO and metadata needs imaginable.",
+    "authors": [
+        {
+            "name": "Fabian Michael",
+            "email": "hallo@fabianmichael.de"
+        }
+    ],
+    "keywords": [
+        "kirby3",
+        "kirby3-cms",
+        "kirby3-plugin",
+        "meta",
+        "metadata",
+        "seo",
+        "panel"
+    ],
+    "autoload": {
+        "psr-4": {
+            "FabianMichael\\Meta\\": "src/"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    },
+    "require": {
+        "php": ">=8.0.0",
+        "getkirby/composer-installer": "^1.2"
+    }
+}

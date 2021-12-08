@@ -1,0 +1,8 @@
+type: range
+label: fabianmichael.meta.sitemap.priority.label
+min: 0
+max: 1
+step: 0.1
+default: 0.5
+help: fabianmichael.meta.sitemap.priority.help
+width: 1/2

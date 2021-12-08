@@ -1,0 +1,30 @@
+type: group
+fields:
+  meta_general_headline:
+    type: headline
+    label: fabianmichael.meta.general.headline
+    numbered: false
+  meta_description:
+    type: text
+    label: fabianmichael.meta.description.label
+    placeholder: "{{ page.meta.get('meta_description', true, true) }}"
+    help: fabianmichael.meta.description.help
+  meta_title:
+    type: text
+    label: fabianmichael.meta.title.label
+    placeholder: "{{ page.title }}"
+    help: fabianmichael.meta.title.help
+  meta_title_preview:
+    type: meta-title-preview
+    label: fabianmichael.meta.title_preview.label
+  meta_canonical_url:
+    type: url
+    label: fabianmichael.meta.canonical_url.label
+    placeholder: "{{ page.url }}"
+    help: fabianmichael.meta.canonical_url.help
+  sitemap_priority:
+    extends: fields/meta/sitemap-priority
+    width: 1/2
+  sitemap_changefreq:
+    extends: fields/meta/sitemap-changefreq
+    width: 1/2

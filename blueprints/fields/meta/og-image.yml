@@ -1,0 +1,12 @@
+type: files
+label: fabianmichael.meta.og_image.label
+multiple: false
+empty: fabianmichael.meta.image.empty
+layout: cards
+size: small
+image:
+  back: white
+  ratio: 1200/630
+  cover: true
+uploads: meta-og-image
+help: fabianmichael.meta.og_image.help

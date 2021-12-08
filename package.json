@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "dev": "npx -y kirbyup panel/index.js --watch",
+    "build": "npx -y kirbyup panel/index.js"
+  },
+  "devDependencies": {
+    "kirbyup": "^0.21.0"
+  },
+  "dependencies": {
+    "vuex": "^3.6.2"
+  }
+}

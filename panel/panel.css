@@ -1,0 +1,10 @@
+.k-meta-warning-box {
+  display: block;
+  background: var(--theme-bg);
+  color: var(--color-dark);
+  border-radius: var(--rounded-xs);
+  line-height: 1.25rem;
+  margin-top: var(--spacing-4);
+  border-inline-start: 2px solid var(--theme-light);
+  padding: .5rem 1.5rem;
+}
