@@ -122,8 +122,8 @@ class PageMeta
 
         $website = [
             '@type' => 'WebSite',
-            '@id'   => url('/#website'),
-            'url'   => $websiteId,
+            '@id'   => $websiteId,
+            'url'   => url(),
             'name'  => $site->title()->toString(),
             'description' => $site->meta_description()->toString(),
         ];
