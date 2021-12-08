@@ -1,7 +1,7 @@
 <?php return array(
     'root' => array(
-        'pretty_version' => '0.0.1-alpha',
-        'version' => '0.0.1.0-alpha',
+        'pretty_version' => '0.0.2-alpha',
+        'version' => '0.0.2.0-alpha',
         'type' => 'kirby-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,8 +11,8 @@
     ),
     'versions' => array(
         'fabianmichael/kirby-meta' => array(
-            'pretty_version' => '0.0.1-alpha',
-            'version' => '0.0.1.0-alpha',
+            'pretty_version' => '0.0.2-alpha',
+            'version' => '0.0.2.0-alpha',
             'type' => 'kirby-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
