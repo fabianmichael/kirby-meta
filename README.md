@@ -109,7 +109,6 @@ meta_description string
 og_image File
 @graph array
 @social array
-@og_image.field string
 
 ### Using hooks
 
