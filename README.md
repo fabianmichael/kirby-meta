@@ -123,10 +123,6 @@ the meta plugin provides a set of handy hooks, allowing you to further add/remov
 | `meta.jsonld:after` | `array $json`, `PageMeta $meta`, `Page $page` | After the Schema.org graph has been generated. This allows you to pass additional data to the array. |
 | `meta.social:after` | `array $social`, `PageMeta $meta`, `Page $page` | Allows you to alter the OpenGraph/Twitter card data. |
 
-## License
-
-This plugin is under the MIT license (see LICENSE file for details).
-
 ## Credits
 
 This is partly based on an older version of the meta plugin, that I had initially
