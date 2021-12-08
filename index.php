@@ -2,7 +2,7 @@
 
 use Kirby\Cms\App as Kirby;
 
-require __DIR__ . '/vendor/autoload.php';
+@include_once __DIR__ . '/vendor/autoload.php';
 
 Kirby::plugin('fabianmichael/meta', [
     'options' => [
