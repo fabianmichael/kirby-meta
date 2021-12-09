@@ -233,6 +233,7 @@ class PageMeta
 
             // load from content/fallback
             return $this
+                ->page
                 ->content()
                 ->get("robots_{$name}")
                 ->or(SiteMeta::robots($name))
