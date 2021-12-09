@@ -68,7 +68,7 @@ class Sitemap
             return false;
         }
 
-        if ($page->status() === 'unlisted'
+        if (($page->isHomePage() === false && $page->status() === 'unlisted')
             && preg_match($templatesIncludeUnlistedRegex, $page->intendedTemplate()->name()) !== 1
             && preg_match($pagesIncludeUnlistedRegex, $page->id()) !== 1
         ) {
