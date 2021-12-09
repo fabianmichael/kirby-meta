@@ -16,6 +16,7 @@ browsers and beyond.
 
 **Future plans:**
 
+- 🌍 Add German translation
 - 🌍 Compability with multilanguage setups
 - 📋 Dedicated panel area for debugging site-wide meta information
 - ✅ Live-check of metadata with hints in the panel
