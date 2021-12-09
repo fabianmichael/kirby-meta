@@ -14,17 +14,13 @@ class Sitemap
         $sitemap[] = '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
 
         foreach (site()->index() as $item) {
-            if (static::isPageIndexible($item) === false) {
-                // Test general indexability
-                continue;
-            }
 
             $meta = $item->meta();
 
-            if ($meta->robots('index') === false) {
+            if (static::isPageIndexible($item) === false || $meta->robots('index') === false) {
                 // Exclude page, if explicitly excluded in page settings
                 // for global settings
-                return false;
+                continue;
             }
 
             $sitemap[] = '<url>';
@@ -85,6 +81,11 @@ class Sitemap
         if (preg_match($pagesExcludeRegex, $page->id()) === 1) {
             // Page is in exclude-list of page IDs
             return false;
+        }
+
+        if ($page->parent() !== null) {
+            // Test indexability of parent pages as well
+            return static::isPageIndexible($page->parent());
         }
 
         return true;
