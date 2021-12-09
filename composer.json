@@ -1,7 +1,7 @@
 {
     "name": "fabianmichael/kirby-meta",
     "type": "kirby-plugin",
-    "version": "0.0.5-alpha",
+    "version": "0.0.6-alpha",
     "license": "MIT",
     "description": "Your all-in-one powerhouse for any SEO and metadata needs imaginable.",
     "authors": [

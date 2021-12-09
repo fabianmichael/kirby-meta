@@ -26,7 +26,7 @@ fields:
     layout: cards
     size: small
     multiple: false
-    query: site.files.filterBy("template", "meta-logo")
+    query: site.files.filterBy("mime", "in", ["image/jpeg", "image/png", "image/svg+xml"])
     uploads: meta-logo
     image:
       back: white
