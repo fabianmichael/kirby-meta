@@ -7,10 +7,6 @@ $data = [
 
 snippet('meta/general', $data);
 
-if ($meta->isIndexible() === true || $meta->robots('index') === false) {
-    return;
-}
-
 if ($kirby->option('fabianmichael.meta.robots') !== false) {
     snippet('meta/robots', $data);
 }
