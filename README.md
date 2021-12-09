@@ -14,6 +14,10 @@ browsers and beyond.
 - 🦊 Easy-to-understand language in the panel, providing a good middle ground between simplicity and extensive control options.
 - 🌍 All blueprints are fully translatable
 
+**TO DO**
+
+- [ ] Generate correct fallback title for homepage in share preview widget.
+
 **Future plans:**
 
 - 🌍 Add German translation
