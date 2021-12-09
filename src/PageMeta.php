@@ -387,7 +387,7 @@ class PageMeta
 
         $title[] = $this->page->site()->title()->toString();
 
-        return new Field($this->page, 'title', implode('' , $title));
+        return new Field($this->page, 'title', implode(' ' , $title));
     }
 
     public function og_image(bool $fallback = true): ?File
