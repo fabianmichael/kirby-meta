@@ -17,7 +17,7 @@ return function (Kirby $kirby) {
         $routes[] = [
             'pattern' => 'robots.txt',
             'method' => 'ALL',
-            'action' => function () use ($indexingAllowed) {
+            'action' => function () use ($kirby, $indexingAllowed) {
                 $robots = [
                     'User-agent: *',
                     'Allow: /',
@@ -27,7 +27,7 @@ return function (Kirby $kirby) {
                     $robots[] = 'Sitemap: ' . url('sitemap.xml');
                 }
 
-                return kirby()
+                return $kirby
                     ->response()
                     ->type('text')
                     ->body(implode(PHP_EOL, $robots));
@@ -40,13 +40,13 @@ return function (Kirby $kirby) {
 
         $routes[] = [
             'pattern' => 'sitemap.xml',
-            'action' => function () {
+            'action' => function () use ($kirby) {
                 $sitemap  = [];
-                $cache    = kirby()->cache('pages');
+                $cache    = $kirby->cache('pages');
                 $cacheKey = 'sitemap.xml';
 
                 if (option('debug') === true || !($sitemap = $cache->get($cacheKey))) {
-                    $sitemap = Sitemap::generate();
+                    $sitemap = Sitemap::generate($kirby);
                     $cache->set($cacheKey, $sitemap);
                 }
 

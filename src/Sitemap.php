@@ -2,19 +2,23 @@
 
 namespace FabianMichael\Meta;
 
+use DOMDocument;
 use Kirby\Cms\Page;
-use Kirby\Toolkit\Xml;
-
+use Kirby\Cms\App as Kirby;
 
 class Sitemap
 {
-    public static function generate(): string
+    public static function generate(Kirby $kirby): string
     {
-        $sitemap[] = '<?xml version="1.0" encoding="UTF-8"?>';
-        $sitemap[] = '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+        $languages = $kirby->languages();
 
-        foreach (site()->index() as $item) {
+        $doc = new DOMDocument('1.0', 'UTF-8');
+        $doc->formatOutput = true;
+        $root = $doc->createElementNS('http://www.sitemaps.org/schemas/sitemap/0.9','urlset');
+        $root->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:xlink', 'http://www.w3.org/1999/xlink');
+        $root = $doc->appendChild($root);
 
+        foreach ($kirby->site()->index() as $item) {
             $meta = $item->meta();
 
             if (static::isPageIndexible($item) === false || $meta->robots('index') === false) {
@@ -23,26 +27,37 @@ class Sitemap
                 continue;
             }
 
-            $sitemap[] = '<url>';
-            $sitemap[] = '  <loc>' . Xml::encode($item->url()) . '</loc>';
+            $url = $doc->createElement('url');
+            $url->appendChild($doc->createElement('loc', $item->url()));
 
             $priority = $meta->priority();
 
-            if ($priority !== null) {
-                $sitemap[] = '  <priority>' . number_format($priority, 1, '.', '') . '</priority>';
+            if ($priority !== null) { // could be 0.0, so has to be checked against NULL
+                $url->appendChild($doc->createElement('priority', number_format($priority, 1, '.', '')));
             }
 
             if ($changefreq = $meta->changefreq()) {
-                $sitemap[] = '  <changefreq>' . $changefreq . '</changefreq>';
+                $url->appendChild($doc->createElement('changefreq', $changefreq));
             }
 
-            $sitemap[] = '</url>';
+            foreach ($languages as $language) {
+                if ($language->isDefault() === true) {
+                    continue;
+                }
+
+                $linkEl = $doc->createElement('xhtml:link');
+                $linkEl->setAttribute('rel', 'alternate');
+                $linkEl->setAttribute('hreflang', $code = $language->code());
+                $linkEl->setAttribute('href', $item->url($code));
+                $url->appendChild($linkEl);
+            }
+
+            $url->appendChild($doc->createElement('lastmod', date('Y-m-d', $meta->lastmod())));
+
+            $root->appendChild($url);
         }
 
-        $sitemap[] = '</urlset>';
-
-
-        return implode(PHP_EOL, $sitemap);
+        return $doc->saveXML();
     }
 
     public static function isPageIndexible(Page $page): bool

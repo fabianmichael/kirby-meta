@@ -192,6 +192,10 @@ class PageMeta
         return $json;
     }
 
+    public function lastmod() {
+        return (int) $this->metadata('lastmod', $this->page->modified('U', 'date'));
+    }
+
     public function locale(): ?string
     {
         if ($language = $this->page->kirby()->language()) {
