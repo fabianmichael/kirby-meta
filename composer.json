@@ -1,7 +1,7 @@
 {
     "name": "fabianmichael/kirby-meta",
     "type": "kirby-plugin",
-    "version": "0.0.12-alpha",
+    "version": "0.0.13-alpha",
     "license": "MIT",
     "description": "Your all-in-one powerhouse for any SEO and metadata needs imaginable.",
     "authors": [
@@ -29,7 +29,9 @@
     },
     "require": {
         "php": ">=8.0.0",
-        "getkirby/composer-installer": "^1.2",
+        "getkirby/composer-installer": "^1.2"
+    },
+    "suggest": {
         "fabianmichael/kirby-multi-toggle-field": "^1.0"
     }
 }

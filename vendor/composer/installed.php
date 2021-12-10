@@ -19,15 +19,6 @@
             'reference' => NULL,
             'dev_requirement' => false,
         ),
-        'fabianmichael/kirby-multi-toggle-field' => array(
-            'pretty_version' => '1.0.2',
-            'version' => '1.0.2.0',
-            'type' => 'kirby-plugin',
-            'install_path' => __DIR__ . '/../../site/plugins/kirby-multi-toggle-field',
-            'aliases' => array(),
-            'reference' => 'a56934e17c21e6988b3c2f357f08c717fe87eb2f',
-            'dev_requirement' => false,
-        ),
         'getkirby/composer-installer' => array(
             'pretty_version' => '1.2.1',
             'version' => '1.2.1.0',
