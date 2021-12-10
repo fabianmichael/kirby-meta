@@ -39,6 +39,7 @@ return function (Kirby $kirby): array {
                 'reset' => false,
                 'equalize' => false,
                 'type' => $toggleType,
+                'translate' => false,
                 'width' => '1/2',
             ];
         } else {
@@ -55,6 +56,7 @@ return function (Kirby $kirby): array {
                     ],
                 ],
                 'type' => $toggleType,
+                'translate' => false,
                 'width' => '1/2',
             ];
         }

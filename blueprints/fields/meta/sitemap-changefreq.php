@@ -18,6 +18,7 @@ return function (Kirby $kirby) {
         'type' => 'select',
         'label' => t('fabianmichael.meta.sitemap.changefreq.label'),
         'placeholder' => $placeholder,
+        'translate' => false,
         'options' => [
             [
                 'value' => 'always',

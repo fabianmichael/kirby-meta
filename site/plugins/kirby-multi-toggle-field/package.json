@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "dev": "npx -y kirbyup src/index.js --watch",
+    "build": "npx -y kirbyup src/index.js"
+  },
+  "devDependencies": {
+    "kirbyup": "^0.21.1"
+  },
+  "dependencies": {
+    "vuelidate": "^0.7.6"
+  }
+}

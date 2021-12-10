@@ -11,6 +11,7 @@ fields:
     options:
       person: Person
       org: Organization
+    translate: false
     help: fabianmichael.meta.schema.website_owner.help
   meta_org_name:
     type: text
@@ -39,6 +40,7 @@ fields:
     required: true
     empty: fabianmichael.meta.schema.meta_person.empty
     help: fabianmichael.meta.schema.meta_person.help
+    translate: false
     when:
       meta_website_owner: person
   meta_privacy_notice:

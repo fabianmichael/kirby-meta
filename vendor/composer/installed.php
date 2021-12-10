@@ -1,7 +1,7 @@
 <?php return array(
     'root' => array(
-        'pretty_version' => '0.0.2-alpha',
-        'version' => '0.0.2.0-alpha',
+        'pretty_version' => '0.0.12-alpha',
+        'version' => '0.0.12.0-alpha',
         'type' => 'kirby-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,12 +11,21 @@
     ),
     'versions' => array(
         'fabianmichael/kirby-meta' => array(
-            'pretty_version' => '0.0.2-alpha',
-            'version' => '0.0.2.0-alpha',
+            'pretty_version' => '0.0.12-alpha',
+            'version' => '0.0.12.0-alpha',
             'type' => 'kirby-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
             'reference' => NULL,
+            'dev_requirement' => false,
+        ),
+        'fabianmichael/kirby-multi-toggle-field' => array(
+            'pretty_version' => '1.0.2',
+            'version' => '1.0.2.0',
+            'type' => 'kirby-plugin',
+            'install_path' => __DIR__ . '/../../site/plugins/kirby-multi-toggle-field',
+            'aliases' => array(),
+            'reference' => 'a56934e17c21e6988b3c2f357f08c717fe87eb2f',
             'dev_requirement' => false,
         ),
         'getkirby/composer-installer' => array(

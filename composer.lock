@@ -4,8 +4,44 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "50e314d158a216f10e5cae6487ee3a45",
+    "content-hash": "398a7e17b2c5a2948ee7fdd571aa42e6",
     "packages": [
+        {
+            "name": "fabianmichael/kirby-multi-toggle-field",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fabianmichael/kirby-multi-toggle-field.git",
+                "reference": "a56934e17c21e6988b3c2f357f08c717fe87eb2f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fabianmichael/kirby-multi-toggle-field/zipball/a56934e17c21e6988b3c2f357f08c717fe87eb2f",
+                "reference": "a56934e17c21e6988b3c2f357f08c717fe87eb2f",
+                "shasum": ""
+            },
+            "require": {
+                "getkirby/composer-installer": "^1.1",
+                "php": ">=8.0"
+            },
+            "type": "kirby-plugin",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabian Michael",
+                    "email": "hallo@fabianmichael.de"
+                }
+            ],
+            "description": "Toggle field with multiple options",
+            "support": {
+                "issues": "https://github.com/fabianmichael/kirby-multi-toggle-field/issues",
+                "source": "https://github.com/fabianmichael/kirby-multi-toggle-field/tree/1.0.2"
+            },
+            "time": "2021-12-06T12:24:08+00:00"
+        },
         {
             "name": "getkirby/composer-installer",
             "version": "1.2.1",
