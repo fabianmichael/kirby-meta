@@ -5,6 +5,7 @@ namespace FabianMichael\Meta;
 use Kirby\Cms\App as Kirby;
 use Kirby\Cms\Field;
 use Kirby\Cms\File;
+use Kirby\Cms\Language;
 use Kirby\Cms\Page;
 
 class PageMeta
@@ -18,22 +19,24 @@ class PageMeta
         return $this->get(strtolower($name), ...$arguments);
     }
 
-    protected function __construct(Page $page)
+    protected function __construct(Page $page, ?string $languageCode = null)
     {
-        $this->kirby = $page->kirby();
-        $this->page  = $page;
+        $this->kirby        = $page->kirby();
+        $this->languageCode = $languageCode;
+        $this->page         = $page;
 
         // Get metadata from page, if possible
         if (method_exists($this->page, 'metadata') === true) {
-            $this->metadata = $this->page->metadata();
+            $this->metadata = $this->page->metadata($languageCode);
         }
 
         // Allow other plugins/config to alter metadata after load
         $this->metadata = $this->kirby->apply(
             'meta.load:after',
             [
-                'metadata' => $this->metadata,
-                'page'     => $this->page,
+                'metadata'     => $this->metadata,
+                'page'         => $this->page,
+                'languageCode' => $this->languageCode,
             ],
             'metadata'
         );
@@ -69,7 +72,7 @@ class PageMeta
         mixed $fallback = null): Field
     {
         // From content file ...
-        $field = $this->page->content()->get($key);
+        $field = $this->page->content($this->languageCode)->get($key);
 
         if ($field->isNotEmpty() === true) {
             return $field;
@@ -90,7 +93,7 @@ class PageMeta
 
         // From site as fallback ...
         if ($siteFallback === true) {
-            $value = $this->page->site()->content()->get($key);
+            $value = $this->page->site()->content($this->languageCode)->get($key);
 
             if ($value->isNotEmpty()) {
                 return $value;
@@ -192,6 +195,19 @@ class PageMeta
         return $json;
     }
 
+    public function language(): ?Language
+    {
+        return empty($this->languageCode) === false
+            ? $this->kirby->language($this->languageCode)
+            : null;
+    }
+
+    public function languageCode(): ?string
+    {
+        return $this->languageCode;
+    }
+
+
     public function lastmod() {
         return (int) $this->metadata('lastmod', $this->page->modified('U', 'date'));
     }
@@ -214,9 +230,9 @@ class PageMeta
             : $fallback;
     }
 
-    public static function of(Page $site): static
+    public static function of(Page $page, ?string $languageCode = null): static
     {
-        return new static($site);
+        return new static($page, $languageCode);
     }
 
     public function priority(): ?float
@@ -238,7 +254,7 @@ class PageMeta
             // load from content/fallback
             return $this
                 ->page
-                ->content()
+                ->content($this->languageCode)
                 ->get("robots_{$name}")
                 ->or(SiteMeta::robots($name))
                 ->toBool();
@@ -384,7 +400,7 @@ class PageMeta
 
         if ($this->page->isHomePage() === false) {
             // Todo: Support pagination
-            $title[] = $this->page->content()->get('meta_title')
+            $title[] = $this->page->content($this->languageCode)->get('meta_title')
                 ->or($this->page->title())->toString();
 
             $title[] = SiteMeta::titleSeparator();
@@ -409,7 +425,7 @@ class PageMeta
         }
 
         // Fallback to global thumbnail
-        if ($fallback === true && ($image = $this->page->site()->content()->get('og_image')->toFile())) {
+        if ($fallback === true && ($image = $this->page->site()->content($this->languageCode)->get('og_image')->toFile())) {
             return $image;
         }
 

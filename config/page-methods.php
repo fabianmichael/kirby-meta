@@ -3,7 +3,7 @@
 use FabianMichael\Meta\PageMeta;
 
 return [
-    'meta' => function () {
-        return PageMeta::of($this);
+    'meta' => function (?string $languageCode = null) {
+        return PageMeta::of($this, $languageCode);
     },
 ];

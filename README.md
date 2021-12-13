@@ -132,7 +132,8 @@ After metadata has been loaded by calling the `$page->metadata()` method on a mo
 return [
   'meta.load:after' => function (
     array $metadata,
-    Page $page
+    Page $page,
+    ?string $languageCode
   ) {
     // set `thumbnail.png` as default share image for all pages,
     // if not other image was already set by a page model

@@ -3,15 +3,15 @@
 namespace FabianMichael\Meta;
 
 use DOMDocument;
+use DOMElement;
 use Kirby\Cms\Page;
 use Kirby\Cms\App as Kirby;
+use Kirby\Cms\Language;
 
 class Sitemap
 {
     public static function generate(Kirby $kirby): string
     {
-        $languages = $kirby->languages();
-
         $doc = new DOMDocument('1.0', 'UTF-8');
         $doc->formatOutput = true;
 
@@ -21,56 +21,63 @@ class Sitemap
         // Allow hook to change $doc and $root, e.g. adding namespaces or other attributes.
         $kirby->trigger('meta.sitemap:before', compact('kirby', 'doc', 'root'));
 
-        $root = $doc->appendChild($root);
+        if ($kirby->multilang() === true) {
+            $languages = $kirby->languages();
 
-        foreach ($kirby->site()->index() as $page) {
-            $meta = $page->meta();
-
-            if (static::isPageIndexible($page) === false || $meta->robots('index') === false) {
-                // Exclude page, if explicitly excluded in page settings
-                // for global settings
-                continue;
-            }
-
-            $url = $doc->createElement('url');
-            $url->appendChild($doc->createElement('loc', $page->url()));
-
-            $priority = $meta->priority();
-
-            if ($priority !== null) { // could be 0.0, so has to be checked against NULL
-                $url->appendChild($doc->createElement('priority', number_format($priority, 1, '.', '')));
-            }
-
-            if ($changefreq = $meta->changefreq()) {
-                $url->appendChild($doc->createElement('changefreq', $changefreq));
-            }
-
-            foreach ($languages as $language) {
-                if ($language->isDefault() === true) {
-                    continue;
+            foreach ($kirby->site()->index() as $page) {
+                foreach ($languages as $language) {
+                    static::urlsForPage($kirby, $page, $doc, $root, $language->code());
                 }
-
-                $linkEl = $doc->createElement('xhtml:link');
-                $linkEl->setAttribute('rel', 'alternate');
-                $linkEl->setAttribute('hreflang', $code = $language->code());
-                $linkEl->setAttribute('href', $page->url($code));
-                $url->appendChild($linkEl);
             }
-
-            // Add lastmod date either from metadata or from modified date of page
-            $url->appendChild($doc->createElement('lastmod', date('Y-m-d', $meta->lastmod())));
-
-            // Allow hook to alter the DOM
-            $kirby->trigger('meta.sitemap.url', compact('kirby', 'page', 'meta', 'doc', 'url'));
-
-            $root->appendChild($url);
         }
+
+        $root = $doc->appendChild($root);
 
         // Allow hook to alter the DOM
         $kirby->trigger('meta.sitemap:after', compact('kirby', 'doc', 'root'));
 
         return $doc->saveXML();
     }
+
+    protected static function urlsForPage(Kirby $kirby, Page $page, DOMDocument $doc, DOMElement $root, ?string $languageCode = null) {
+
+        $meta = $page->meta($languageCode);
+
+        if (static::isPageIndexible($page) === false || $meta->robots('index') === false) {
+            // Exclude page, if explicitly excluded in page settings
+            // for global settings
+            return;
+        }
+
+        $url = $doc->createElement('url');
+        $url->appendChild($doc->createElement('loc', $page->url($languageCode)));
+
+        $priority = $meta->priority();
+
+        if ($priority !== null) { // could be 0.0, so has to be checked against NULL
+            $url->appendChild($doc->createElement('priority', number_format($priority, 1, '.', '')));
+        }
+
+        if ($changefreq = $meta->changefreq()) {
+            $url->appendChild($doc->createElement('changefreq', $changefreq));
+        }
+
+        foreach ($kirby->languages() as $language) {
+            $linkEl = $doc->createElement('xhtml:link');
+            $linkEl->setAttribute('rel', 'alternate');
+            $linkEl->setAttribute('hreflang', $code = $language->code());
+            $linkEl->setAttribute('href', $page->url($code));
+            $url->appendChild($linkEl);
+        }
+
+        // Add lastmod date either from metadata or from modified date of page
+        $url->appendChild($doc->createElement('lastmod', date('Y-m-d', $meta->lastmod())));
+
+        // Allow hook to alter the DOM
+        $kirby->trigger('meta.sitemap.url', compact('kirby', 'page', 'meta', 'doc', 'url'));
+
+        $root->appendChild($url);
+}
 
     public static function isPageIndexible(Page $page): bool
     {
