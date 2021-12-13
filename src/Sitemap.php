@@ -78,7 +78,7 @@ class Sitemap
         $url->appendChild($doc->createElement('lastmod', date('Y-m-d', $meta->lastmod())));
 
         // Allow hook to alter the DOM
-        $kirby->trigger('meta.sitemap.url', compact('kirby', 'page', 'meta', 'doc', 'url'));
+        $kirby->trigger('meta.sitemap.url', compact('kirby', 'page', 'meta', 'doc', 'url', 'languageCode'));
 
         $root->appendChild($url);
 }
