@@ -3,6 +3,7 @@
 use FabianMichael\Meta\Sitemap;
 use FabianMichael\Meta\SiteMeta;
 use Kirby\Cms\App as Kirby;
+use Kirby\Filesystem\F;
 use Kirby\Http\Response;
 
 

@@ -14,21 +14,26 @@ class Sitemap
 
         $doc = new DOMDocument('1.0', 'UTF-8');
         $doc->formatOutput = true;
+
         $root = $doc->createElementNS('http://www.sitemaps.org/schemas/sitemap/0.9','urlset');
-        $root->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:xlink', 'http://www.w3.org/1999/xlink');
+        $root->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:xhtml', 'http://www.w3.org/1999/xlink');
+
+        // Allow hook to change $doc and $root, e.g. adding namespaces or other attributes.
+        $kirby->trigger('meta.sitemap:before', compact('kirby', 'doc', 'root'));
+
         $root = $doc->appendChild($root);
 
-        foreach ($kirby->site()->index() as $item) {
-            $meta = $item->meta();
+        foreach ($kirby->site()->index() as $page) {
+            $meta = $page->meta();
 
-            if (static::isPageIndexible($item) === false || $meta->robots('index') === false) {
+            if (static::isPageIndexible($page) === false || $meta->robots('index') === false) {
                 // Exclude page, if explicitly excluded in page settings
                 // for global settings
                 continue;
             }
 
             $url = $doc->createElement('url');
-            $url->appendChild($doc->createElement('loc', $item->url()));
+            $url->appendChild($doc->createElement('loc', $page->url()));
 
             $priority = $meta->priority();
 
@@ -48,14 +53,21 @@ class Sitemap
                 $linkEl = $doc->createElement('xhtml:link');
                 $linkEl->setAttribute('rel', 'alternate');
                 $linkEl->setAttribute('hreflang', $code = $language->code());
-                $linkEl->setAttribute('href', $item->url($code));
+                $linkEl->setAttribute('href', $page->url($code));
                 $url->appendChild($linkEl);
             }
 
+            // Add lastmod date either from metadata or from modified date of page
             $url->appendChild($doc->createElement('lastmod', date('Y-m-d', $meta->lastmod())));
+
+            // Allow hook to alter the DOM
+            $kirby->trigger('meta.sitemap.url', compact('kirby', 'page', 'meta', 'doc', 'url'));
 
             $root->appendChild($url);
         }
+
+        // Allow hook to alter the DOM
+        $kirby->trigger('meta.sitemap:after', compact('kirby', 'doc', 'root'));
 
         return $doc->saveXML();
     }

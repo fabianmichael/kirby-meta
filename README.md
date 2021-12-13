@@ -12,6 +12,8 @@ browsers and beyond.
 - 🚀 Customizable Metadata for auto-generated metadata from page contents
 - 💻 Extensive panel UI including social media previews
 - 🦊 Easy-to-understand language in the panel, providing a good middle ground between simplicity and extensive control options.
+- 🧙‍♂️ Most features can be enabled/disabled in config, panel UI only shows enabled features (thanks to dynamic blueprints)
+- 🪝 Hooks for altering the plugin’s behavior
 - 🌍 All blueprints are fully translatable
 
 **TO DO**
@@ -55,7 +57,7 @@ The options below have to be set in your `config.php`. Please note that every op
 
 | Key | Type | Default | Description |
 |:----|:-----|:--------|:------------|
-| `sitemap` | `bool` | `true` | When true, will generate an XML sitemap for search engines. The sitemap includes all listed pages by default. |
+| `sitemap` | `bool` | `true` | When true, will generate an XML sitemap for search engines. The sitemap includes all listed pages by default. ⚠️ If you disable the `robots` setting, no robots.txt will be served to sell search engines where your sitemap is located. |
 | `sitemap.pages.exclude` | `array` | `[]` | An array of page IDs to exlude from the sitemap. Values are treated as regular expressions, so they can include wildcards like e.g. `about/.*`. The error page is always excluded. |
 | `sitemap.pages.includeUnlisted` | `array` | `[]` | An array of page IDs to include in the sitemap, even if their status is `unlisted`. Values are treated as regular expressions, so they can include wildcards like e.g. `about/.*`. |
 | `sitemap.templates.exclude` | `array` | `[]` | An array of template names to exlude from the sitemap. Values are treated as regular expressions, so they can include wildcards like e.g. `article-(internal|secret)` |
@@ -122,11 +124,144 @@ the meta plugin provides a set of handy hooks, allowing you to further add/remov
 
 ⚠️ Hooks are a powerful tool that can break the plugin’s expected behavior for editors working on the panel. Use with care!
 
-| Hook | Parameters | Description |
-|:-----|:-----------|:------------|
-| `meta.load:after` | `array $metadata`, `Page $page` | After metadata has been loaded by calling the `$page->metadata()` method on a model. This allows you to inject additional data. |
-| `meta.jsonld:after` | `array $json`, `PageMeta $meta`, `Page $page` | After the Schema.org graph has been generated. This allows you to pass additional data to the array. |
-| `meta.social:after` | `array $social`, `PageMeta $meta`, `Page $page` | Allows you to alter the OpenGraph/Twitter card data. |
+#### `meta.load:after`
+
+After metadata has been loaded by calling the `$page->metadata()` method on a model. This allows you to inject additional data.
+
+```php
+return [
+  'meta.load:after' => function (
+    array $metadata,
+    Page $page
+  ) {
+    // set `thumbnail.png` as default share image for all pages,
+    // if not other image was already set by a page model
+    if (empty($metadata['og_image']) === true) {
+      $metadata['og_image'] = $page->image('thumbnail.png');
+    }
+    return $metadata;
+  },
+];
+```
+
+#### `meta.jsonld:after` hook
+
+After the Schema.org graph has been generated. This allows you to pass additional data to the array.
+
+```php
+return [
+  'meta.jsonld:after' => function (
+    array $json,
+    PageMeta $meta,
+    Page $page
+  ) {
+    // add breadcrumb to JSON-LD graph
+    $items = [];
+
+    $parents = $page->parents();
+
+    if ($parents->count() === 0) {
+      return $json;
+    }
+
+    $i = 0;
+
+    foreach ($parents->flip() as $parent) {
+      $items[] = [
+        '@type' => 'ListItem',
+        'position' => ++$i,
+        'item' => [
+          '@id' => $parent->url(),
+          'name' => $parent->title()->toString(),
+        ],
+      ];
+    }
+
+    $json['@graph'][] = [
+      '@type' => 'BreadcrumbList',
+      'itemListElement' => $items,
+    ];
+
+    return $json;
+  },
+];
+```
+
+#### `meta.social:after`
+
+Allows you to alter the OpenGraph/Twitter card data.
+
+```php
+return [
+  'meta.social:after' => function (
+    array $social,
+    PageMeta $meta,
+    Page $page
+  ) {
+    // add first video file of page to OpenGraph markup
+    if ($page->hasVideos()) {
+      $social[] = [
+        'property' => 'og:video',
+        'content'  => $page->videos()->first()->url(),
+      ];
+    }
+    return $social;
+  },
+];
+```
+
+
+#### `'meta.sitemap…` hooks
+
+These hooks allow you to completely alter the way how the sitemap is being generated. These functions are meant to manipulate the provided DOM document and elements directly and should not return anything.
+
+```php
+return [
+  'hooks' => [
+    'meta.sitemap:before' => function (
+      Kirby $kirby,
+      DOMDocument $doc,
+      DOMElement $root
+    ) {
+      // add namespace for image sitemap
+      $root->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:image', 'http://www.google.com/schemas/sitemap-image/1.1');
+    },
+
+    'meta.sitemap.url' => function (
+      Kirby $kirby,
+      Page $page,
+      PageMeta $meta,
+      DOMDocument $doc,
+      DOMElement $url
+    ) {
+      foreach ($page->images() as $image) {
+        // add all images from page to image sitemap.
+        $imageEl = $doc->createElement('image:image');
+        $imageEl->appendChild($doc->createElement('image:loc', $image->url()));
+
+        if ($image->alt()->isNotEmpty()) {
+          $imageEl->appendChild($doc->createElement('image:caption', $image->alt()));
+        }
+
+        $url->appendChild($imageEl);
+      }
+    },
+
+    'meta.sitemap:after' => function (
+      Kirby $kirby,
+      DOMDocument $doc,
+      DOMElement $root
+    ) {
+      foreach ($root->getElementsByTagName('url') as $url) {
+        if ($lastmod = $url->getElementsByTagName('lastmod')[0] ?? null) {
+          // remove lastmod date from sitemap entries for some reason …
+          $url->removeChild($lastmod);
+        }
+      }
+    },
+  ],
+];
+```
 
 ## Credits
 
