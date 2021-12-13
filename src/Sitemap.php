@@ -29,6 +29,10 @@ class Sitemap
                     static::urlsForPage($kirby, $page, $doc, $root, $language->code());
                 }
             }
+        } else {
+            foreach ($kirby->site()->index() as $page) {
+                static::urlsForPage($kirby, $page, $doc, $root);
+            }
         }
 
         $root = $doc->appendChild($root);
