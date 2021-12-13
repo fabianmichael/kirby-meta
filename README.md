@@ -233,7 +233,8 @@ return [
       Page $page,
       PageMeta $meta,
       DOMDocument $doc,
-      DOMElement $url
+      DOMElement $url,
+      ?string $languageCode
     ) {
       foreach ($page->images() as $image) {
         // add all images from page to image sitemap.
