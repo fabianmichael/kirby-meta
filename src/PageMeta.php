@@ -307,7 +307,10 @@ class PageMeta
 
         $social[] = [
             'property' => 'og:title',
-            'content'  => $this->get('og_title')->or($this->page->title()),
+            'content'  => $this->get('og_title')->or($this->page->isHomePage()
+                ? $site->og_site_name()->or($site->title())->toString()
+                : $this->page->title()
+            ),
         ];
 
         $description = $this->get('og_description', true, false)
@@ -397,16 +400,20 @@ class PageMeta
     public function title(): Field
     {
         $title = [];
+        $siteTitle = $this->page->site()->title();
 
-        if ($this->page->isHomePage() === false) {
+        if ($this->page->isHomePage() === true) {
+            $title[] = $this->page->content($this->languageCode)->get('meta_title')
+                ->or($siteTitle)->toString();
+        } else {
             // Todo: Support pagination
             $title[] = $this->page->content($this->languageCode)->get('meta_title')
                 ->or($this->page->title())->toString();
 
             $title[] = SiteMeta::titleSeparator();
+            $title[] = $siteTitle->toString();
         }
 
-        $title[] = $this->page->site()->title()->toString();
 
         return new Field($this->page, 'title', implode(' ' , $title));
     }

@@ -50,6 +50,7 @@ export default {
       headline: "Basic Meta Information",
       metadata_og_image: null,
       metadata_og_image_field: null,
+      page_is_homepage: null,
       page_title: null,
       page_metadata_description: null,
       site_meta_description: null,
@@ -63,28 +64,30 @@ export default {
       og_image_source: null,
     };
   },
-  created() {
-    this.load().then((response) => {
+  async created() {
+    const response = await this.load();
 
-      this.headline = response.headline;
-      this.metadata_og_image = response.metadata_og_image;
-      this.metadata_og_image_field = response.metadata_og_image_field;
-      this.page_title = response.page_title;
-      this.page_metadata_description = response.page_metadata_description;
-      this.site_meta_description = response.site_meta_description;
-      this.site_name = response.site_name;
-      this.site_og_image = response.site_og_image;
-      this.site_title = response.site_title;
-      this.title_separator = response.title_separator;
-      this.url = response.url;
+    this.headline = response.headline;
+    this.metadata_og_image = response.metadata_og_image;
+    this.metadata_og_image_field = response.metadata_og_image_field;
+    this.page_is_homepage = response.page_is_homepage;
+    this.page_title = response.page_title;
+    this.page_metadata_description = response.page_metadata_description;
+    this.site_meta_description = response.site_meta_description;
+    this.site_name = response.site_name;
+    this.site_og_image = response.site_og_image;
+    this.site_title = response.site_title;
+    this.title_separator = response.title_separator;
+    this.url = response.url;
 
-      this.updateOgImage();
-    });
+    this.updateOgImage();
   },
   computed: {
     title() {
       const { og_title, meta_title } = this.$store.getters["content/values"]();
-      return og_title || meta_title || this.page_title;
+      return this.page_is_homepage
+        ? (og_title || meta_title || this.site_name)
+        : (og_title || meta_title || this.page_title);
     },
     description() {
       const { og_description, meta_description } = this.$store.getters["content/values"]();

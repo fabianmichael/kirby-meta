@@ -37,6 +37,9 @@ return [
                 $image = $this->model()->meta()->metadata('og_image');
                 return $image ? $image->crop(1200, 630)->toArray() : null;
             },
+            'page_is_homepage' => function(): bool {
+                return $this->model()->isHomePage();
+            },
             'page_title' => function (): ?string {
                 return $this->model()->title()->value();
             },

@@ -51,7 +51,9 @@ export default {
     },
     title() {
       const values = this.$store.getters["content/values"]();
-      return values.meta_title || this.modelTitle || this.$t("fabianmichael.meta.page_title.placeholder");
+      return this.isHomePage
+        ? values.meta_title || this.siteTitle
+        : values.meta_title || this.modelTitle || this.$t("fabianmichael.meta.page_title.placeholder");
     },
   },
 };
