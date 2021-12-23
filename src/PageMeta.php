@@ -292,12 +292,14 @@ class PageMeta
 
         $social[] = [
             'property' => 'og:site_name',
-            'content'  => $site->og_site_name()->or($site->title())->toString(),
+            'content'  => $site->content()->get('og_site_name')
+                ->or($site->title())->toString(),
         ];
 
         $social[] = [
             'property' => 'og:url',
-            'content'  => $this->canonicalUrl(),
+            'content'  => $this->get('og_url', true)
+                ->or($this->canonicalUrl())->toString(),
         ];
 
         $social[] = [
@@ -308,7 +310,8 @@ class PageMeta
         $social[] = [
             'property' => 'og:title',
             'content'  => $this->get('og_title')->or($this->page->isHomePage()
-                ? $site->og_site_name()->or($site->title())->toString()
+                ? $site->content()->get('og_site_name')
+                    ->or($site->title())->toString()
                 : $this->page->title()
             ),
         ];
