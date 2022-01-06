@@ -132,7 +132,7 @@ After metadata has been loaded by calling the `$page->metadata()` method on a mo
 return [
   'meta.load:after' => function (
     array $metadata,
-    Page $page,
+    Kirb\Cms\Page $page,
     ?string $languageCode
   ) {
     // set `thumbnail.png` as default share image for all pages,
@@ -153,8 +153,8 @@ After the Schema.org graph has been generated. This allows you to pass additiona
 return [
   'meta.jsonld:after' => function (
     array $json,
-    PageMeta $meta,
-    Page $page
+    FabianMichael\Meta\PageMeta $meta,
+    Kirb\Cms\Page $page
   ) {
     // add breadcrumb to JSON-LD graph
     $items = [];
@@ -196,8 +196,8 @@ Allows you to alter the OpenGraph/Twitter card data.
 return [
   'meta.social:after' => function (
     array $social,
-    PageMeta $meta,
-    Page $page
+    FabianMichael\Meta\PageMeta $meta,
+    Kirby\Cms\Page $page
   ) {
     // add first video file of page to OpenGraph markup
     if ($page->hasVideos()) {
