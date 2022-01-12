@@ -5,8 +5,12 @@ import "./panel.css";
 // import Section from "./components/Section.vue";
 import SharePreviewSection from "./components/SharePreviewSection.vue";
 import TitlePreviewField from "./components/TitlePreviewField.vue";
+import MetaView from "./components/MetaView.vue";
 
 panel.plugin("fabianmichael/meta", {
+  components: {
+    "k-meta-view": MetaView,
+  },
   fields: {
     "meta-title-preview": TitlePreviewField,
   },
