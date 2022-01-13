@@ -10,6 +10,9 @@ use Kirby\Cms\Page;
 
 class PageMeta
 {
+    public const OG_IMAGE_CROP_WIDTH  = 1200;
+    public const OG_IMAGE_CROP_HEIGHT = 630;
+
     protected Page $page;
     protected Kirby $kirby;
     protected array $metadata = [];
@@ -330,12 +333,17 @@ class PageMeta
 
         if ($image = $this->og_image()) {
             $extension = $image->extension();
-            $thumb     = $image->thumb([
-                'width'  => 1200,
-                'height' => 630,
-                'crop'   => true,
-                'format' => in_array($extension, ['jpeg', 'jpg', 'png']) === false ? 'jpg' : null,
-            ]);
+
+            if ($image->exists()) {
+                $thumb     = $image->thumb([
+                    'width'  => static::OG_IMAGE_CROP_WIDTH,
+                    'height' => static::OG_IMAGE_CROP_WIDTH,
+                    'crop'   => true,
+                    'format' => in_array($extension, ['jpeg', 'jpg', 'png']) === false ? 'jpg' : null,
+                ]);
+            } else {
+                $thumb = $image;
+            }
 
             $social[] = [
                 'property' => 'og:image',

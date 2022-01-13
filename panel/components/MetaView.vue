@@ -101,16 +101,13 @@
                 <template v-else>—</template>
               </td>
               <td class="k-meta-thumbnail-col">
-                <template v-if="page.og_image">
-                  <k-link :to="page.og_image_panelUrl">
-                    <k-image
-                      v-bind="page.og_image"
-                      :cover="true"
-                      ratio="1200/630"
-                      back="pattern"
-                    />
-                  </k-link>
-                </template>
+                <k-image
+                  v-if="page.og_image_url"
+                  :src="page.og_image_url"
+                  :cover="true"
+                  ratio="1200/630"
+                  back="pattern"
+                />
                 <div v-else class="k-meta-center">—</div>
               </td>
               <td>

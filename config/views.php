@@ -27,9 +27,8 @@ return [
                     'robots' => $meta->robots(),
                     'og_title' => $meta->get('og_title')->value(),
                     'og_description' => $meta->get('og_description')->value(),
-                    'og_image' => $meta->og_image()?->panel()->image(layout: 'cardlets'),
+                    'og_image_url' => $meta->og_image()?->url(),
                     'og_image_alt' => $meta->og_image()?->alt()->value(),
-                    'og_image_panelUrl' => $meta->og_image()?->panelUrl(),
                 ];
             }
 
