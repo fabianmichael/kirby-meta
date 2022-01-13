@@ -12,6 +12,21 @@ return [
 
             foreach (site()->index() as $page) {
                 $meta = $page->meta();
+
+                $og_image = $meta->og_image();
+                if ($og_image !== null) {
+                    if ($og_image->exists() === true) {
+                        // Only resize, if given image does actually exist
+                        // and is accessible
+                        $og_image_url = $og_image->crop(192, 101)->url();
+                    } else {
+                        // Probably a virtual file
+                        $og_image_url = $og_image->url();
+                    }
+                } else {
+                    $og_image_url = null;
+                }
+
                 $pages[] = [
                     'title' => $page->title()->value(),
                     'meta_title' => $meta->get('meta_title')->value(),
@@ -27,8 +42,8 @@ return [
                     'robots' => $meta->robots(),
                     'og_title' => $meta->get('og_title')->value(),
                     'og_description' => $meta->get('og_description')->value(),
-                    'og_image_url' => $meta->og_image()?->url(),
-                    'og_image_alt' => $meta->og_image()?->alt()->value(),
+                    'og_image_url' => $og_image_url,
+                    'og_image_alt' => $og_image?->alt()->value(),
                 ];
             }
 
