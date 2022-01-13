@@ -68,7 +68,7 @@
                   <div class="k-meta-status-wrap">
                     <k-status-icon :status="page.status" />
                   </div>
-                  <k-link :to="page.panelUrl + '?tab=meta'">{{ page.title }}</k-link>
+                  <k-link :to="page.panelUrl">{{ page.title }}</k-link>
                   <a :href="page.url" target="_blank" rel="noopener" class="k-meta-infozone">
                     <k-icon type="url"/>
                     <span>{{ page.shortUrl }}</span>
@@ -177,7 +177,10 @@ export default {
       for (let i = 0, l = this.pages.length; i < l; i++) {
         const page = this.pages[i];
         const id   = page.id;
-        const result = await this.$api.get(`meta/check-internal-links`, {id});
+        const result = await this.$api.get(`meta/check-internal-links`, {
+          id,
+          language: (this.$multilang ? this.$language.code : null),
+        });
         page.internalLinksResult = result;
         this.$set(this.pages, i, page);
       }

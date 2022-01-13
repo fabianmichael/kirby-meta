@@ -1,6 +1,7 @@
 <?php
 
 use Kirby\Cms\Response;
+use Kirby\Cms\Url;
 use Kirby\Http\Header;
 use Kirby\Toolkit\Str;
 
@@ -10,24 +11,31 @@ return [
             'pattern' => 'meta/check-internal-links',
             'action' => function () {
                 $id = get('id');
+                $language = get('language');
                 $baseUrl = url();
 
-                if (empty($id) === null) {
+                if (empty($id) === true) {
                     return Response::json("Empty ID parameter.", 500);
                 }
 
-                $page = page($id);
+                if (kirby()->multilang() && empty($language) === true) {
+                    return Response::json("Empty language parameter.", 500);
+                }
+
+                $page = kirby()->page($id);
 
                 if ($page === null) {
                     return Response::json("The page with $id could not be found.", 500);
                 }
+
+                site()->visit($page, $language);
 
                 // intercept redirects, so the link checker always returns
                 // a 200 status code.
                 $handleRedirect = function () use ($baseUrl) {
                     if (in_array(http_response_code(), [301, 302, 303, 304, 307])) {
                         $target = '';
-                        foreach(headers_list() as $header) {
+                        foreach (headers_list() as $header) {
                             if (Str::contains($header, ':') === false) {
                                 continue;
                             }
@@ -51,8 +59,7 @@ return [
                 header_register_callback($handleRedirect);
                 register_shutdown_function($handleRedirect);
 
-
-                $html = $page->render();
+                $html = kirby()->impersonate('nobody', fn() => $page->render());
 
                 $brokenLinks = [];
 
@@ -109,16 +116,16 @@ return [
                                 continue;
                             }
 
-                            $id = trim(parse_url($href, PHP_URL_PATH), '/');
+                            $path = trim(parse_url($href, PHP_URL_PATH), '/');
 
-                            if (empty($id) === true) {
+                            if (empty($path) === true) {
                                 // skip links to homepage
                                 continue;
                             }
 
-                            if (page($id) === null) {
+                            if (kirby()->router()->call($path) === null) {
                                 // target page does not exist
-                                $brokenLinks[] = "Link to non-existant page with id: <code>{$id}</code>";
+                                $brokenLinks[] = "Link to non-existant page: <code>" . Url::short($href) . "</code>";
                             }
                         }
                     }
@@ -131,7 +138,7 @@ return [
 
                 return Response::json([
                     'type' => 'page',
-                    'message' => sizeof($brokenLinks) > 0 ? "This page contains some broken links:" : null,
+                    'message' => sizeof($brokenLinks) > 0 ? "This page contains broken links:" : null,
                     'brokenLinks' => $brokenLinks,
                 ], 200);
             },
