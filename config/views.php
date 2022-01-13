@@ -1,5 +1,8 @@
 <?php
 
+use FabianMichael\Meta\Sitemap;
+use Kirby\Cms\Url;
+
 return [
     [
         'pattern' => 'meta',
@@ -13,7 +16,11 @@ return [
                     'title' => $page->title()->value(),
                     'meta_title' => $meta->get('meta_title')->value(),
                     'icon'  => $page->blueprint()->icon(),
+                    'is_indexible' => Sitemap::isPageIndexible($page),
+                    'status'  => $page->status(),
                     'id' => $page->id(),
+                    'url' => $page->url(),
+                    'shortUrl' => Url::short($page->url()),
                     'template' => $page->template()->name(),
                     'panelUrl' => $page->panelUrl(),
                     'meta_description' => $meta->meta_description()->value(),

@@ -6,7 +6,6 @@ use DOMDocument;
 use DOMElement;
 use Kirby\Cms\Page;
 use Kirby\Cms\App as Kirby;
-use Kirby\Cms\Language;
 
 class Sitemap
 {

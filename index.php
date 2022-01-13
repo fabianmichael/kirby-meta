@@ -27,6 +27,8 @@ Kirby::plugin('fabianmichael/meta', [
         'theme.color' => null,
     ],
 
+    'api' => require __DIR__ . '/config/api.php',
+
     'areas' => [
         'meta' => [
             'label' => 'Metadata',

@@ -5,10 +5,12 @@
         Metadata
         <k-button-group slot="left">
           <k-button
-            text="Validate links"
+            text="Validate internal links"
             icon="wand"
-            @click="checkLinks"
+            :disabled="isBusy"
+            @click="checkInternalLinks"
           />
+          <k-languages-dropdown />
         </k-button-group>
       </k-header>
       <table class="k-meta">
@@ -46,24 +48,42 @@
               </span>
             </th>
             <th style="width: 3rem">
-              <span class="sr-only">All links are valid</span>
+              <span class="sr-only">Robots</span>
+              <k-icon type="meta-robot" />
+            </th>
+            <th style="width: 3rem">
+              <span class="sr-only">Link validation</span>
               <k-icon type="url" />
             </th>
           </tr>
         </thead>
         <tbody>
           <template v-for="(page, id) in pages" >
-            <tr :key="id + '_head'">
-              <th colspan="7" class="k-meta-page-header-col">
+            <tr
+              :key="id + '_head'"
+              :data-is-indexible="page.is_indexible"
+            >
+              <th colspan="8" class="k-meta-page-header-col">
                 <div class="k-meta-page-header">
-                  <k-icon :type="page.icon || 'page'" />
+                  <div class="k-meta-status-wrap">
+                    <k-status-icon :status="page.status" />
+                  </div>
                   <k-link :to="page.panelUrl + '?tab=meta'">{{ page.title }}</k-link>
-                  <code>{{ page.id }}</code>
-                  <span class="k-meta-template"><k-icon type="template"/><span>{{ page.template }}</span></span>
+                  <a :href="page.url" target="_blank" rel="noopener" class="k-meta-infozone">
+                    <k-icon type="url"/>
+                    <span>{{ page.shortUrl }}</span>
+                  </a>
+                  <span class="k-meta-infozone">
+                    <k-icon :type="page.icon || 'page'"/>
+                    <span>{{ page.template }}</span>
+                  </span>
                 </div>
               </th>
             </tr>
-            <tr :key="id + '_content'">
+            <tr
+              :key="id + '_content'"
+              :data-is-indexible="page.is_indexible"
+            >
               <td>
                 <div v-if="page.meta_title" class="k-meta-text-xs k-meta-max-3-lines">{{ page.meta_title }}</div>
                 <template v-else>—</template>
@@ -97,8 +117,31 @@
                 <div v-if="page.og_image_alt" class="k-meta-text-xs k-meta-max-3-lines">{{ page.og_image_alt}}</div>
                 <template v-else>—</template>
               </td>
-              <td><div class="k-meta-center">?</div></td>
-
+              <td><div class="k-meta-center"><k-icon :type="page.is_indexible ? 'meta-true' : 'meta-false'"/></div></td>
+              <td>
+                <div class="k-meta-center">
+                  <k-icon
+                    :type="(page.internalLinksResult && page.internalLinksResult.message) ? 'meta-false' : 'meta-true'"
+                    v-if="page.internalLinksResult"
+                  />
+                  <template v-else>—</template>
+                </div>
+              </td>
+            </tr>
+            <tr
+              :key="id + '_internal_links_result'"
+              v-if="page.internalLinksResult && page.internalLinksResult.message"
+            >
+              <td colspan="8" class="k-meta-result">
+                <k-box theme="negative">
+                  <k-text size="tiny">
+                    <p>{{ page.internalLinksResult.message }}</p>
+                    <ul v-if="page.internalLinksResult.brokenLinks">
+                      <li v-for="(value, index) in page.internalLinksResult.brokenLinks" :key="index" v-html="value"/>
+                    </ul>
+                  </k-text>
+                </k-box>
+              </td>
             </tr>
           </template>
         </tbody>
@@ -114,32 +157,32 @@ export default {
     sort: String,
     pages: Object,
   },
-  computed: {
-    // sortArrow() {
-    //   return this.dir === "asc" ? "↓" : "↑";
-    // },
+  data() {
+    return {
+      isBusy: false,
+    }
   },
   methods: {
-    checkLinks() {
+    async checkInternalLinks() {
+      this.isBusy = true;
+
+      // Reset
+      for (let i = 0, l = this.pages.length; i < l; i++) {
+        const page = this.pages[i];
+        page.internalLinksResult = null;
+        this.$set(this.pages, i, page);
+      }
+
+      // Get new results
+      for (let i = 0, l = this.pages.length; i < l; i++) {
+        const page = this.pages[i];
+        const id   = page.id;
+        const result = await this.$api.get(`meta/check-internal-links`, {id});
+        page.internalLinksResult = result;
+        this.$set(this.pages, i, page);
+      }
+      this.isBusy = false;
     },
-
-    // sortBy(sort) {
-    //   // sort ascending by default
-    //   let dir = "asc";
-
-    //   // toggle direction when resorting the same column
-    //   if (sort === this.sort) {
-    //     dir = this.dir === "asc" ? "desc" : "asc";
-    //   }
-
-    //   // refresh the view with the updated query parameters
-    //   this.$reload({
-    //     query: {
-    //       sort: sort,
-    //       dir: dir,
-    //     },
-    //   });
-    // },
   },
 };
 </script>
@@ -158,14 +201,16 @@ export default {
   font-size: var(--text-sm);
   padding: var(--spacing-2);
   vertical-align: top;
-  /* white-space: nowrap; */
-  /* text-overflow: ellipsis; */
-  /* overflow: hidden; */
-  /* background: var(--color-white); */
 }
 
 .k-meta th {
-  font-weight: var(--font-bold);
+  font-weight: 500;
+}
+
+.k-meta thead th {
+  position: sticky;
+  top: 0; /* Don't forget this, required for the stickiness */
+  z-index: 10;
 }
 
 .k-meta td:first-child,
@@ -176,6 +221,29 @@ export default {
 .k-meta td:nth-child(even),
 .k-meta th:nth-child(even) {
   background: var(--color-gray-100);
+}
+
+.k-meta td:nth-child(odd),
+.k-meta th:nth-child(odd) {
+  background: var(--color-background);
+}
+
+.k-meta tbody tr:not([data-is-indexible="true"]) {
+  color: var(--color-gray-600);
+}
+
+.k-meta tbody tr:not([data-is-indexible="true"]) .k-image {
+  opacity: .8;
+}
+
+.k-meta .k-meta-result {
+  color: var(--color-gray-900);
+  padding-right: 0;
+}
+
+.k-meta .k-meta-result-content {
+  padding: var(--spoacing-3);
+  background: var(--color-white);
 }
 
 .k-meta-title {
@@ -189,8 +257,12 @@ export default {
 .k-meta-caps {
   text-transform: uppercase;
   font-size: var(--text-xs);
+  font-weight: 500;
   line-height: 1rem;
-  letter-spacing: .01em;
+  letter-spacing: .02em;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .k-meta-thumbnail-col {
@@ -217,7 +289,7 @@ export default {
   align-items: center;
   display: grid;
   gap: var(--spacing-2);
-  grid-template-columns: min-content auto 1fr auto;
+  grid-template-columns: min-content 1fr 3fr auto;
   background: var(--color-white);
   border-radius: var(--rounded-sm);
   box-shadow: var(--shadow);
@@ -225,7 +297,7 @@ export default {
   margin: 0 calc(-1 * var(--spacing-2));
 }
 
-.k-meta-template {
+.k-meta-infozone {
   font-weight: var(--font-normal);
   color: var(--color-gray-500);
   font-size: var(--text-xs);
@@ -233,27 +305,20 @@ export default {
   display: flex;
 }
 
-.k-meta-template > * + * {
-  margin-left: var(--spacing-1);
+.k-meta-infozone > * + * {
+  margin-left: var(--spacing-2);
 }
 
-.k-meta-template .k-icon {
+.k-meta-infozone .k-icon {
   --size: .75rem;
 }
 
-/* .k-meta-page-header > * + * {
-  margin-left: var(--spacing-2);
-} */
-
-.k-meta-page-header code {
-  justify-self: start;
-  background: var(--color-gray-200);
-  border-radius: var(--rounded-sm);
-  padding: var(--spacing-2px) var(--spacing-1);
-  font-size: var(--text-xs);
-  font-weight: var(--font-normal);
+.k-meta-status-wrap {
+  height: 1rem;
+  width: 1rem;
+  line-height: 1;
+  pointer-events: none;
 }
-
 
 .k-meta-text-xs {
   font-size: var(--text-xs);
