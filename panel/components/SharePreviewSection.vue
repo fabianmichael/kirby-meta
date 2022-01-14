@@ -59,6 +59,7 @@ export default {
       site_title: null,
       title_separator: null,
       url: null,
+      og_title_prefix: null,
 
       og_image: null,
       og_image_source: null,
@@ -78,6 +79,7 @@ export default {
     this.site_og_image = response.site_og_image;
     this.site_title = response.site_title;
     this.title_separator = response.title_separator;
+    this.og_title_prefix = response.og_title_prefix;
     this.url = response.url;
 
     this.updateOgImage();
@@ -85,9 +87,12 @@ export default {
   computed: {
     title() {
       const { og_title, meta_title } = this.$store.getters["content/values"]();
-      return this.page_is_homepage
+      const prefix = this.og_title_prefix || "";
+      const title = this.page_is_homepage
         ? (og_title || meta_title || this.site_name)
         : (og_title || meta_title || this.page_title);
+
+      return prefix + title;
     },
     description() {
       const { og_description, meta_description } = this.$store.getters["content/values"]();

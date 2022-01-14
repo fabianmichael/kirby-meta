@@ -312,11 +312,7 @@ class PageMeta
 
         $social[] = [
             'property' => 'og:title',
-            'content'  => $this->get('og_title')->or($this->page->isHomePage()
-                ? $site->content()->get('og_site_name')
-                    ->or($site->title())->toString()
-                : $this->page->title()
-            ),
+            'content'  => $this->og_title()->toString(),
         ];
 
         $description = $this->get('og_description', true, false)
@@ -425,7 +421,6 @@ class PageMeta
             $title[] = $siteTitle->toString();
         }
 
-
         return new Field($this->page, 'title', implode(' ' , $title));
     }
 
@@ -448,5 +443,28 @@ class PageMeta
         }
 
         return null;
+    }
+
+    public function og_title(): Field
+    {
+        $site = $this->page->site();
+        $titlePrefix = $this->get(key: 'og_title_prefix', fallback: '');
+        $title = $this->get('og_title')->or($this->page->isHomePage()
+            ? $site->content()->get('og_site_name')
+                ->or($site->title())->toString()
+            : $this->page->title()
+        );
+
+        return new Field($this->page, 'og_title', $titlePrefix . $title);
+    }
+
+    public function panelTitlePlaceholder(): string
+    {
+        if ($this->page->isHomePage()) {
+            return $this->page->content($this->languageCode)->get('meta_title')
+            ->or($this->page->site()->title())->toString();
+        }
+
+        return $this->page->title();
     }
 }

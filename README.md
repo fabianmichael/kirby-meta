@@ -114,6 +114,7 @@ Now you are ready to add/editr metadata from the panel.
 ### Providing metadata from page models
 
 meta_description string
+og_title_prefix string
 og_image File
 @graph array
 @social array
