@@ -63,6 +63,9 @@ return [
             'title_separator' => function (): string {
                 return SiteMeta::titleSeparator();
             },
+            'og_title_prefix' => function(): ?string {
+                return $this->model()->meta()->get('og_title_prefix')->value();
+            },
             'url' => function (): string {
                 return $this->model()->url();
             },

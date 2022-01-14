@@ -26,6 +26,18 @@ Kirby::plugin('fabianmichael/meta', [
 
         'theme.color' => null,
     ],
+
+    'api' => require __DIR__ . '/config/api.php',
+
+    'areas' => [
+        'meta' => [
+            'label' => 'Metadata',
+            'icon'  => 'search',
+            'menu'  => true,
+            'views' => require __DIR__ . '/config/views.php',
+        ],
+    ],
+
     'blueprints' => [
         'fields/meta/general-group'             => require __DIR__ . '/blueprints/fields/meta/general-group.php',
         'fields/meta/global-general-group'      => require __DIR__ . '/blueprints/fields/meta/global-general-group.php',

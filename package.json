@@ -4,7 +4,7 @@
     "build": "npx -y kirbyup panel/index.js"
   },
   "devDependencies": {
-    "kirbyup": "^0.21.0"
+    "kirbyup": "^0.22.2"
   },
   "dependencies": {
     "vuex": "^3.6.2"

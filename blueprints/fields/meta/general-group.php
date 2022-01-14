@@ -21,7 +21,7 @@ return function (Kirby $kirby) {
         'meta_title' => [
             'type'        => 'text',
             'label'       => t('fabianmichael.meta.title.label'),
-            'placeholder' => '{{ page.title }}',
+            'placeholder' => '{{ page.meta.panelTitlePlaceholder }}',
             'help'        => t('fabianmichael.meta.title.help'),
         ],
         'meta_title_preview' => [

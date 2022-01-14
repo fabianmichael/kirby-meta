@@ -10,6 +10,9 @@ use Kirby\Cms\Page;
 
 class PageMeta
 {
+    public const OG_IMAGE_CROP_WIDTH  = 1200;
+    public const OG_IMAGE_CROP_HEIGHT = 630;
+
     protected Page $page;
     protected Kirby $kirby;
     protected array $metadata = [];
@@ -309,11 +312,7 @@ class PageMeta
 
         $social[] = [
             'property' => 'og:title',
-            'content'  => $this->get('og_title')->or($this->page->isHomePage()
-                ? $site->content()->get('og_site_name')
-                    ->or($site->title())->toString()
-                : $this->page->title()
-            ),
+            'content'  => $this->og_title()->toString(),
         ];
 
         $description = $this->get('og_description', true, false)
@@ -330,12 +329,17 @@ class PageMeta
 
         if ($image = $this->og_image()) {
             $extension = $image->extension();
-            $thumb     = $image->thumb([
-                'width'  => 1200,
-                'height' => 630,
-                'crop'   => true,
-                'format' => in_array($extension, ['jpeg', 'jpg', 'png']) === false ? 'jpg' : null,
-            ]);
+
+            if ($image->exists()) {
+                $thumb     = $image->thumb([
+                    'width'  => static::OG_IMAGE_CROP_WIDTH,
+                    'height' => static::OG_IMAGE_CROP_WIDTH,
+                    'crop'   => true,
+                    'format' => in_array($extension, ['jpeg', 'jpg', 'png']) === false ? 'jpg' : null,
+                ]);
+            } else {
+                $thumb = $image;
+            }
 
             $social[] = [
                 'property' => 'og:image',
@@ -417,7 +421,6 @@ class PageMeta
             $title[] = $siteTitle->toString();
         }
 
-
         return new Field($this->page, 'title', implode(' ' , $title));
     }
 
@@ -440,5 +443,28 @@ class PageMeta
         }
 
         return null;
+    }
+
+    public function og_title(): Field
+    {
+        $site = $this->page->site();
+        $titlePrefix = $this->get(key: 'og_title_prefix', fallback: '');
+        $title = $this->get('og_title')->or($this->page->isHomePage()
+            ? $site->content()->get('og_site_name')
+                ->or($site->title())->toString()
+            : $this->page->title()
+        );
+
+        return new Field($this->page, 'og_title', $titlePrefix . $title);
+    }
+
+    public function panelTitlePlaceholder(): string
+    {
+        if ($this->page->isHomePage()) {
+            return $this->page->content($this->languageCode)->get('meta_title')
+            ->or($this->page->site()->title())->toString();
+        }
+
+        return $this->page->title();
     }
 }

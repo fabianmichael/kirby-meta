@@ -14,6 +14,10 @@
           :src="$urls.site + '/favicon.ico'"
           :hidden="!showFavicon"
         />
+        <k-icon
+          type="globe"
+          v-if="!showFavicon"
+        />
         <div class="k-meta-title-preview__title">
           <span>{{ title }}</span>
           &#32;
