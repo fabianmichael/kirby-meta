@@ -332,7 +332,7 @@ class PageMeta
             if ($image->exists()) {
                 $thumb     = $image->thumb([
                     'width'  => static::OG_IMAGE_CROP_WIDTH,
-                    'height' => static::OG_IMAGE_CROP_WIDTH,
+                    'height' => static::OG_IMAGE_CROP_HEIGHT,
                     'crop'   => true,
                     'format' => in_array($extension, ['jpeg', 'jpg', 'png']) === false ? 'jpg' : null,
                 ]);
