@@ -129,7 +129,7 @@ class PageMeta
         $website = [
             '@type' => 'WebSite',
             '@id'   => $websiteId,
-            'url'   => url(),
+            'url'   => $site->url(),
             'name'  => $site->title()->toString(),
             'description' => $site->meta_description()->toString(),
         ];
@@ -149,10 +149,9 @@ class PageMeta
                 '@type' => 'Organization',
                 '@id'   => $ownerId,
                 'name'  => $site->meta_org_name()->toString(),
-                'url' => url(),
+                'url'   => $site->url(),
                 // 'sameAs' => [
-                //     'https://twitter.com/getkirby',
-                //     'https://instagram.com/getkirby',
+                //     'https://example.com',
                 // ],
             ];
 
