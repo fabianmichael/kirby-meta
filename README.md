@@ -25,9 +25,11 @@ browsers and beyond.
 **Future plans:**
 
 - 🌍 Add German translation
-- 🌍 Compability with multilanguage setups
+- 🌍 Full compability with multilanguage setups
 - 📋 Dedicated panel area for debugging site-wide meta information
 - ✅ Live-check of metadata with hints in the panel
+
+> This plugin is completely free and published under the MIT license. However, if you are using it in a commercial project and want to help me keep up with maintenance, please consider to **[❤️ sponsor me](https://github.com/sponsors/fabianmichael)** for securing the continued development of the plugin.
 
 ## How it works
 
