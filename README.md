@@ -25,7 +25,7 @@ browsers and beyond.
 **Future plans:**
 
 - 🌍 Add German translation
-- 🌍 Full compability with multilanguage setups
+- 🌍 Full compatibility with multilanguage setups
 - 📋 Dedicated panel area for debugging site-wide meta information
 - ✅ Live-check of metadata with hints in the panel
 
@@ -34,7 +34,7 @@ browsers and beyond.
 ## How it works
 
 The plugin tries looks for metadata from a pages content file (e.g. article.txt) by
-the corrsponding key. If the page does not contain the specific field, it looks for a metadata.
+the corresponding key. If the page does not contain the specific field, it looks for a metadata.
 Method on the current page model, which can return an array metadata for the current page
 If that also fails, it will fall back to default metadata, as stored in the
 `site.txt` file at the top-level of the content directory.
@@ -57,7 +57,7 @@ You can also download this repository as ZIP or add the whole repo as a submodul
 
 ### Available configuration options
 
-The options below have to be set in your `config.php`. Please note that every option has to be prifixed with the plugin namespace, e.g. `sitemap` => `fabianmichael.meta.sitemap`.
+The options below have to be set in your `config.php`. Please note that every option has to be prefixed with the plugin namespace, e.g. `sitemap` => `fabianmichael.meta.sitemap`.
 
 | Key | Type | Default | Description |
 |:----|:-----|:--------|:------------|
@@ -111,7 +111,7 @@ loading any scripts or stylesheets:
 […]
 ```
 
-Now you are ready to add/editr metadata from the panel.
+Now you are ready to add/edit metadata from the panel.
 
 ## Advanced usage
 
