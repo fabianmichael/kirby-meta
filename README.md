@@ -31,6 +31,11 @@ browsers and beyond.
 
 > This plugin is completely free and published under the MIT license. However, if you are using it in a commercial project and want to help me keep up with maintenance, please consider to **[❤️ sponsor me](https://github.com/sponsors/fabianmichael)** for securing the continued development of the plugin.
 
+## Requirements
+
+- PHP 8.0+
+- Kirby 3.6.0+
+
 ## How it works
 
 The plugin tries looks for metadata from a pages content file (e.g. article.txt) by
