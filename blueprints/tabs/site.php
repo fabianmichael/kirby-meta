@@ -28,12 +28,12 @@ return function (Kirby $kirby) {
                 'width' => '2/3',
                 'fields' => $fields,
             ],
-        ],
-        'meta_sidebar' => [
-            'sticky' => true,
-            'width' => '1/3',
-            'sections' => [
-                'meta_files' => 'sections/meta/files',
+            'meta_sidebar' => [
+                'sticky' => true,
+                'width' => '1/3',
+                'sections' => [
+                    'meta_files' => 'sections/meta/files',
+                ],
             ],
         ],
     ];
