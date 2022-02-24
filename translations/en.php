@@ -68,7 +68,7 @@ return [
     'fabianmichael.meta.sitemap.priority.help' => 'Relative priority compared to other pages on your site.',
     'fabianmichael.meta.sitemap.global_priority.help' => 'Default priority for all pages of this site. Setting a priority gives a hint to search engines about the relative importance of your pages in comparison to each other.',
     'fabianmichael.meta.sitemap.changefreq.label' => 'Change frequency',
-    'fabianmichael.meta.sitemap.changefreq.help' => 'Ranking of the importance of pages of your website relative to each other.',
+    'fabianmichael.meta.sitemap.changefreq.help' => 'Tells search engines, how often the content changes.',
     'fabianmichael.meta.sitemap.changefreq.always' => 'Always',
     'fabianmichael.meta.sitemap.changefreq.hourly' => 'Hourly',
     'fabianmichael.meta.sitemap.changefreq.daily' => 'Daily',
