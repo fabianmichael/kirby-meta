@@ -245,11 +245,16 @@ class PageMeta
 
     public function robots(?string $name = null): bool|string|null
     {
-        if (is_string($name) === true) {
+        if (is_string($name)) {
             // single robots value of page as boolean
 
+            // if page is a draft, always return false for everything
+            if (in_array($name, ['index', 'follow']) && $this->page->isDraft()) {
+                return false;
+            }
+
             // if page is not in sitemap, it will also not be indexible
-            if ($name === 'index' && Sitemap::isPageIndexible($this->page) === false) {
+            if ($name === 'index' && ! Sitemap::isPageIndexible($this->page)) {
                 return false;
             }
 
@@ -270,9 +275,15 @@ class PageMeta
                 }
             }
 
-            return sizeof($robots) > 0
+            $result = sizeof($robots) > 0
                 ? implode(', ', $robots)
                 : null;
+
+            if ($result === 'noindex, nofollow') {
+                return 'none';
+            }
+
+            return $result;
         }
     }
 
@@ -412,7 +423,7 @@ class PageMeta
             $title[] = $this->page->content($this->languageCode)->get('meta_title')
                 ->or($siteTitle)->toString();
         } else {
-            // Todo: Support pagination
+            // TODO: Support pagination
             $title[] = $this->page->content($this->languageCode)->get('meta_title')
                 ->or($this->page->title())->toString();
 
