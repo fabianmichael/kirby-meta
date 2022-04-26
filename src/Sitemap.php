@@ -20,18 +20,8 @@ class Sitemap
         // Allow hook to change $doc and $root, e.g. adding namespaces or other attributes.
         $kirby->trigger('meta.sitemap:before', compact('kirby', 'doc', 'root'));
 
-        if ($kirby->multilang() === true) {
-            $languages = $kirby->languages();
-
-            foreach ($kirby->site()->index() as $page) {
-                foreach ($languages as $language) {
-                    static::urlsForPage($kirby, $page, $doc, $root, $language->code());
-                }
-            }
-        } else {
-            foreach ($kirby->site()->index() as $page) {
-                static::urlsForPage($kirby, $page, $doc, $root);
-            }
+        foreach ($kirby->site()->index() as $page) {
+            static::urlsForPage($kirby, $page, $doc, $root);
         }
 
         $root = $doc->appendChild($root);
