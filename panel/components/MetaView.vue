@@ -28,14 +28,12 @@
             </th>
             <th>
               <span class="k-meta-title">
-                <k-icon type="share" />
-                <span class="k-meta-caps">Title</span>
+                <span class="k-meta-caps">Share Title</span>
               </span>
             </th>
             <th style="width: 14rem">
               <span class="k-meta-title">
-                <k-icon type="share" />
-                <span class="k-meta-caps">Description</span>
+                <span class="k-meta-caps">Share Description</span>
               </span>
             </th>
             <th class="k-meta-thumbnail-col">
@@ -98,6 +96,7 @@
               </td>
               <td>
                 <div v-if="page.og_description" class="k-meta-text-xs k-meta-max-3-lines">{{ page.og_description }}</div>
+                <div v-else-if="page.meta_description" class="k-meta-text-xs k-meta-max-3-lines" style="opacity: 0.5;">[Meta description]</div>
                 <template v-else>—</template>
               </td>
               <td class="k-meta-thumbnail-col">

@@ -325,8 +325,7 @@ class PageMeta
             'content'  => $this->og_title()->toString(),
         ];
 
-        $description = $this->get('og_description', true, false)
-            ->or($this->get('meta_description', true, true));
+        $description = $this->og_description();
 
         if ($description->isNotEmpty() === true) {
             $social[] = [
@@ -432,6 +431,13 @@ class PageMeta
         }
 
         return new Field($this->page, 'title', implode(' ' , $title));
+    }
+
+    public function og_description(bool $fallback = true): Field
+    {
+        return $this
+            ->get('og_description', true, false)
+            ->or($this->get('meta_description', true, true));
     }
 
     public function og_image(bool $fallback = true): ?File

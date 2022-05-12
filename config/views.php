@@ -40,8 +40,8 @@ return [
                     'panelUrl' => $page->panelUrl(),
                     'meta_description' => $meta->meta_description()->value(),
                     'robots' => $meta->robots(),
-                    'og_title' => $meta->get('og_title')->value(),
-                    'og_description' => $meta->get('og_description')->value(),
+                    'og_title' => $meta->og_title()->value(),
+                    'og_description' => $meta->get('og_description', true, false)->value(),
                     'og_image_url' => $og_image_url,
                     'og_image_alt' => $og_image?->alt()->value(),
                 ];
