@@ -10,7 +10,13 @@ return [
 
             $pages = [];
 
-            foreach (site()->index() as $page) {
+            $index = site()->index();
+
+            if (is_callable($filter = option('fabianmichael.meta.panel.view.filter', null))) {
+                $index = $index->filter($filter);
+            }
+
+            foreach ($index as $page) {
                 $meta = $page->meta();
 
                 $og_image = $meta->og_image();

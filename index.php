@@ -1,6 +1,7 @@
 <?php
 
 use Kirby\Cms\App as Kirby;
+use Kirby\Cms\Page;
 
 @include_once __DIR__ . '/vendor/autoload.php';
 
@@ -25,6 +26,8 @@ Kirby::plugin('fabianmichael/meta', [
         'robots.translate' => true,
 
         'theme.color' => null,
+
+        'panel.view.filter' => null,
     ],
 
     'api' => require __DIR__ . '/config/api.php',
