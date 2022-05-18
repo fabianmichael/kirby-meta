@@ -2,7 +2,7 @@
 
 use Kirby\Cms\App as Kirby;
 
-return function(Kirby $kirby) {
+return function (Kirby $kirby) {
     return [
         'type' => 'select',
         'label' => t('fabianmichael.meta.sitemap.changefreq.label'),

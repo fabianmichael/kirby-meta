@@ -4,8 +4,8 @@ namespace FabianMichael\Meta;
 
 use DOMDocument;
 use DOMElement;
-use Kirby\Cms\Page;
 use Kirby\Cms\App as Kirby;
+use Kirby\Cms\Page;
 
 class Sitemap
 {
@@ -14,7 +14,7 @@ class Sitemap
         $doc = new DOMDocument('1.0', 'UTF-8');
         $doc->formatOutput = true;
 
-        $root = $doc->createElementNS('http://www.sitemaps.org/schemas/sitemap/0.9','urlset');
+        $root = $doc->createElementNS('http://www.sitemaps.org/schemas/sitemap/0.9', 'urlset');
         $root->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:xhtml', 'http://www.w3.org/1999/xlink');
 
         // Allow hook to change $doc and $root, e.g. adding namespaces or other attributes.
@@ -32,8 +32,8 @@ class Sitemap
         return $doc->saveXML();
     }
 
-    protected static function urlsForPage(Kirby $kirby, Page $page, DOMDocument $doc, DOMElement $root, ?string $languageCode = null) {
-
+    protected static function urlsForPage(Kirby $kirby, Page $page, DOMDocument $doc, DOMElement $root, ?string $languageCode = null)
+    {
         $meta = $page->meta($languageCode);
 
         if (static::isPageIndexible($page) === false || $meta->robots('index') === false) {
@@ -70,7 +70,7 @@ class Sitemap
         $kirby->trigger('meta.sitemap.url', compact('kirby', 'page', 'meta', 'doc', 'url', 'languageCode'));
 
         $root->appendChild($url);
-}
+    }
 
     public static function isPageIndexible(Page $page): bool
     {
@@ -86,12 +86,12 @@ class Sitemap
         $pagesIncludeUnlisted = option('fabianmichael.meta.sitemap.pages.includeUnlisted', []);
         $pagesIncludeUnlistedRegex = '!^(?:' . implode('|', $pagesIncludeUnlisted) . ')$!i';
 
-        if ($page->isErrorPage() === true) {
-            // Error page is always excluded
+        if ($page->isErrorPage()) {
+            // Error page is always excluded from sitemap
             return false;
         }
 
-        if (($page->isHomePage() === false && $page->status() === 'unlisted')
+        if (($page->isHomePage() && $page->status() === 'unlisted')
             && preg_match($templatesIncludeUnlistedRegex, $page->intendedTemplate()->name()) !== 1
             && preg_match($pagesIncludeUnlistedRegex, $page->id()) !== 1
         ) {
@@ -110,7 +110,7 @@ class Sitemap
             return false;
         }
 
-        if ($page->parent() !== null) {
+        if (! is_null($page->parent())) {
             // Test indexability of parent pages as well
             return static::isPageIndexible($page->parent());
         }

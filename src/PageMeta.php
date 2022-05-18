@@ -10,7 +10,7 @@ use Kirby\Cms\Page;
 
 class PageMeta
 {
-    public const OG_IMAGE_CROP_WIDTH  = 1200;
+    public const OG_IMAGE_CROP_WIDTH = 1200;
     public const OG_IMAGE_CROP_HEIGHT = 630;
 
     protected Page $page;
@@ -24,9 +24,9 @@ class PageMeta
 
     protected function __construct(Page $page, ?string $languageCode = null)
     {
-        $this->kirby        = $page->kirby();
+        $this->kirby = $page->kirby();
         $this->languageCode = $languageCode;
-        $this->page         = $page;
+        $this->page = $page;
 
         // Get metadata from page, if possible
         if (method_exists($this->page, 'metadata') === true) {
@@ -72,7 +72,8 @@ class PageMeta
         bool $metadataFallback = true,
         bool $siteFallback = false,
         bool $configFallback = false,
-        mixed $fallback = null): Field
+        mixed $fallback = null
+    ): Field
     {
         // From content file ...
         $field = $this->page->content($this->languageCode)->get($key);
@@ -119,10 +120,10 @@ class PageMeta
     public function jsonld(): array
     {
         $graph = [];
-        $site  = $this->page->site();
+        $site = $this->page->site();
 
         $websiteId = url('/#website');
-        $ownerId   = url('/#owner');
+        $ownerId = url('/#owner');
 
         // Website
 
@@ -160,7 +161,7 @@ class PageMeta
             }
 
             $graph[] = $org;
-        } else if ($owner === 'person' && ($user = $site->meta_person()->toUser())) {
+        } elseif ($owner === 'person' && ($user = $site->meta_person()->toUser())) {
             $person = [
                 '@type' => 'Person',
                 '@id'   => url('/#owner'),
@@ -209,8 +210,8 @@ class PageMeta
         return $this->languageCode;
     }
 
-
-    public function lastmod() {
+    public function lastmod()
+    {
         return (int) $this->metadata('lastmod', $this->page->modified('U', 'date'));
     }
 
@@ -218,7 +219,7 @@ class PageMeta
     {
         if ($language = $this->page->kirby()->language()) {
             return $language->code();
-        } else if ($locale = $this->page->kirby()->option('locale')) {
+        } elseif ($locale = $this->page->kirby()->option('locale')) {
             return preg_replace('/^([^.]+)\:/is', '$1', $locale);
         }
 
@@ -240,6 +241,7 @@ class PageMeta
     public function priority(): ?float
     {
         $priority = $this->get('sitemap_priority', true, true, false, 0.5)->toFloat();
+
         return (float) max(0, min(1, $priority)); // 0 <= value <= 1
     }
 
@@ -340,7 +342,7 @@ class PageMeta
             $extension = $image->extension();
 
             if ($image->exists()) {
-                $thumb     = $image->thumb([
+                $thumb = $image->thumb([
                     'width'  => static::OG_IMAGE_CROP_WIDTH,
                     'height' => static::OG_IMAGE_CROP_HEIGHT,
                     'crop'   => true,
@@ -430,7 +432,7 @@ class PageMeta
             $title[] = $siteTitle->toString();
         }
 
-        return new Field($this->page, 'title', implode(' ' , $title));
+        return new Field($this->page, 'title', implode(' ', $title));
     }
 
     public function og_description(bool $fallback = true): Field
@@ -465,7 +467,8 @@ class PageMeta
     {
         $site = $this->page->site();
         $titlePrefix = $this->get(key: 'og_title_prefix', fallback: '');
-        $title = $this->get('og_title')->or($this->page->isHomePage()
+        $title = $this->get('og_title')->or(
+            $this->page->isHomePage()
             ? $site->content()->get('og_site_name')
                 ->or($site->title())->toString()
             : $this->page->title()

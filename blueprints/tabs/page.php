@@ -3,9 +3,8 @@
 use Kirby\Cms\App as Kirby;
 
 return function (Kirby $kirby) {
-
-    $columns  = [];
-    $fields   = [];
+    $columns = [];
+    $fields = [];
     $sections = [];
 
     // main column
@@ -13,10 +12,10 @@ return function (Kirby $kirby) {
     $fields['meta_general'] = 'fields/meta/general-group';
 
     if ($kirby->option('fabianmichael.meta.social') !== false) {
-        $fields  ['meta_opengraph']       = 'fields/meta/opengraph-group';
-        $fields  ['meta_twitter']         = 'fields/meta/twitter-group';
+        $fields  ['meta_opengraph'] = 'fields/meta/opengraph-group';
+        $fields  ['meta_twitter'] = 'fields/meta/twitter-group';
         $sections['meta_sharing_preview'] = 'sections/meta/share-preview';
-        $sections['meta_files']           = 'sections/meta/files';
+        $sections['meta_files'] = 'sections/meta/files';
     }
 
     // robots
@@ -45,5 +44,4 @@ return function (Kirby $kirby) {
         'label' => t('fabianmichael.meta.tab.label'),
         'columns' => $columns,
     ];
-
 };

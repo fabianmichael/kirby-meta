@@ -3,7 +3,6 @@
 use Kirby\Cms\App as Kirby;
 
 return function (Kirby $kirby): array {
-
     $toggleType = Kirby::plugin('fabianmichael/kirby-multi-toggle-field')
         ? 'multi-toggle'
         : 'select';

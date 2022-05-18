@@ -44,6 +44,7 @@ return [
 
                             if (strtolower($key) === 'location') {
                                 $target = str_replace($baseUrl, '', trim($value));
+
                                 break;
                             }
                         }
@@ -59,7 +60,7 @@ return [
                 header_register_callback($handleRedirect);
                 register_shutdown_function($handleRedirect);
 
-                $html = kirby()->impersonate('nobody', fn() => $page->render());
+                $html = kirby()->impersonate('nobody', fn () => $page->render());
 
                 $brokenLinks = [];
 
@@ -99,9 +100,7 @@ return [
                             }
 
                             continue;
-
                         } else {
-
                             if (Str::startsWith($href, '/')) {
                                 $href = $baseUrl . $href;
                             }

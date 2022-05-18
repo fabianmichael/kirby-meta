@@ -1,18 +1,18 @@
 <?php return array(
     'root' => array(
-        'pretty_version' => '0.0.12-alpha',
-        'version' => '0.0.12.0-alpha',
+        'pretty_version' => '0.0.26-alpha',
+        'version' => '0.0.26.0-alpha',
         'type' => 'kirby-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
         'reference' => NULL,
         'name' => 'fabianmichael/kirby-meta',
-        'dev' => true,
+        'dev' => false,
     ),
     'versions' => array(
         'fabianmichael/kirby-meta' => array(
-            'pretty_version' => '0.0.12-alpha',
-            'version' => '0.0.12.0-alpha',
+            'pretty_version' => '0.0.26-alpha',
+            'version' => '0.0.26.0-alpha',
             'type' => 'kirby-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

@@ -4,7 +4,6 @@ use FabianMichael\Meta\SiteMeta;
 use Kirby\Cms\App as Kirby;
 
 return function (Kirby $kirby) {
-
     $defaultState = SiteMeta::changefreq();
     $defaultState = $defaultState !== null
         ? t("fabianmichael.meta.sitemap.changefreq.{$defaultState}")

@@ -1,6 +1,5 @@
 <?php
 
-use FabianMichael\Meta\SiteMeta;
 
 return [
     'metaPanelWarning' => function (string $type) {

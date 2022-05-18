@@ -7,7 +7,6 @@ return [
     [
         'pattern' => 'meta',
         'action'  => function () {
-
             $pages = [];
 
             $index = site()->index();
@@ -19,10 +18,9 @@ return [
             foreach ($index as $page) {
                 $meta = $page->meta();
 
-                $og_image = $meta->og_image();
-                if ($og_image !== null) {
+                if ($og_image = $meta->og_image()) {
                     if ($og_image->exists() === true) {
-                        // Only resize, if given image does actually exist
+                        // Only resize, if given image does actually exists
                         // and is accessible
                         $og_image_url = $og_image->crop(192, 101)->url();
                     } else {
@@ -57,8 +55,8 @@ return [
                 'component' => 'k-meta-view',
                 'props' => [
                     'pages' => $pages,
-                ]
+                ],
             ];
-        }
-    ]
+        },
+    ],
 ];

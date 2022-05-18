@@ -21,7 +21,7 @@ return [
             },
             'isHomePage' => function () {
                 return $this->model->isHomePage();
-            }
+            },
         ],
         'save' => false,
     ],

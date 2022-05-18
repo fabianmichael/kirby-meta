@@ -10,7 +10,7 @@ return [
                 'image/png',
                 'image/webp',
                 'image/avif',
-                'image/gif'
+                'image/gif',
             ])
             ->filterBy('width', '>=', 300)
             ->filterBy('height', '>=', 157);

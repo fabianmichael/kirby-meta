@@ -25,14 +25,24 @@
         }
     },
     "config": {
-        "optimize-autoloader": true
+        "optimize-autoloader": true,
+        "allow-plugins": {
+            "getkirby/composer-installer": true
+        }
     },
     "require": {
         "php": ">=8.0.0",
         "getkirby/composer-installer": "^1.2"
     },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.8"
+    },
     "extra": {
         "installer-name": "meta"
+    },
+    "scripts": {
+        "cs-fixer": "vendor/bin/php-cs-fixer fix --dry-run --diff",
+        "cs-fixer-fix": "vendor/bin/php-cs-fixer fix --diff"
     },
     "suggest": {
         "fabianmichael/kirby-multi-toggle-field": "^1.0"

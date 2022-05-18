@@ -1,7 +1,6 @@
 <?php
 
 use Kirby\Cms\App as Kirby;
-use Kirby\Cms\Page;
 
 @include_once __DIR__ . '/vendor/autoload.php';
 
