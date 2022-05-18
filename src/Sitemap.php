@@ -74,10 +74,13 @@ class Sitemap
 
     public static function isPageIndexible(Page $page): bool
     {
+        // pages have to pass a set of for being indexible. If any test
+        // fails, the page is excluded from index
+
         $templatesExclude = option('fabianmichael.meta.sitemap.templates.exclude', []);
         $templatesExcludeRegex = '!^(?:' . implode('|', $templatesExclude) . ')$!i';
 
-        $templatesIncludeUnlisted = option('fabianmichael.meta.sitemap.includeUnlisted', []);
+        $templatesIncludeUnlisted = option('fabianmichael.meta.sitemap.templates.includeUnlisted', []);
         $templatesIncludeUnlistedRegex = '!^(?:' . implode('|', $templatesIncludeUnlisted) . ')$!i';
 
         $pagesExclude = option('fabianmichael.meta.sitemap.pages.exclude', []);
@@ -87,31 +90,32 @@ class Sitemap
         $pagesIncludeUnlistedRegex = '!^(?:' . implode('|', $pagesIncludeUnlisted) . ')$!i';
 
         if ($page->isErrorPage()) {
-            // Error page is always excluded from sitemap
+            // error page is always excluded from sitemap
             return false;
         }
 
-        if (($page->isHomePage() && $page->status() === 'unlisted')
-            && preg_match($templatesIncludeUnlistedRegex, $page->intendedTemplate()->name()) !== 1
-            && preg_match($pagesIncludeUnlistedRegex, $page->id()) !== 1
-        ) {
-            // Unlisted pages are only indexible, if exceptions are
-            // defined for them based on page id or template.
-            return false;
+
+        if (! $page->isHomePage() && $page->status() === 'unlisted') {
+            if (preg_match($templatesIncludeUnlistedRegex, $page->intendedTemplate()->name()) !== 1
+                && preg_match($pagesIncludeUnlistedRegex, $page->id()) !== 1) {
+                // unlisted pages are only indexible, if exceptions are
+                // defined for them based on page id or template
+                return false;
+            }
         }
 
         if (preg_match($templatesExcludeRegex, $page->intendedTemplate()->name()) === 1) {
-            // Page is in exclude-list of templates
+            // page is in exclude-list of templates
             return false;
         }
 
         if (preg_match($pagesExcludeRegex, $page->id()) === 1) {
-            // Page is in exclude-list of page IDs
+            // page is in exclude-list of page IDs
             return false;
         }
 
         if (! is_null($page->parent())) {
-            // Test indexability of parent pages as well
+            // test indexability of parent pages as well
             return static::isPageIndexible($page->parent());
         }
 
