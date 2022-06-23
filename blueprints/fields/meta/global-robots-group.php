@@ -1,11 +1,10 @@
 <?php
 
+use FabianMichael\Meta\Helper;
 use Kirby\Cms\App as Kirby;
 
 return function (Kirby $kirby): array {
-    $toggleType = Kirby::plugin('fabianmichael/kirby-multi-toggle-field')
-        ? 'multi-toggle'
-        : 'select';
+    $toggleType = Helper::toggleFieldType();
 
     $getOptions = function (string $name) use ($kirby, $toggleType): array {
         $optionValue = $kirby->option('fabianmichael.meta.' . str_replace('_', '.', $name));
@@ -13,7 +12,7 @@ return function (Kirby $kirby): array {
             'state' => ($optionValue === true ? t('fabianmichael.meta.state.on') : t('fabianmichael.meta.state.off')),
         ]);
 
-        if ($toggleType === 'multi-toggle') {
+        if (in_array($toggleType, ['multi-toggle', 'toggles'])) {
             return [
                 'options' => [
                     [

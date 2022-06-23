@@ -41,7 +41,7 @@ return [
                     'url' => $page->url(),
                     'shortUrl' => Url::short($page->url()),
                     'template' => $page->template()->name(),
-                    'panelUrl' => $page->panelUrl(),
+                    'panelUrl' => $page->panel()->url(),
                     'meta_description' => $meta->meta_description()->value(),
                     'robots' => $meta->robots(),
                     'og_title' => $meta->og_title()->value(),

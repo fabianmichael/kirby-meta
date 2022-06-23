@@ -1,7 +1,7 @@
 {
     "name": "fabianmichael/kirby-meta",
     "type": "kirby-plugin",
-    "version": "0.0.26-alpha",
+    "version": "0.1-beta",
     "license": "MIT",
     "description": "Your all-in-one powerhouse for any SEO and metadata needs imaginable.",
     "authors": [
@@ -32,6 +32,7 @@
     },
     "require": {
         "php": ">=8.0.0",
+        "getkirby/cms": ">=3.6.0",
         "getkirby/composer-installer": "^1.2"
     },
     "require-dev": {
@@ -43,8 +44,5 @@
     "scripts": {
         "cs-fixer": "vendor/bin/php-cs-fixer fix --dry-run --diff",
         "cs-fixer-fix": "vendor/bin/php-cs-fixer fix --diff"
-    },
-    "suggest": {
-        "fabianmichael/kirby-multi-toggle-field": "^1.0"
     }
 }

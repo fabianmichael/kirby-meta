@@ -207,9 +207,16 @@ export default {
 }
 
 .k-meta thead th {
+  border-top-left-radius: var(--rounded);
+  border-top-right-radius: var(--rounded);
   position: sticky;
   top: 0; /* Don't forget this, required for the stickiness */
   z-index: 10;
+}
+
+.k-meta tbody tr:last-child td {
+  border-bottom-left-radius: var(--rounded);
+  border-bottom-right-radius: var(--rounded);
 }
 
 .k-meta td:first-child,
@@ -256,7 +263,7 @@ export default {
 .k-meta-caps {
   text-transform: uppercase;
   font-size: var(--text-xs);
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1rem;
   letter-spacing: .02em;
   width: 100%;
@@ -290,7 +297,7 @@ export default {
   gap: var(--spacing-2);
   grid-template-columns: min-content 1fr 3fr auto;
   background: var(--color-white);
-  border-radius: var(--rounded-sm);
+  border-radius: var(--rounded);
   box-shadow: var(--shadow);
   padding: var(--spacing-2);
   margin: 0 calc(-1 * var(--spacing-2));

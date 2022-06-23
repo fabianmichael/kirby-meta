@@ -67,9 +67,9 @@ export default {
 <style type="css">
 
 .k-meta-title-preview__content {
+  border: var(--field-input-border);
   background: var(--color-gray-300);
-  border: var(--color-white);
-  border-radius: var(--rounded-sm);
+  border-radius: var(--rounded);
   padding: var(--field-input-padding);
   display: grid;
   align-items: center;

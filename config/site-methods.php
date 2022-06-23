@@ -8,7 +8,7 @@ return [
         if ($type === 'no_og_image_fallback') {
             if (site()->og_image()->toFile() === null) {
                 $text = tt('fabianmichael.meta.no_og_image_fallback', [
-                    'link' => $this->panelUrl() . '?tab=meta',
+                    'link' => $this->panel()->url() . '?tab=meta',
                 ]);
             }
         }

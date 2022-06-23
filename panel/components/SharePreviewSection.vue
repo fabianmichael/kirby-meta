@@ -164,7 +164,7 @@ export default {
 
 .k-meta-sharing-preview__box {
   background: var(--color-white);
-  border-radius: var(--rounded-sm);
+  border-radius: var(--rounded);
   box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
