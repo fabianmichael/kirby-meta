@@ -25,7 +25,7 @@ return [
     'fabianmichael.meta.robots_snippet.label' => 'Snippets',
     'fabianmichael.meta.robots_snippet.help' => 'Search engines will display description snippets for this page.',
 
-    'fabianmichael.meta.global_robots.headline' => 'Search engines',
+    'fabianmichael.meta.global_robots.headline' => 'Search engine settings',
     'fabianmichael.meta.global_robots.help' => 'Detailed instructions for how search engines should handle pages of this site by default. Pages can have their individual settings to override these defaults.',
     'fabianmichael.meta.global_robots_index.label' => 'Indexing',
     'fabianmichael.meta.global_robots_index.help' => 'Search engines are allowed to index this site.',
