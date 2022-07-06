@@ -55,12 +55,17 @@ class Sitemap
             $url->appendChild($doc->createElement('changefreq', $changefreq));
         }
 
-        foreach ($kirby->languages() as $language) {
-            $linkEl = $doc->createElement('xhtml:link');
-            $linkEl->setAttribute('rel', 'alternate');
-            $linkEl->setAttribute('hreflang', $code = $language->code());
-            $linkEl->setAttribute('href', $page->url($code));
-            $url->appendChild($linkEl);
+        $languages = $kirby->languages();
+        if ($languages->count() > 1) {
+            // only generate links to translations, if is are more
+            // than one language defined
+            foreach ($languages as $language) {
+                $linkEl = $doc->createElement('xhtml:link');
+                $linkEl->setAttribute('rel', 'alternate');
+                $linkEl->setAttribute('hreflang', $code = $language->code());
+                $linkEl->setAttribute('href', $page->url($code));
+                $url->appendChild($linkEl);
+            }
         }
 
         // Add lastmod date either from metadata or from modified date of page
