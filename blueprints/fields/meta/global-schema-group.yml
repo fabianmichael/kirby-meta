@@ -23,7 +23,6 @@ fields:
   meta_org_logo:
     type: files
     label: fabianmichael.meta.schema.org_logo.label
-    required: true
     layout: cards
     size: small
     multiple: false
