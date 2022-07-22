@@ -45,14 +45,16 @@ class Sitemap
         $url = $doc->createElement('url');
         $url->appendChild($doc->createElement('loc', $page->url($languageCode)));
 
-        $priority = $meta->priority();
+        if ($kirby->option('fabianmichael.meta.sitemap.detailSettings') !== false) {
+            $priority = $meta->priority();
 
-        if ($priority !== null) { // could be 0.0, so has to be checked against NULL
-            $url->appendChild($doc->createElement('priority', number_format($priority, 1, '.', '')));
-        }
+            if ($priority !== null) { // could be 0.0, so has to be checked against NULL
+                $url->appendChild($doc->createElement('priority', number_format($priority, 1, '.', '')));
+            }
 
-        if ($changefreq = $meta->changefreq()) {
-            $url->appendChild($doc->createElement('changefreq', $changefreq));
+            if ($changefreq = $meta->changefreq()) {
+                $url->appendChild($doc->createElement('changefreq', $changefreq));
+            }
         }
 
         $languages = $kirby->languages();

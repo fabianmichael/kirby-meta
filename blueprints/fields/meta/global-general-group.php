@@ -35,7 +35,8 @@ return function (Kirby $kirby) {
 
     // sitemap
 
-    if ($kirby->option('fabianmichael.meta.sitemap') !== false) {
+    if ($kirby->option('fabianmichael.meta.sitemap') !== false
+        && $kirby->option('fabianmichael.meta.sitemap.detailSettings') !== false) {
         $fields['sitemap_priority'] = [
             'extends' => 'fields/meta/sitemap-priority',
             'help' => t('fabianmichael.meta.sitemap.global_priority.help'),

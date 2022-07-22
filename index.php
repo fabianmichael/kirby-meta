@@ -7,6 +7,7 @@ use Kirby\Cms\App as Kirby;
 Kirby::plugin('fabianmichael/meta', [
     'options' => [
         'sitemap' => true,
+        'sitemap.detailSettings' => false,
         'sitemap.pages.exclude' => [],
         'sitemap.pages.includeUnlisted' => [],
         'sitemap.templates.exclude' => [],
