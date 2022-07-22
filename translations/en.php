@@ -101,4 +101,11 @@ return [
     'fabianmichael.meta.schema.meta_person.label' => 'Person',
     'fabianmichael.meta.schema.meta_person.empty' => 'No user selected yet',
     'fabianmichael.meta.schema.meta_person.help' => 'Select a user who represents this website.',
+
+    'fabianmichael.meta.status.label' => 'Status',
+    'fabianmichael.meta.search_engines.visibility.visible' => 'Visible',
+    'fabianmichael.meta.search_engines.visibility.hidden' => 'Hidden',
+    'fabianmichael.meta.search_engines.visibility.label' => 'Search engine visbility',
+    'fabianmichael.meta.search_engines.visibility.yes' => 'This page is indexed by search engines and may appear in search results',
+    'fabianmichael.meta.search_engines.visibility.no' => 'This page is hidden from search results',
 ];

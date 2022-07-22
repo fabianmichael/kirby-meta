@@ -1,34 +1,11 @@
 <?php
 
-use FabianMichael\Meta\Meta;
 use FabianMichael\Meta\SiteMeta;
 
 return [
-    // 'meta' =>
-    // [
-    //     'props' => [
-    //         'headline' => function ($headline = 'Metadata') {
-    //             return $headline;
-    //         }
-    //     ],
-    //     'computed' => [],
-    //     // 'computed' => [
-    //     //     'title' => function () {
-    //     //         return $this->model()->title();
-    //     //     },
-    //     //     'url' => function () {
-    //     //         return $this->model()->url();
-    //     //     },
-    //     //     'siteTitleAfterPageTitle' => function () {
-    //     //         return option('diesdasdigital.meta-knight.siteTitleAfterPageTitle', true);
-    //     //     }
-    //     // ]
-    // ],
     'meta-share-preview' => [
-        'props' => [
-            'headline' => function (?string $headline = null): string {
-                return $headline ?? t('fabianmichael.meta.sharing_preview.headline');
-            },
+        'mixins' => [
+            'headline',
         ],
         'computed' => [
             'metadata_og_image' => function (): ?array {

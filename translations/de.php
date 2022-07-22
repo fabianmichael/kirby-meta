@@ -102,4 +102,11 @@ return [
     'fabianmichael.meta.schema.meta_person.label' => 'Person',
     'fabianmichael.meta.schema.meta_person.empty' => 'Kein Benutzer*innen-Account ausgewählt',
     'fabianmichael.meta.schema.meta_person.help' => 'Wählen Sie einen Benutzer*innen-Account, welcher diese Website repräsentiert.',
+
+    'fabianmichael.meta.status.label' => 'Status',
+    'fabianmichael.meta.search_engines.visibility.visible' => 'Sichtbar',
+    'fabianmichael.meta.search_engines.visibility.hidden' => 'Versteckt',
+    'fabianmichael.meta.search_engines.visibility.label' => 'Sichtbarkeit in Suchmaschinen',
+    'fabianmichael.meta.search_engines.visibility.yes' => 'Diese Seite wird von Suchmaschinen indexizert und kann in Suchergebnissen erscheinen',
+    'fabianmichael.meta.search_engines.visibility.no' => 'Diese Seite wird in den Suchergebnissen versteckt',
 ];

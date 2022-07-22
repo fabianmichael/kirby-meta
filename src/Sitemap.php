@@ -32,11 +32,16 @@ class Sitemap
         return $doc->saveXML();
     }
 
-    protected static function urlsForPage(Kirby $kirby, Page $page, DOMDocument $doc, DOMElement $root, ?string $languageCode = null)
+    protected static function urlsForPage(
+        Kirby $kirby,
+        Page $page,
+        DOMDocument $doc,
+        DOMElement $root,
+        ?string $languageCode = null): void
     {
         $meta = $page->meta($languageCode);
 
-        if (static::isPageIndexible($page) === false || $meta->robots('index') === false) {
+        if (static::isPageIndexible($page) === false) {
             // Exclude page, if explicitly excluded in page settings
             // for global settings
             return;

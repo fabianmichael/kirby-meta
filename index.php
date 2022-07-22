@@ -59,6 +59,7 @@ Kirby::plugin('fabianmichael/meta', [
         'files/meta-og-image'                   => __DIR__ . '/blueprints/files/meta-og-image.yml',
         'sections/meta/files'                   => __DIR__ . '/blueprints/sections/files.yml',
         'sections/meta/share-preview'           => __DIR__ . '/blueprints/sections/share-preview.yml',
+        'sections/meta/status'                  => __DIR__ . '/blueprints/sections/status.yml',
         'tabs/meta/page'                        => require __DIR__ . '/blueprints/tabs/page.php',
         'tabs/meta/site'                        => require __DIR__ . '/blueprints/tabs/site.php',
     ],

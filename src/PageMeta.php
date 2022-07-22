@@ -485,4 +485,22 @@ class PageMeta
 
         return $this->page->title();
     }
+
+    public function reports(): array
+    {
+        $isIndexible = Sitemap::isPageIndexible($this->page) && $this->robots('index');
+
+        return [
+            [
+                'value' => $isIndexible
+                    ? t('fabianmichael.meta.search_engines.visibility.visible')
+                    : t('fabianmichael.meta.search_engines.visibility.hidden'),
+                'label' => 'fabianmichael.meta.search_engines.visibility.label',
+                'info'  => $isIndexible
+                    ? t('fabianmichael.meta.search_engines.visibility.yes')
+                    : t('fabianmichael.meta.search_engines.visibility.no'),
+                'theme' => $isIndexible ? 'positive' : 'negative',
+            ],
+        ];
+    }
 }
