@@ -435,7 +435,7 @@ class PageMeta
         return new Field($this->page, 'title', implode(' ', $title));
     }
 
-    public function og_description(bool $fallback = true): Field
+    public function og_description(): Field
     {
         return $this
             ->get('og_description', true, false)
