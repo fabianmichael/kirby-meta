@@ -1,10 +1,10 @@
 <?php
 
-use Kirby\Cms\App as Kirby;
+use Kirby\Cms\App;
 
 @include_once __DIR__ . '/vendor/autoload.php';
 
-Kirby::plugin('fabianmichael/meta', [
+App::plugin('fabianmichael/meta', [
     'options' => [
         'sitemap' => true,
         'sitemap.detailSettings' => false,
