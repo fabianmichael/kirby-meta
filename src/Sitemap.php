@@ -4,12 +4,28 @@ namespace FabianMichael\Meta;
 
 use DOMDocument;
 use DOMElement;
-use Kirby\Cms\App as Kirby;
+use Kirby\Cms\App;
+use Kirby\Cms\Languages;
 use Kirby\Cms\Page;
 
 class Sitemap
 {
-    public static function generate(Kirby $kirby): string
+    protected App $kirby;
+    protected bool $isMultilang;
+    protected Languages $languages;
+
+    public function __construct() {
+        $this->kirby = kirby();
+        $this->isMultilang = $this->kirby->multilang();
+        $this->languages   = $this->kirby->languages();
+    }
+
+    public static function factory(...$args): static
+    {
+        return new static(...$args);
+    }
+
+    public function generate(): string
     {
         $doc = new DOMDocument('1.0', 'UTF-8');
         $doc->formatOutput = true;
@@ -18,28 +34,34 @@ class Sitemap
         $root->setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:xhtml', 'http://www.w3.org/1999/xlink');
 
         // Allow hook to change $doc and $root, e.g. adding namespaces or other attributes.
-        $kirby->trigger('meta.sitemap:before', compact('kirby', 'doc', 'root'));
+        $this->kirby->trigger('meta.sitemap:before', [
+            'kirby' => $this->kirby,
+            'doc' => $doc,
+            'root' => $root
+        ]);
 
-        foreach ($kirby->site()->index() as $page) {
-            static::urlsForPage($kirby, $page, $doc, $root);
+        foreach ($this->kirby->site()->index() as $page) {
+            $this->urlsForPage($page, $doc, $root);
         }
 
         $root = $doc->appendChild($root);
 
         // Allow hook to alter the DOM
-        $kirby->trigger('meta.sitemap:after', compact('kirby', 'doc', 'root'));
+        $this->kirby->trigger('meta.sitemap:after', [
+            'kirby' => $this->kirby,
+            'doc' => $doc,
+            'root' => $root
+        ]);
 
         return $doc->saveXML();
     }
 
-    protected static function urlsForPage(
-        Kirby $kirby,
+    protected function urlsForPage(
         Page $page,
         DOMDocument $doc,
-        DOMElement $root,
-        ?string $languageCode = null): void
-    {
-        $meta = $page->meta($languageCode);
+        DOMElement $root): void
+        {
+        $meta = $page->meta();
 
         if (static::isPageIndexible($page) === false) {
             // Exclude page, if explicitly excluded in page settings
@@ -48,9 +70,9 @@ class Sitemap
         }
 
         $url = $doc->createElement('url');
-        $url->appendChild($doc->createElement('loc', $page->url($languageCode)));
+        $url->appendChild($doc->createElement('loc', $page->url()));
 
-        if ($kirby->option('fabianmichael.meta.sitemap.detailSettings') !== false) {
+        if ($this->kirby->option('fabianmichael.meta.sitemap.detailSettings') !== false) {
             $priority = $meta->priority();
 
             if ($priority !== null) { // could be 0.0, so has to be checked against NULL
@@ -62,11 +84,10 @@ class Sitemap
             }
         }
 
-        $languages = $kirby->languages();
-        if ($languages->count() > 1) {
+        if ($this->isMultilang && $this->languages->count() > 1) {
             // only generate links to translations, if is are more
             // than one language defined
-            foreach ($languages as $language) {
+            foreach ($this->languages as $language) {
                 $linkEl = $doc->createElement('xhtml:link');
                 $linkEl->setAttribute('rel', 'alternate');
                 $linkEl->setAttribute('hreflang', $code = $language->code());
@@ -79,7 +100,13 @@ class Sitemap
         $url->appendChild($doc->createElement('lastmod', date('Y-m-d', $meta->lastmod())));
 
         // Allow hook to alter the DOM
-        $kirby->trigger('meta.sitemap.url', compact('kirby', 'page', 'meta', 'doc', 'url', 'languageCode'));
+        $this->kirby->trigger('meta.sitemap.url', [
+            'kirby' => $this->kirby,
+            'page' => $page,
+            'meta' => $meta,
+            'doc' => $doc,
+            'url' => $url,
+        ]);
 
         $root->appendChild($url);
     }

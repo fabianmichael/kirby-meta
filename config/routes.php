@@ -43,7 +43,7 @@ return function (Kirby $kirby) {
             $cacheKey = 'sitemap.xml';
 
             if (option('debug') === true || ! ($sitemap = $cache->get($cacheKey))) {
-                $sitemap = Sitemap::generate($kirby);
+                $sitemap = Sitemap::factory()->generate();
                 $cache->set($cacheKey, $sitemap);
             }
 

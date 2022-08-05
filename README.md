@@ -245,9 +245,7 @@ return [
       Page $page,
       PageMeta $meta,
       DOMDocument $doc,
-      DOMElement $url,
-      ?string $languageCode
-    ) {
+      DOMElement $url) {
       foreach ($page->images() as $image) {
         // add all images from page to image sitemap.
         $imageEl = $doc->createElement('image:image');
