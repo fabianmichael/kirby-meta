@@ -466,12 +466,7 @@ class PageMeta
     {
         $site = $this->page->site();
         $titlePrefix = $this->get(key: 'og_title_prefix', fallback: '');
-        $title = $this->get('og_title')->or(
-            $this->page->isHomePage()
-            ? $site->content()->get('og_site_name')
-                ->or($site->title())->toString()
-            : $this->page->title()
-        );
+        $title = $this->get('og_title')->or($this->title());
 
         return new Field($this->page, 'og_title', $titlePrefix . $title);
     }
