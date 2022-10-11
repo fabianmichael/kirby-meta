@@ -48,7 +48,7 @@ return [
     'fabianmichael.meta.state.on' => 'ja',
     'fabianmichael.meta.state.off' => 'nein',
     'fabianmichael.meta.state.unset' => 'nicht gesetzt',
-    'fabianmichael.meta.og.headline' => 'Teilen in sozialen Medine',
+    'fabianmichael.meta.og.headline' => 'Teilen in sozialen Medien',
     'fabianmichael.meta.og.help' => '[Open Graph](https://ogp.me/) werden von asozialen Netzwerken (z.B. Facebook, Twitter) und den meisten Messenger-Apps (z.B. Signal, Telegram, iMessage) verwendet, um Vorschauen für Links zu generieren.',
     'fabianmichael.meta.og_site_name.label' => 'Titel der Website für Teilen',
     'fabianmichael.meta.og_site_name.help' => 'Der Website-Titel, welcher beim Teilen verwendet werden soll. Standardmäßig wird der Titel der Website verwendet.',
@@ -95,7 +95,7 @@ return [
 
     'fabianmichael.meta.schema.headline' => 'Strukturierte Daten',
     'fabianmichael.meta.schema.help' => 'Diese Daten basieren auf dem [Schema.org](https://schema.org)-Standard und werden von Suchmachhinen wie [Google](https://google.com) verwendet, um Zusammmenhänge zwischen Daten, Organisationen und Personen besser verstehen zu können.',
-    'fabianmichael.meta.schema.website_owner.label' => 'Eigentümer der Website',
+    'fabianmichael.meta.schema.website_owner.label' => 'Eigentümer:in der Website',
     'fabianmichael.meta.schema.website_owner.help' => 'Wählen Sie, ob diese Website eine Person oder Organisation repräsentiert.',
     'fabianmichael.meta.schema.org_name.label' => 'Name der Organisation',
     'fabianmichael.meta.schema.org_logo.label' => 'Logo der Organisation',
