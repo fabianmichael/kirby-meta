@@ -28,7 +28,6 @@
         <p class="k-meta-sharing-preview__preview-paragraph">
           {{ description }}
         </p>
-        <!-- <p class="k-meta-sharing-preview__url">{{ url }}</p> -->
       </div>
     </div>
   </div>
