@@ -73,7 +73,7 @@ return [
     'fabianmichael.meta.sitemap.changefreq.always' => 'Ständig',
     'fabianmichael.meta.sitemap.changefreq.hourly' => 'Stündlich',
     'fabianmichael.meta.sitemap.changefreq.daily' => 'Täglich',
-    'fabianmichael.meta.sitemap.changefreq.weekly' => 'Wochentlich',
+    'fabianmichael.meta.sitemap.changefreq.weekly' => 'Wöchentlich',
     'fabianmichael.meta.sitemap.changefreq.monthly' => 'Monatlich',
     'fabianmichael.meta.sitemap.changefreq.yearly' => 'Jährlich',
     'fabianmichael.meta.sitemap.changefreq.never' => 'Niemals',
