@@ -88,9 +88,9 @@ return [
     'fabianmichael.meta.schema.person_privacy_notice.text' => 'Durch das Auswählen eines Benutzer*innen-Account werden private Informationen wie die E-Mailadresse und das Profilbild in mit Suchmaschinen und alllen Menschen und Bots, die den Quelltext der Website lesen geteilt.',
     'fabianmichael.meta.sharing_preview.headline' => 'Vorschau für Teilen',
     'fabianmichael.meta.description_missing' => '[Beschreibung für Teilen und globale Beschreibung fehlen]',
-    'fabianmichael.meta.source.og_image' => ': Bild für Teilen',
-    'fabianmichael.meta.source.metadata' => ': Seiten-Thumbnail',
-    'fabianmichael.meta.source.site' => ': globale Standard-Thumbnail',
+    'fabianmichael.meta.source.og_image' => 'Quelle: Bild für Teilen',
+    'fabianmichael.meta.source.metadata' => 'Quelle: Seiten-Thumbnail',
+    'fabianmichael.meta.source.site' => 'Quelle: globale Standard-Thumbnail',
     'fabianmichael.meta.og_image.missing' => 'Bild fehlt',
 
     'fabianmichael.meta.schema.headline' => 'Strukturierte Daten',
