@@ -264,6 +264,12 @@ return [
         }
       }
     },
+
+    'meta.theme.color' => function (
+      ?string $color
+    ) {
+      return '#ff0000';
+    }
   ],
 ];
 ```

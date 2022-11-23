@@ -24,4 +24,11 @@ class Helper
 
         return $type = 'select';
     }
+
+    public static function themeColor(): ?string
+    {
+        return kirby()->apply('meta.theme.color', [
+            'color' => option('fabianmichael.meta.theme.color'),
+        ], 'color');
+    }
 }
