@@ -49,7 +49,7 @@ return [
     'fabianmichael.meta.state.off' => 'nein',
     'fabianmichael.meta.state.unset' => 'nicht gesetzt',
     'fabianmichael.meta.og.headline' => 'Teilen in sozialen Medien',
-    'fabianmichael.meta.og.help' => '[Open Graph](https://ogp.me/) werden von sozialen Netzwerken und den Messenger-Apps verwendet, um Vorschauen für Links zu generieren.',
+    'fabianmichael.meta.og.help' => '[Open Graph](https://ogp.me/) wird von sozialen Netzwerken und den Messenger-Apps verwendet, um Vorschauen für Links zu generieren.',
     'fabianmichael.meta.og_site_name.label' => 'Titel der Website für Teilen',
     'fabianmichael.meta.og_site_name.help' => 'Der Website-Titel, welcher beim Teilen verwendet werden soll. Standardmäßig wird der Titel der Website verwendet.',
     'fabianmichael.meta.global_og_image.label' => 'Standard Bild für Teilen',
