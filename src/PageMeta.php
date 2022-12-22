@@ -375,26 +375,27 @@ class PageMeta
         }
 
         // Twitter
-
-        $social[] = [
-            'name' => 'twitter:card',
-            'content' => 'summary_large_image', // TODO: make overridable from metadata() method
-        ];
-
-        $twitterSite = $this->get('twitter_site', false, true);
-        if ($twitterSite->isNotEmpty() === true) {
+        if (option('fabianmichael.meta.twitter')) {
             $social[] = [
-                'name' => 'twitter:site',
-                'content' => '@' . ltrim($twitterSite->toString(), '@'),
+                'name' => 'twitter:card',
+                'content' => 'summary_large_image',
             ];
-        }
 
-        $twitterCreator = $this->get('twitter_creator', true, true);
-        if ($twitterCreator->isNotEmpty() === true) {
-            $social[] = [
-                'name' => 'twitter:creator',
-                'content' => '@' . ltrim($twitterCreator->toString(), '@'),
-            ];
+            $twitterSite = $this->get('twitter_site', false, true);
+            if ($twitterSite->isNotEmpty() === true) {
+                $social[] = [
+                    'name' => 'twitter:site',
+                    'content' => '@' . ltrim($twitterSite->toString(), '@'),
+                ];
+            }
+
+            $twitterCreator = $this->get('twitter_creator', true, true);
+            if ($twitterCreator->isNotEmpty() === true) {
+                $social[] = [
+                    'name' => 'twitter:creator',
+                    'content' => '@' . ltrim($twitterCreator->toString(), '@'),
+                ];
+            }
         }
 
         // Additional metadata from page model
