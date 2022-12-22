@@ -31,22 +31,11 @@ export default {
   data() {
     return {
       headline: "Metadata",
-      // results: [],
     };
-    // return {
-    //   headline: "Basic Meta Information",
-    //   site_title: null,
-    //   page_title: null,
-    //   url: null,
-    //   twitter_image: null,
-    // };
   },
   created: function() {
     this.load().then((response) => {
       this.headline = response.headline;
-      // this.url = response.url;
-      // this.page_title = response.title.value;
-      // this.twitter_url = response.url;
     });
   },
   computed: {
@@ -60,15 +49,6 @@ export default {
 
         return item;
       });
-      // return [
-      //   {
-      //     "icon": "check",
-      //     "theme": "positive",
-      //     "text": "...",
-      //   }
-      // ];
-      // console.log("update!");
-      // return this.$store.getters["content/values"]().meta_description;
     },
   },
   methods: {
@@ -90,28 +70,6 @@ export default {
       return "negative";
     },
   },
-  // watch: {
-  //   meta_description: {
-  //     handler() {
-  //       if (this.store_image.length === 0) {
-  //         this.twitter_image = null;
-  //       } else {
-  //         this.$api.files
-  //           .get(
-  //             this.$store.getters["content/model"]().api,
-  //             this.store_image[0].filename,
-  //             {
-  //               view: "compact",
-  //             }
-  //           )
-  //           .then((response) => {
-  //             this.twitter_image = response.url;
-  //           });
-  //       }
-  //     },
-  //     immediate: true,
-  //   },
-  // },
 };
 </script>
 
@@ -121,14 +79,11 @@ export default {
   background: var(--color-white);
   border-radius: var(--rounded-sm);
   box-shadow: var(--shadow);
-  /* padding: var(--spacing-3); */
 }
 
 .k-meta__headline {
   border-bottom: 1px solid var(--color-gray-200);
   padding: var(--spacing-2) var(--spacing-3);
-  /* margin: 0 calc(-1 * var(--spacing-3)) var(--spacing-2); */
-  /* padding: 0 var(--spacing-3) var(--spacing-2); */
 }
 
 .k-meta__result {

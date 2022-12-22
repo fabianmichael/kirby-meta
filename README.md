@@ -10,7 +10,7 @@ browsers and beyond.
 **Key features:**
 
 - 🔎 All-in-one solution for SEO and social media optimization
-- 📱 Support for OpenGraph, Twitter Cards and Schema.org markup
+- 📱 Support for OpenGraphand Schema.org markup (Twitter cards are supported but deprecated)
 - 🚀 Customizable Metadata for auto-generated metadata from page contents
 - 💻 Extensive panel UI including social media previews
 - 🦊 Easy-to-understand language in the panel, providing a good middle ground between simplicity and extensive control options.
@@ -66,7 +66,8 @@ The options below have to be set in your `config.php`. Please note that every op
 | `sitemap.templates.exclude` | `array` | `[]` | An array of template names to exlude from the sitemap. Values are treated as regular expressions, so they can include wildcards like e.g. `article-(internal|secret)` |
 | `sitemap.templates.includeUnlisted` | `array` | `[]` | An array of templates to include in the sitemap, even if their status is `unlisted`. Values are treated as regular expressions. |
 | `schema` | `bool` | `true` | Generate [Schema.org](https://schema.org/) markup as [JSON-LD](https://json-ld.org/).
-| `social` | `bool` | `true` | Generate [OpenGraph](https://ogp.me/) and [Twitter Cards](https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/abouts-cards) markup.
+| `social` | `bool` | `true` | Generate [OpenGraph](https://ogp.me/) markup.
+| `twitter` | `bool` | `true` | Generate and [Twitter Cards](https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/abouts-cards) markup.  Only has an effect, if `social` is also enabled. Since `0.2.0-beta` (⚠️ deprecated).
 | `robots` | `bool` | `true` | Generate the `robots` metatag and serve [robots.txt](https://developers.google.com/search/docs/advanced/robots/intro) at `http(s)://yourdomain.com/robots.txt`.
 | `robots.canonical` | `bool` | `true` | Generate canonical url meta tag. Requires `robots` option to be `true`. |
 | `robots.index` | `bool` | `true` | Allows crawlers to index pages. Can be overriden in global or page-specidic settings from the panel. Requires `robots` option to be `true` for having an effect. If a page is excluded from the sitemap or unlisted, the robots meta tag will always contain `noindex`. |
