@@ -10,7 +10,7 @@ browsers and beyond.
 **Key features:**
 
 - 🔎 All-in-one solution for SEO and social media optimization
-- 📱 Support for OpenGraphand Schema.org markup (Twitter cards are supported but deprecated)
+- 📱 Support for OpenGraph and Schema.org (JSON-LD) markup
 - 🚀 Customizable Metadata for auto-generated metadata from page contents
 - 💻 Extensive panel UI including social media previews
 - 🦊 Easy-to-understand language in the panel, providing a good middle ground between simplicity and extensive control options.
