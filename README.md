@@ -51,7 +51,8 @@ composer require fabianmichael/kirby-meta
 
 **Alternative download methods:**
 
-You can also download this repository as ZIP or add the whole repo as a submodule.
+You can also download this repository as ZIP or add the whole repo as a submodule.  
+To run from source, you need to install the dependencies : `composer install`.
 
 ### Available configuration options
 
@@ -96,6 +97,25 @@ tabs:
   […]
   meta: tabs/meta/page
 ```
+
+Altering the default fields is also possible (like any Kirby Blueprint) :
+```yml
+[…]
+tabs:
+  […]
+  meta:
+    extends: tabs/meta/page
+    columns:
+      meta_main:
+        fields:
+          # remove a field completely
+          meta_canonical_url: false
+          # Change field properties
+          meta_description:
+            label: "Awesome Description"
+
+```
+
 
 ### Template setup
 
