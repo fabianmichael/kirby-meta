@@ -16,7 +16,7 @@ browsers and beyond.
 - 🦊 Easy-to-understand language in the panel, providing a good middle ground between simplicity and extensive control options.
 - 🧙‍♂️ Most features can be enabled/disabled in config, panel UI only shows enabled features (thanks to dynamic blueprints)
 - 🪝 Hooks for altering the plugin’s behavior
-- 🌍 All blueprints are fully translatable
+- 🌍 All blueprints are fully translatable (*English, German and French translations are included*)
 
 **Future plans:**
 
@@ -51,7 +51,8 @@ composer require fabianmichael/kirby-meta
 
 **Alternative download methods:**
 
-You can also download this repository as ZIP or add the whole repo as a submodule.
+You can also download this repository as ZIP or add the whole repo as a submodule.  
+To run from source, you need to install the dependencies : `composer install`.
 
 ### Available configuration options
 
