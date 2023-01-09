@@ -98,25 +98,6 @@ tabs:
   meta: tabs/meta/page
 ```
 
-Altering the default fields is also possible (like any Kirby Blueprint) :
-```yml
-[…]
-tabs:
-  […]
-  meta:
-    extends: tabs/meta/page
-    columns:
-      meta_main:
-        fields:
-          # remove a field completely
-          meta_canonical_url: false
-          # Change field properties
-          meta_description:
-            label: "Awesome Description"
-
-```
-
-
 ### Template setup
 
 Include the `meta` snippet within your `<head>` element, preferably before
