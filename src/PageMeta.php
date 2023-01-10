@@ -244,7 +244,7 @@ class PageMeta
         return (float) max(0, min(1, $priority)); // 0 <= value <= 1
     }
 
-    public function robots(?string $name = null): bool|string|null
+    public function robots(?string $name = null): bool|string
     {
         if (is_string($name)) {
             // single robots value of page as boolean
@@ -278,7 +278,7 @@ class PageMeta
 
             $result = sizeof($robots) > 0
                 ? implode(', ', $robots)
-                : null;
+                : 'all';
 
             if ($result === 'noindex, nofollow') {
                 return 'none';
