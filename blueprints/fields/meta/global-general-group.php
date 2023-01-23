@@ -22,7 +22,7 @@ return function (Kirby $kirby) {
             'label' => t('fabianmichael.meta.title_separator.label'),
             'default' => '',
             'placeholder' => '|',
-            'options' => ["~" , "-" , "–" , "—" , ":" , "/" , "⋆" , "·" , "•" , "~" , "×" , "*" , "‣", "→", "←", "<" , ">" , "«" , "»" , "‹" , "›", "♠︎", "♣︎", "♥︎", "♦︎", "☙", "❦", "❧", "☭"],
+            'options' => $kirby->option('fabianmichael.meta.title.separators'),
             'width' => '1/3',
             'help' => t('fabianmichael.meta.title_separator.help'),
         ],
