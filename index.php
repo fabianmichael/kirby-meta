@@ -87,7 +87,7 @@ App::plugin('fabianmichael/meta', [
 
     'collections' => [
         'indexedPages' => function(){
-            return kirby()->site()->index()->filterBy('isIndexedByMeta', true);
+            return kirby()->site()->index()->filterBy('isIndexible', true);
         },
     ],
 ]);

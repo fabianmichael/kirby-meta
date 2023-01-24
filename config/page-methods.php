@@ -8,7 +8,7 @@ return [
         return PageMeta::of($this, $languageCode);
     },
 
-    'isIndexedByMeta' => function(){
+    'isIndexible' => function(){
         return Sitemap::isPageIndexible( $this );
     },
 ];
