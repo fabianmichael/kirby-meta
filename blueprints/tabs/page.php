@@ -43,7 +43,7 @@ return function (Kirby $kirby) {
 
     if (sizeof($sections) > 0) {
         $columns['meta_sidebar'] = [
-            'sticky' => 'true',
+            'sticky' => true,
             'width' => '1/3',
             'sections' => $sections,
         ];
