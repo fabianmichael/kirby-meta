@@ -15,6 +15,7 @@ class PageMeta
 
     protected Page $page;
     protected Kirby $kirby;
+    protected ?string $languageCode;
     protected array $metadata = [];
 
     public function __call($name, $arguments): mixed
