@@ -281,6 +281,15 @@ return [
 ];
 ```
 
+### Manipulating indexed pages
+A few helpers are available for manipulating pages :
+
+### Page Method
+If you'd like to know if a page is indexed in the sitemap, you can use `$page->isInexible()`.
+
+### Pages Collection
+A collection of all indexed pages is available in : `$kirby->collection('indexedPages')`.
+
 ## Credits
 
 This is partly based on an older version of the meta plugin, that I had initially
