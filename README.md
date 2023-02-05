@@ -285,10 +285,10 @@ return [
 A few helpers are available for manipulating pages :
 
 ### Page Method
-If you'd like to know if a page is indexed in the sitemap, you can use `$page->isIndexible()`.
+If you'd like to know if a page is indexed in the sitemap, you can use `$page->isIndexible()` (returns a `bool`).
 
-### Pages Collection
-A collection of all indexed pages is available in : `$kirby->collection('indexedPages')`.
+### Site Method
+To get all indexed pages according to your settings, you can use : `$site->indexedPages()` (returns a `Kirby\Cms\Collection` of pages).
 
 ## Credits
 
