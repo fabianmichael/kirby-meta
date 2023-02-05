@@ -18,6 +18,6 @@ return [
         }
     },
     'indexedPages' => function () {
-        return kirby()->site()->index()->filterBy('isIndexible', '==', true);
+        return $this->index()->filterBy('isIndexible', '==', true);
     },
 ];
