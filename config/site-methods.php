@@ -17,4 +17,7 @@ return [
             return '<span data-theme="notice" class="k-meta-warning-box">' . $text . '</span>';
         }
     },
+    'indexedPages' => function () {
+        return kirby()->site()->index()->filterBy('isIndexible', '==', true);
+    },
 ];

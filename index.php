@@ -84,10 +84,4 @@ App::plugin('fabianmichael/meta', [
         'en' => require __DIR__ . '/translations/en.php',
         'fr' => require __DIR__ . '/translations/fr.php',
     ],
-
-    'collections' => [
-        'indexedPages' => function(){
-            return kirby()->site()->index()->filterBy('isIndexible', '==', true);
-        },
-    ],
 ]);
