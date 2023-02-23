@@ -1,2 +1,3 @@
 type: files
-headline: fabianmichael.meta.files.headline
+label: fabianmichael.meta.files.headline
+template: meta-og-image
