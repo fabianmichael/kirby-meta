@@ -1,0 +1,10 @@
+title: Meta image
+
+accept:
+  mime: image/jpeg, image/png, image/svg+xml, image/webp, image/avif, image/gif
+
+fields:
+  alt:
+    type: text
+    label: Alternative text
+    help: Used by assistive technology and automated system for describing image contents.

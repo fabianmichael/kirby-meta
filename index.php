@@ -57,8 +57,7 @@ App::plugin('fabianmichael/meta', [
         'fields/meta/sitemap-changefreq'        => require __DIR__ . '/blueprints/fields/meta/sitemap-changefreq.php',
         'fields/meta/sitemap-priority'          => __DIR__ . '/blueprints/fields/meta/sitemap-priority.yml',
         'fields/meta/twitter-group'             => __DIR__ . '/blueprints/fields/meta/twitter-group.yml', // deprecated
-        'files/meta-logo'                       => __DIR__ . '/blueprints/files/meta-logo.yml',
-        'files/meta-og-image'                   => __DIR__ . '/blueprints/files/meta-og-image.yml',
+        'files/meta-image'                      => __DIR__ . '/blueprints/files/meta-image.yml',
         'sections/meta/files'                   => __DIR__ . '/blueprints/sections/files.yml',
         'sections/meta/share-preview'           => __DIR__ . '/blueprints/sections/share-preview.yml',
         'sections/meta/status'                  => __DIR__ . '/blueprints/sections/status.yml',

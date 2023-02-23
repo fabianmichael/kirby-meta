@@ -8,5 +8,5 @@ image:
   back: white
   ratio: 1200/630
   cover: true
-uploads: meta-og-image
+uploads: meta-image
 help: fabianmichael.meta.og_image.help

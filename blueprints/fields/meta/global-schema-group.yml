@@ -27,7 +27,7 @@ fields:
     size: small
     multiple: false
     query: site.files.filterBy("mime", "in", ["image/jpeg", "image/png", "image/svg+xml"])
-    uploads: meta-logo
+    uploads: meta-image
     image:
       back: white
     when:
