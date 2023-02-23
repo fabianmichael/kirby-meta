@@ -19,7 +19,10 @@ return function (Kirby $kirby) {
         }
 
         $sections['meta_sharing_preview'] = 'sections/meta/share-preview';
-        $sections['meta_files'] = 'sections/meta/files';
+        
+        if ($kirby->option('fabianmichael.meta.files')) {
+            $sections['meta_files'] = 'sections/meta/files';
+        }
     }
 
     // robots
