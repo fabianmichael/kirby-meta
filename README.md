@@ -83,19 +83,25 @@ The options below have to be set in your `config.php`. Please note that every op
 
 ### Blueprint setup
 
-Meta comes with predefined tab blueprints to be added to your site and page blueprints:
+Your site and page blueprints need to use [tabs](https://getkirby.com/docs/guide/blueprints/layout#tabs), as the plugin’s input fields all come in a tab. Meta comes with tab blueprints that need to be added to your site and page blueprints accordingly:
 
 ```yaml
 # site/blueprints/site.yml
 […]
 tabs:
-  […]
+  structure:
+    label: Structure
+    columns:
+      […]
   meta: tabs/meta/site
 
 # site/blueprints/pages/default.yml
 […]
 tabs:
-  […]
+  content:
+    label: Content
+    columns:
+      […]
   meta: tabs/meta/page
 ```
 
