@@ -6,6 +6,8 @@ use Kirby\Cms\App;
 
 App::plugin('fabianmichael/meta', [
     'options' => [
+        'cache' => true,
+
         'sitemap' => true,
         'sitemap.detailSettings' => false,
         'sitemap.pages.exclude' => [],
