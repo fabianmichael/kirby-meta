@@ -69,7 +69,6 @@ App::plugin('fabianmichael/meta', [
     ],
     'fields' => require __DIR__ . '/config/fields.php',
     'filesMethods' => require __DIR__ . '/config/files-methods.php',
-    'hooks' => require __DIR__ . '/config/hooks.php',
     'routes' => require __DIR__ . '/config/routes.php',
     'pageMethods' => require __DIR__ . '/config/page-methods.php',
     'sections' => require __DIR__ . '/config/sections.php',

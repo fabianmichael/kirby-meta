@@ -40,26 +40,25 @@ return function (App $kirby) {
             }
 
             $sitemap = [];
-            $cache = $kirby->cache('fabianmichael.meta');
+            // $cache = $kirby->cache('fabianmichael.meta');
+            $cache = $kirby->cache('pages');
             $cacheKey = 'sitemap.xml';
-            $version = $kirby->plugin('fabianmichael/meta')->version();
+            // $version = $kirby->plugin('fabianmichael/meta')->version();
 
-            if ($kirby->option('debug') === true || ! ($sitemap = $cache->get($cacheKey)) || A::get($sitemap, 'version') !== $version) {
+            if (!($sitemap = $cache->get($cacheKey))) {
                 $created = time();
 
                 $xml = Sitemap::factory()->generate();
-                $xml .= PHP_EOL . '<!-- created ' . date('c', $created) . ' -->';
+                // $xml .= PHP_EOL . '<!-- created ' . date('c', $created) . ' -->';
 
                 $sitemap = [
-                    'version' => $version,
-                    'xml' => $xml,
-                    'created' => $created,
+                    'html' => $xml,
                 ];
 
                 $cache->set($cacheKey, $sitemap);
             }
 
-            return new Response(A::get($sitemap, 'xml'), 'application/xml');
+            return new Response(A::get($sitemap, 'html'), 'application/xml');
         },
     ];
 
