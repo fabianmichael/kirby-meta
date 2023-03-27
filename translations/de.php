@@ -9,7 +9,7 @@ return [
     'fabianmichael.meta.general.headline' => 'Basisdaten',
     'fabianmichael.meta.title.label' => 'Titel (Überschreiben)',
     'fabianmichael.meta.title.help' => 'Der Seitentitel, so wie er in Suchmaschinen erscheinen soll. Wenn das Feld leer ist, wird stattdessen der Seitentitel ausgegeben.',
-    'fabianmichael.meta.title_separator.label' => 'Titel Trennzeichen',
+    'fabianmichael.meta.title_separator.label' => 'Titel-Trennzeichen',
     'fabianmichael.meta.title_separator.help' => 'Das Trennzeichen wird zwischen dem Titel der aktuellen Seite und dem Titel der Website angezeigt.',
 
     'fabianmichael.meta.robots.headline' => 'Suchmaschinen',
@@ -23,7 +23,7 @@ return [
     'fabianmichael.meta.robots_imageindex.label' => 'Bild-Indexierung',
     'fabianmichael.meta.robots_imageindex.help' => 'Bilder auf dieser Seite erscheinen in der Bildsuche.',
     'fabianmichael.meta.robots_snippet.label' => 'Snippets',
-    'fabianmichael.meta.robots_snippet.help' => 'Suchmaschinen fürfen Textschnipsel aus dieser Seite generieren.',
+    'fabianmichael.meta.robots_snippet.help' => 'Suchmaschinen dürfen Textschnipsel aus dieser Seite generieren.',
 
     'fabianmichael.meta.global_robots.headline' => 'Suchmaschinen-Einstellungen',
     'fabianmichael.meta.global_robots.help' => 'Standard-Einstellungen für Anweisungen an Suchmaschinen, in welcher Weise sie Seiten dieser Website indizieren dürfen. Seiten können individuelle Einstellungen verwenden, um dieses Verhaltern zu überschreiben.',
@@ -36,7 +36,7 @@ return [
     'fabianmichael.meta.global_robots_imageindex.label' => 'Bild-Indexierung',
     'fabianmichael.meta.global_robots_imageindex.help' => 'Bilder auf dieser Website erscheinen in der Bildsuche.',
     'fabianmichael.meta.global_robots_snippet.label' => 'Snippets',
-    'fabianmichael.meta.global_robots_snippet.help' => 'Suchmaschinen fürfen Textschnipsel aus dieser Website generieren.',
+    'fabianmichael.meta.global_robots_snippet.help' => 'Suchmaschinen dürfen Textschnipsel aus dieser Website generieren.',
 
     'fabianmichael.meta.description.label' => 'Beschreibung',
     'fabianmichael.meta.description.help' => 'Eine kurze Beschreibung, die Suchmachinen in den Ergebnissen unterhalb des Seitentitels darstellen.',
@@ -53,9 +53,9 @@ return [
     'fabianmichael.meta.og_site_name.label' => 'Titel der Website für Teilen',
     'fabianmichael.meta.og_site_name.help' => 'Der Website-Titel, welcher beim Teilen verwendet werden soll. Standardmäßig wird der Titel der Website verwendet.',
     'fabianmichael.meta.global_og_image.label' => 'Standard Bild für Teilen',
-    'fabianmichael.meta.global_og_image.help' => 'Ein Bild, welches diese Website beim Teilen in sozialen Netzwerken und Messegern repräsentiert. Wird automatisch zugeschnitten. Dieses Bild wird als Standard für Seiten verwendet, die kein eigenes Bild haben.<br><br>**Empfohlene Größe:** 1200&thinsp;&times;&thinsp;630&nbsp;px<br>**Formats:** JPEG, PNG, GIF, WebP, AVIF',
+    'fabianmichael.meta.global_og_image.help' => 'Ein Bild, welches diese Website beim Teilen in sozialen Netzwerken und Messegern repräsentiert. Wird automatisch zugeschnitten. Dieses Bild wird als Standard für Seiten verwendet, die kein eigenes Bild haben.<br><br>**Empfohlene Größe:** 1200&thinsp;&times;&thinsp;630&nbsp;px<br>**Erlaubte Formate:** JPEG, PNG, GIF, WebP, AVIF',
     'fabianmichael.meta.og_image.label' => 'Bild für Teilen',
-    'fabianmichael.meta.og_image.help' => 'Ein Bild, welches diese Seite beim Teilen in sozialen Netzwerken und Messegern repräsentiert. Wird automatisch zugeschnitten. Wenn kein Bild ausgewählt ist, wird das globale Standard-Bild verwendet.<br><br>**Empfohlene Größe:** 1200&thinsp;&times;&thinsp;630&nbsp;px<br>**Formats:** JPEG, PNG, GIF, WebP, AVIF {< site.metaPanelWarning("no_og_image_fallback") >}',
+    'fabianmichael.meta.og_image.help' => 'Ein Bild, welches diese Seite beim Teilen in sozialen Netzwerken und Messegern repräsentiert. Wird automatisch zugeschnitten. Wenn kein Bild ausgewählt ist, wird das globale Standard-Bild verwendet.<br><br>**Empfohlene Größe:** 1200&thinsp;&times;&thinsp;630&nbsp;px<br>**Erlaubte Formate:** JPEG, PNG, GIF, WebP, AVIF {< site.metaPanelWarning("no_og_image_fallback") >}',
 
     'fabianmichael.meta.og_title.label' => 'Gesonderter Titel für Teilen',
     'fabianmichael.meta.og_title.help' => 'Der Titel dieser Seite beim Teilen in sozialen Netzwerken. Verwendet **Title (überschreiben)** oder den Seitentitel als Alternativen.',
