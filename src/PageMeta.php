@@ -30,7 +30,7 @@ class PageMeta
         $this->page = $page;
 
         // Get metadata from page, if possible
-        if (method_exists($this->page, 'metadata') === true) {
+        if ($this->page->hasMethod('metadata') === true) {
             $this->metadata = $this->page->metadata($languageCode);
         }
 
