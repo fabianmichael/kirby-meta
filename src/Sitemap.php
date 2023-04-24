@@ -100,15 +100,16 @@ class Sitemap
         $url->appendChild($doc->createElement('lastmod', date('Y-m-d', $meta->lastmod())));
 
         // Allow hook to alter the DOM
-        $this->kirby->trigger('meta.sitemap.url', [
+        if ($this->kirby->apply('meta.sitemap.url', [
             'kirby' => $this->kirby,
             'page' => $page,
             'meta' => $meta,
             'doc' => $doc,
             'url' => $url,
-        ]);
-
-        $root->appendChild($url);
+            'include' => true,
+        ], 'include') !== false) {
+            $root->appendChild($url);
+        }
     }
 
     public static function isPageIndexible(Page $page): bool

@@ -252,6 +252,12 @@ return [
       PageMeta $meta,
       DOMDocument $doc,
       DOMElement $url) {
+
+      if ($page->images()->count() === 0) {
+        // dynamically exclude page from the sitemap
+        return false;
+      }
+
       foreach ($page->images() as $image) {
         // add all images from page to image sitemap.
         $imageEl = $doc->createElement('image:image');
