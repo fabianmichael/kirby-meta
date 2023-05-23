@@ -150,7 +150,7 @@ After metadata has been loaded by calling the `$page->metadata()` method on a mo
 return [
   'meta.load:after' => function (
     array $metadata,
-    Kirb\Cms\Page $page,
+    Kirby\Cms\Page $page,
     ?string $languageCode
   ) {
     // set `thumbnail.png` as default share image for all pages,
@@ -172,7 +172,7 @@ return [
   'meta.jsonld:after' => function (
     array $json,
     FabianMichael\Meta\PageMeta $meta,
-    Kirb\Cms\Page $page
+    Kirby\Cms\Page $page
   ) {
     // add breadcrumb to JSON-LD graph
     $items = [];
