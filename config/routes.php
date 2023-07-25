@@ -17,7 +17,7 @@ return function (App $kirby) {
                     'Allow: /',
                 ];
 
-                if ($kirby->option('fabianmichael.meta.sitemap') !== false && SiteMeta::robots('index') === true) {
+                if ($kirby->option('fabianmichael.meta.sitemap') === true && SiteMeta::robots('index') === true) {
                     $robots[] = 'Sitemap: ' . url('sitemap.xml');
                 }
 
@@ -32,7 +32,7 @@ return function (App $kirby) {
     $routes[] = [
         'pattern' => 'sitemap.xml',
         'action' => function () use ($kirby) {
-            if ($kirby->option('fabianmichael.meta.sitemap') === false && SiteMeta::robots('index') === false) {
+            if ($kirby->option('fabianmichael.meta.sitemap') === false || SiteMeta::robots('index') === false) {
                 $this->next();
             }
 
