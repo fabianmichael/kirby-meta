@@ -89,6 +89,7 @@ App::plugin('fabianmichael/meta', [
         'sitemap.xml' => __DIR__ . '/templates/sitemap.xml.php',
     ],
     'translations' => [
+        'da' => require __DIR__ . '/translations/da.php',
         'de' => require __DIR__ . '/translations/de.php',
         'en' => require __DIR__ . '/translations/en.php',
         'fr' => require __DIR__ . '/translations/fr.php',
