@@ -71,14 +71,21 @@ export default {
   background: var(--color-gray-300);
   border-radius: var(--rounded);
   padding: var(--field-input-padding);
+  min-height: var(--input-height);
   display: grid;
   align-items: center;
   gap: .75ch;
   grid-template-columns: min-content 1fr;
 }
 
+/**
+1. Prevents the icon from collapsing in Kirby 4.0.0-beta.1
+*/
 .k-k-meta-title-separator-preview__favicon {
   border-radius: 2px;
+  block-size: 1rem; /* 1 */
+  inline-size: 1rem; /* 1 */
+  max-inline-size: none; /* 1 */
 }
 
 .k-meta-title-preview__title {
