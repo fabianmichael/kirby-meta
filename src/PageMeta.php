@@ -418,6 +418,10 @@ class PageMeta
 
     public function title(): Field
     {
+        // Search in page model ...
+        if ($title = $this->metadata('meta_title_full')) {
+            return new Field($this->page, 'title', $title);
+        }
         $title = [];
         $siteTitle = $this->page->site()->title();
 
