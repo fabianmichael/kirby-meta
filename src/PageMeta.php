@@ -418,21 +418,18 @@ class PageMeta
 
     public function title(): Field
     {
-        // Search in page model ...
-        if ($title = $this->metadata('meta_title_full')) {
-            return new Field($this->page, 'title', $title);
-        }
         $title = [];
         $siteTitle = $this->page->site()->title();
 
-        if ($this->page->isHomePage() === true) {
-            $title[] = $this->page->content($this->languageCode)->get('meta_title')
-                ->or($siteTitle)->toString();
+        if ($metaTitleFull = $this->metadata('meta_title_full')) {
+            $title[] = $metaTitleFull;
+        } else if ($this->page->isHomePage() === true) {
+            $title[] = $this->get(key: 'meta_title',
+                fallback: $siteTitle)->toString();
         } else {
             // TODO: Support pagination
-            $title[] = $this->page->content($this->languageCode)->get('meta_title')
-                ->or($this->page->title())->toString();
-
+            $title[] = $this->get(key: 'meta_title',
+                fallback: $this->page->title())->toString();
             $title[] = SiteMeta::titleSeparator();
             $title[] = $siteTitle->toString();
         }
