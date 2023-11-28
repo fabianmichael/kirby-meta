@@ -3,7 +3,7 @@
 namespace FabianMichael\Meta;
 
 use Kirby\Cms\App as Kirby;
-use Kirby\Cms\Field;
+use Kirby\Content\Field;
 use Kirby\Cms\File;
 use Kirby\Cms\Language;
 use Kirby\Cms\Page;
@@ -74,7 +74,8 @@ class PageMeta
         bool $siteFallback = false,
         bool $configFallback = false,
         mixed $fallback = null
-    ) {
+    ): Field {
+
         // From content file ...
         $field = $this->page->content($this->languageCode)->get($key);
 
