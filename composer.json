@@ -4,6 +4,7 @@
     "version": "0.4.2-beta",
     "license": "MIT",
     "description": "Your all-in-one powerhouse for any SEO and metadata needs imaginable.",
+    "homepage": "https://github.com/fabianmichael/kirby-meta",
     "authors": [
         {
             "name": "Fabian Michael",
