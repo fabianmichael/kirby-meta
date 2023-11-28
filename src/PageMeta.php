@@ -74,7 +74,7 @@ class PageMeta
         bool $siteFallback = false,
         bool $configFallback = false,
         mixed $fallback = null
-    ): Field {
+    ) {
         // From content file ...
         $field = $this->page->content($this->languageCode)->get($key);
 
