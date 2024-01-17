@@ -93,6 +93,6 @@ App::plugin('fabianmichael/meta', [
         'de' => require __DIR__ . '/translations/de.php',
         'en' => require __DIR__ . '/translations/en.php',
         'fr' => require __DIR__ . '/translations/fr.php',
-        'sv' => require __DIR__ . '/translations/sv.php',
+        'sv_SE' => require __DIR__ . '/translations/sv_SE.php',
     ],
 ]);
