@@ -131,6 +131,8 @@ Sometimes, you want special behavior for certain templates. The easiest way to a
 | Key | Type | Description |
 |:----|:-----|:------------|
 | `meta_description` | `string` | Provide a default description that is used, when the user had not entered a dedicated description for this page. This could e.g. be a truncated version of the page's text content. |
+| `meta_title` | `string` | Provide a default override page title that is used, when the user has not entered a title override for this page. This could be used to provide an autogenrated title. |
+| `meta_title_full` | `string` | Provide a page title override that does not append the title separate and site title. This exact title is used for the page. If this is passed, no other field is checked by this plugin. But your page model can check the plugin's fields like `meta_title`. |
 | `og_title_prefix` | `string` | Will be put in front of the page's OpenGraph title, e.g. `'ℹ️ '` or `'[Recipe ]` |
 | `og_image File` | `Kirby\Cms\File` | A `File` object, that sets the default OpenGraph image for this page. You can even generate custom images programatically and Wrap them in a `File` object, e.g. for the docs of your product (getkirby.com does this for the reference pages).
 | `@graph` | `array` | Things to add to the JSON-LD metadata in the page's head. If you need to reference the organization or person behind the website, use `url('/#owner')`. If you need to reference the website itself, use `url('/#website')`. |

@@ -3,7 +3,7 @@
 namespace FabianMichael\Meta;
 
 use Kirby\Cms\App as Kirby;
-use Kirby\Cms\Field;
+use Kirby\Content\Field;
 use Kirby\Cms\File;
 use Kirby\Cms\Language;
 use Kirby\Cms\Page;
@@ -75,6 +75,7 @@ class PageMeta
         bool $configFallback = false,
         mixed $fallback = null
     ): Field {
+
         // From content file ...
         $field = $this->page->content($this->languageCode)->get($key);
 
@@ -421,14 +422,15 @@ class PageMeta
         $title = [];
         $siteTitle = $this->page->site()->title();
 
-        if ($this->page->isHomePage() === true) {
-            $title[] = $this->page->content($this->languageCode)->get('meta_title')
-                ->or($siteTitle)->toString();
+        if ($metaTitleFull = $this->metadata('meta_title_full')) {
+            $title[] = $metaTitleFull;
+        } else if ($this->page->isHomePage() === true) {
+            $title[] = $this->get(key: 'meta_title',
+                fallback: $siteTitle)->toString();
         } else {
             // TODO: Support pagination
-            $title[] = $this->page->content($this->languageCode)->get('meta_title')
-                ->or($this->page->title())->toString();
-
+            $title[] = $this->get(key: 'meta_title',
+                fallback: $this->page->title())->toString();
             $title[] = SiteMeta::titleSeparator();
             $title[] = $siteTitle->toString();
         }
