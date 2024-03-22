@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'fabianmichael.meta.tab.label' => 'Metadata (SEO)',
+    'fabianmichael.meta.tab.label' => 'SEO',
     'fabianmichael.meta.page_title.placeholder' => 'Sidetitel',
     'fabianmichael.meta.title_preview.label' => 'Titel forhåndsvisning',
     'fabianmichael.meta.global_settings.headline' => ' Globale indstillinger',
