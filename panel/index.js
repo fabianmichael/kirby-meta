@@ -14,12 +14,11 @@ panel.plugin("fabianmichael/meta", {
     "meta-title-preview": TitlePreviewField,
   },
   sections: {
-  //   meta: Section,
     "meta-share-preview": SharePreviewSection,
   },
   icons: {
-    "meta-true": '<g fill="currentColor"><polygon points="12.4,6 11,4.6 7,8.6 5,6.6 3.6,8 7,11.4 "></polygon></g>',
-    "meta-false": '<g fill="currentColor"><polygon points="10.1,4.5 8,6.6 5.9,4.5 4.5,5.9 6.6,8 4.5,10.1 5.9,11.5 8,9.4 10.1,11.5 11.5,10.1 9.4,8 11.5,5.9 "></polygon></g>',
-    "meta-robot": '<g fill="currentColor"><path d="M10,0v2h2v2H4V2h2V0H0v2h2v2H0v12h16V4h-2V2h2V0H10z M14,14H2V6h2h8h2V14z"></path><rect x="4" y="7" width="3" height="2"></rect><rect x="9" y="7" width="3" height="2"></rect><rect x="5" y="10" width="6" height="3"></rect>',
+    "meta-true": '<path d="M10 15.2 19.2 6l1.4 1.4L10 18l-6.4-6.4L5 10.2l5 5Z"/>',
+    "meta-false": '<path d="m12 10.6 5-5 1.4 1.5-5 4.9 5 5-1.5 1.4-4.9-5-5 5L5.6 17l5-5-5-5L7 5.7l5 5Z"/>',
+    "meta-searcheye": '<path d="m18 16.6 4.3 4.3-1.4 1.4-4.3-4.3a9 9 0 1 1 1.4-1.4Zm-2-.7A7 7 0 0 0 11 4a7 7 0 1 0 4.9 12l.1-.1Zm-3.8-8.7a2 2 0 1 0 2.6 2.6 4 4 0 1 1-2.6-2.6Z"/>',
   }
 });

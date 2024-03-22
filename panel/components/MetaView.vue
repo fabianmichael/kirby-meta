@@ -1,148 +1,150 @@
 <template>
   <k-inside>
-    <k-view>
-      <k-header>
-        Metadata
-        <k-button-group slot="left">
-          <k-button
-            text="Validate internal links"
-            icon="wand"
-            :disabled="isBusy"
-            @click="checkInternalLinks"
-          />
-          <k-languages-dropdown />
-        </k-button-group>
-      </k-header>
-      <table class="k-meta">
-        <thead>
-          <tr>
-            <th>
-              <span class="k-meta-title">
-                <span class="k-meta-caps">Title Override</span>
-              </span>
-            </th>
-            <th>
-              <span class="k-meta-title">
-                <span class="k-meta-caps">Meta Description</span>
-              </span>
-            </th>
-            <th>
-              <span class="k-meta-title">
-                <span class="k-meta-caps">Share Title</span>
-              </span>
-            </th>
-            <th style="width: 14rem">
-              <span class="k-meta-title">
-                <span class="k-meta-caps">Share Description</span>
-              </span>
-            </th>
-            <th class="k-meta-thumbnail-col">
+    <k-header>
+      Metadata
+      <template #buttons>
+        <k-button
+          text="Validate internal links"
+          icon="wand"
+          :disabled="isBusy"
+          @click="checkInternalLinks"
+        />
+        <k-languages-dropdown />
+      </template>
+    </k-header>
+    <table class="k-meta">
+      <thead>
+        <tr>
+          <th>
+            <span class="k-meta-title">
+              <span class="k-meta-caps">Title Override</span>
+            </span>
+          </th>
+          <th>
+            <span class="k-meta-title">
+              <span class="k-meta-caps">Meta Description</span>
+            </span>
+          </th>
+          <th>
+            <span class="k-meta-title">
+              <span class="k-meta-caps">Share Title</span>
+            </span>
+          </th>
+          <th style="width: 14rem">
+            <span class="k-meta-title">
+              <span class="k-meta-caps">Share Description</span>
+            </span>
+          </th>
+          <th class="k-meta-thumbnail-col">
+            <k-icon type="image" />
+          </th>
+          <th style="width: 14rem">
+            <span class="k-meta-title">
               <k-icon type="image" />
-            </th>
-            <th style="width: 14rem">
-              <span class="k-meta-title">
-                <k-icon type="image" />
-                <span class="k-meta-caps">Alt</span>
-              </span>
-            </th>
-            <th style="width: 3rem">
-              <span class="sr-only">Robots</span>
-              <k-icon type="meta-robot" />
-            </th>
-            <th style="width: 3rem">
-              <span class="sr-only">Link validation</span>
-              <k-icon type="url" />
+              <span class="k-meta-caps">Alt</span>
+            </span>
+          </th>
+          <th style="width: 3rem; text-align: center;">
+            <span class="sr-only">Robots</span>
+            <k-icon type="meta-searcheye" style="margin-inline: auto;" />
+          </th>
+          <th style="width: 3rem; text-align: center;">
+            <span class="sr-only">Link validation</span>
+            <k-icon type="url" style="margin-inline: auto;" />
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <template v-for="(page, id) in pages" >
+          <tr
+            :key="id + '_head'"
+            :data-is-indexible="page.is_indexible"
+          >
+            <th colspan="8" class="k-meta-page-header-col">
+              <div class="k-meta-page-header">
+                <div class="k-meta-status-wrap">
+                  <k-status-icon :status="page.status" />
+                </div>
+                <k-link :to="page.panelUrl">{{ page.title }}</k-link>
+                <a :href="page.url" target="_blank" rel="noopener" class="k-meta-infozone">
+                  <k-icon type="url"/>
+                  <span>{{ page.shortUrl }}</span>
+                </a>
+                <span class="k-meta-infozone">
+                  <k-icon :type="page.icon || 'page'"/>
+                  <span>{{ page.template }}</span>
+                </span>
+              </div>
             </th>
           </tr>
-        </thead>
-        <tbody>
-          <template v-for="(page, id) in pages" >
-            <tr
-              :key="id + '_head'"
-              :data-is-indexible="page.is_indexible"
-            >
-              <th colspan="8" class="k-meta-page-header-col">
-                <div class="k-meta-page-header">
-                  <div class="k-meta-status-wrap">
-                    <k-status-icon :status="page.status" />
-                  </div>
-                  <k-link :to="page.panelUrl">{{ page.title }}</k-link>
-                  <a :href="page.url" target="_blank" rel="noopener" class="k-meta-infozone">
-                    <k-icon type="url"/>
-                    <span>{{ page.shortUrl }}</span>
-                  </a>
-                  <span class="k-meta-infozone">
-                    <k-icon :type="page.icon || 'page'"/>
-                    <span>{{ page.template }}</span>
-                  </span>
-                </div>
-              </th>
-            </tr>
-            <tr
-              :key="id + '_content'"
-              :data-is-indexible="page.is_indexible"
-            >
-              <td>
-                <div v-if="page.meta_title" class="k-meta-text-xs k-meta-max-3-lines">{{ page.meta_title }}</div>
-                <template v-else>—</template>
-              </td>
-              <td>
-                <div v-if="page.meta_description" class="k-meta-text-xs k-meta-max-3-lines">{{ page.meta_description }}</div>
-                <template v-else>—</template>
-              </td>
-              <td>
-                <div v-if="page.og_title" class="k-meta-text-xs k-meta-max-3-lines">{{ page.og_title }}</div>
-                <template v-else>—</template>
-              </td>
-              <td>
-                <div v-if="page.og_description" class="k-meta-text-xs k-meta-max-3-lines">{{ page.og_description }}</div>
-                <div v-else-if="page.meta_description" class="k-meta-text-xs k-meta-max-3-lines" style="opacity: 0.5;">[Meta description]</div>
-                <template v-else>—</template>
-              </td>
-              <td class="k-meta-thumbnail-col">
-                <k-image
-                  v-if="page.og_image_url"
-                  :src="page.og_image_url"
-                  :cover="true"
-                  ratio="1200/630"
-                  back="pattern"
-                />
-                <div v-else class="k-meta-center">—</div>
-              </td>
-              <td>
-                <div v-if="page.og_image_alt" class="k-meta-text-xs k-meta-max-3-lines">{{ page.og_image_alt}}</div>
-                <template v-else>—</template>
-              </td>
-              <td><div class="k-meta-center"><k-icon :type="page.is_indexible ? 'meta-true' : 'meta-false'"/></div></td>
-              <td>
-                <div class="k-meta-center">
-                  <k-icon
-                    :type="(page.internalLinksResult && page.internalLinksResult.message) ? 'meta-false' : 'meta-true'"
-                    v-if="page.internalLinksResult"
-                  />
-                  <template v-else>—</template>
-                </div>
-              </td>
-            </tr>
-            <tr
-              :key="id + '_internal_links_result'"
-              v-if="page.internalLinksResult && page.internalLinksResult.message"
-            >
-              <td colspan="8" class="k-meta-result">
-                <k-box theme="negative">
-                  <k-text size="tiny">
-                    <p>{{ page.internalLinksResult.message }}</p>
-                    <ul v-if="page.internalLinksResult.brokenLinks">
-                      <li v-for="(value, index) in page.internalLinksResult.brokenLinks" :key="index" v-html="value"/>
-                    </ul>
-                  </k-text>
-                </k-box>
-              </td>
-            </tr>
-          </template>
-        </tbody>
-      </table>
-    </k-view>
+          <tr
+            :key="id + '_content'"
+            :data-is-indexible="page.is_indexible"
+          >
+            <td>
+              <div v-if="page.meta_title" class="k-meta-text-xs k-meta-max-3-lines">{{ page.meta_title }}</div>
+              <template v-else>—</template>
+            </td>
+            <td>
+              <div v-if="page.meta_description" class="k-meta-text-xs k-meta-max-3-lines">{{ page.meta_description }}</div>
+              <template v-else>—</template>
+            </td>
+            <td>
+              <div v-if="page.og_title" class="k-meta-text-xs k-meta-max-3-lines">{{ page.og_title }}</div>
+              <template v-else>—</template>
+            </td>
+            <td>
+              <div v-if="page.og_description" class="k-meta-text-xs k-meta-max-3-lines">{{ page.og_description }}</div>
+              <div v-else-if="page.meta_description" class="k-meta-text-xs k-meta-max-3-lines" style="opacity: 0.5;">[Meta description]</div>
+              <template v-else>—</template>
+            </td>
+            <td class="k-meta-thumbnail-col">
+              <k-image
+                v-if="page.og_image_url"
+                :src="page.og_image_url"
+                :cover="true"
+                ratio="1200/630"
+                back="pattern"
+              />
+              <div v-else style="text-align: center;">—</div>
+            </td>
+            <td>
+              <div v-if="page.og_image_alt" class="k-meta-text-xs k-meta-max-3-lines">{{ page.og_image_alt}}</div>
+              <template v-else>—</template>
+            </td>
+            <td style="text-align: center;">
+              <k-icon
+                :type="page.is_indexible ? 'meta-true' : 'meta-false'"
+                style="margin-inline: auto;"
+              />
+            </td>
+            <td style="text-align: center;">
+              <k-icon
+                :type="(page.internalLinksResult && page.internalLinksResult.message) ? 'meta-false' : 'meta-true'"
+                style="margin-inline: auto;"
+                v-if="page.internalLinksResult"
+              />
+              <template v-else>—</template>
+            </td>
+          </tr>
+          <tr
+            :key="id + '_internal_links_result'"
+            v-if="page.internalLinksResult && page.internalLinksResult.message"
+          >
+            <td colspan="8" class="k-meta-result">
+              <k-box theme="negative">
+                <k-text size="tiny">
+                  <p>{{ page.internalLinksResult.message }}</p>
+                  <ul v-if="page.internalLinksResult.brokenLinks">
+                    <li v-for="(value, index) in page.internalLinksResult.brokenLinks" :key="index" v-html="value"/>
+                  </ul>
+                </k-text>
+              </k-box>
+            </td>
+          </tr>
+        </template>
+      </tbody>
+    </table>
   </k-inside>
 </template>
 
@@ -173,7 +175,7 @@ export default {
       for (let i = 0, l = this.pages.length; i < l; i++) {
         const page = this.pages[i];
         const id   = page.id;
-        const result = await this.$api.get(`meta/check-internal-links`, {
+        const result = await window.panel.api.get(`meta/check-internal-links`, {
           id,
           language: (this.$multilang ? this.$language.code : null),
         });
@@ -282,10 +284,6 @@ export default {
   width: 6rem;
 }
 
-.k-meta-center {
-  text-align: center;
-}
-
 .k-meta .k-meta-page-header-col {
   padding: 0 !important;
 }
@@ -305,10 +303,11 @@ export default {
 
 .k-meta-infozone {
   font-weight: var(--font-normal);
-  color: var(--color-gray-500);
+  color: var(--color-gray-600);
   font-size: var(--text-xs);
   font-family: var(--font-mono);
   display: flex;
+  align-items: center;
 }
 
 .k-meta-infozone > * + * {
