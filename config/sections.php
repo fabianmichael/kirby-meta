@@ -20,10 +20,16 @@ return [
                 return $this->model()->title()->value();
             },
             'page_metadata_description' => function (): ?string {
-                return $this->model()->meta()->metadata('meta_description');
+                return $this->model()
+                    ->meta()
+                    ->metadata('meta_description');
             },
             'site_meta_description' => function (): ?string {
-                return $this->model()->site()->content()->get('meta_description')->value();
+                return $this->model()
+                    ->site()
+                    ->content()
+                    ->get('meta_description')
+                    ->value();
             },
             'site_name' => function (): ?string {
                 $site = $this->model()->site();
@@ -31,7 +37,11 @@ return [
                 return $site->og_site_name()->or($site->title())->value();
             },
             'site_og_image' => function (): ?array {
-                $image = $this->model()->site()->content()->get('og_image')->toFile();
+                $image = $this->model()
+                    ->site()
+                    ->content()
+                    ->get('og_image')
+                    ->toFile();
 
                 return $image ? $image->crop(1200, 630)->toArray() : null;
             },
@@ -42,7 +52,10 @@ return [
                 return SiteMeta::titleSeparator();
             },
             'og_title_prefix' => function (): ?string {
-                return $this->model()->meta()->get('og_title_prefix')->value();
+                return $this->model()
+                    ->meta()
+                    ->get('og_title_prefix')
+                    ->value();
             },
             'url' => function (): string {
                 return $this->model()->url();
