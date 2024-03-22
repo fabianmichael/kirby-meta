@@ -1,8 +1,8 @@
 <template>
-  <div class="k-meta-sharing-preview">
+  <k-section class="k-meta-sharing-preview">
     <div class="k-meta-sharing-preview__label k-field-label">
       <k-icon type="share"/>
-      <span>{{ headline }}</span>
+      <k-label>{{ headline }}</k-label>
     </div>
     <div class="k-meta-sharing-preview__box">
       <div
@@ -30,7 +30,7 @@
         </p>
       </div>
     </div>
-  </div>
+  </k-section>
 </template>
 
 <script>
@@ -142,6 +142,8 @@ export default {
 
 .k-meta-sharing-preview__label {
   display: flex;
+  align-items: center;
+  margin-block-end: var(--spacing-1);
 }
 
 .k-meta-sharing-preview__label > * + * {
@@ -167,7 +169,6 @@ export default {
   box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
-  max-width: 438px;
   overflow: hidden;
   position: relative;
   width: 100%;
