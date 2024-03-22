@@ -3,7 +3,7 @@
 namespace FabianMichael\Meta;
 
 use Kirby\Cms\App as Kirby;
-use Kirby\Cms\Field;
+use Kirby\Content\Field;
 use Kirby\Cms\File;
 use Kirby\Cms\Language;
 use Kirby\Cms\Page;
