@@ -1,9 +1,9 @@
 {
   "scripts": {
-    "dev": "npx -y kirbyup panel/index.js --watch",
-    "build": "npx -y kirbyup panel/index.js"
+    "dev": "kirbyup serve panel/index.js",
+    "build": "kirbyup panel/index.js"
   },
   "devDependencies": {
-    "kirbyup": "^0.22.2"
+    "kirbyup": "^3.1.5"
   }
 }
