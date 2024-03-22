@@ -256,7 +256,7 @@ class PageMeta
             }
 
             // if page is not in sitemap, it will also not be indexible
-            if ($name === 'index' && ! Sitemap::isPageIndexible($this->page)) {
+            if ($name === 'index' && ! $this->page->isIndexible()) {
                 return false;
             }
 
@@ -485,7 +485,7 @@ class PageMeta
 
     public function reports(): array
     {
-        $isIndexible = Sitemap::isPageIndexible($this->page) && $this->robots('index');
+        $isIndexible = $this->page->isIndexible() && $this->robots('index');
 
         return [
             [

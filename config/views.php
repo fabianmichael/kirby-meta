@@ -35,7 +35,7 @@ return [
                     'title' => $page->title()->value(),
                     'meta_title' => $meta->get('meta_title')->value(),
                     'icon'  => $page->blueprint()->icon(),
-                    'is_indexible' => Sitemap::isPageIndexible($page),
+                    'is_indexible' => $page->isIndexible(),
                     'status'  => $page->status(),
                     'id' => $page->id(),
                     'url' => $page->url(),
