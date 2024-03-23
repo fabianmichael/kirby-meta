@@ -49,7 +49,7 @@ return [
     'fabianmichael.meta.state.off' => 'off',
     'fabianmichael.meta.state.unset' => 'not set',
     'fabianmichael.meta.og.headline' => 'Social media sharing',
-    'fabianmichael.meta.og.help' => '[Open Graph](https://ogp.me/) metadata is consumed by social networks (e.g. Facebook, Twitter) and most messenger apps (e.g. Signal, Telegram, iMessage).',
+    'fabianmichael.meta.og.help' => '[Open Graph](https://ogp.me/) metadata is consumed by social networks (e.g. Facebook, Mastodon) and most messenger apps (e.g. Signal, Telegram, iMessage).',
     'fabianmichael.meta.og_site_name.label' => 'Share site name',
     'fabianmichael.meta.og_site_name.help' => 'The name which should be displayed for the overall site for social media sharing. Will use site title as fallback.',
     'fabianmichael.meta.global_og_image.label' => 'Default share image',
@@ -76,10 +76,6 @@ return [
     'fabianmichael.meta.sitemap.changefreq.monthly' => 'Monthly',
     'fabianmichael.meta.sitemap.changefreq.yearly' => 'Yearly',
     'fabianmichael.meta.sitemap.changefreq.never' => 'Never',
-
-    'fabianmichael.meta.twitter.headline' => 'Twitter',
-    'fabianmichael.meta.twitter.site.label' => 'Twitter username of website',
-    'fabianmichael.meta.twitter.creator.label' => 'Twitter username of content creator',
 
     'fabianmichael.meta.no_og_image_fallback' => 'No global fallback image defined. Please go to <a href="{ link }">global metadata settings</a> and upload one.',
 

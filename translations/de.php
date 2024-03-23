@@ -78,10 +78,6 @@ return [
     'fabianmichael.meta.sitemap.changefreq.yearly' => 'Jährlich',
     'fabianmichael.meta.sitemap.changefreq.never' => 'Niemals',
 
-    'fabianmichael.meta.twitter.headline' => 'Twitter',
-    'fabianmichael.meta.twitter.site.label' => 'Twitter-Benutzername der Website',
-    'fabianmichael.meta.twitter.creator.label' => 'Twitter-Benutzername des Authors',
-
     'fabianmichael.meta.no_og_image_fallback' => 'Kein globales "Teilen"-Bild definiert. Ein solches Bild sollte in den <a href="{ link }">globalen Einstellungen</a> hochgeladen werden.',
 
     'fabianmichael.meta.schema.person_privacy_notice.label' => 'Hinweis zum Datenschutz',

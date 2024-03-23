@@ -68,7 +68,6 @@ The options below have to be set in your `config.php`. Please note that every op
 | `sitemap.templates.includeUnlisted` | `array` | `[]` | An array of templates to include in the sitemap, even if their status is `unlisted`. Values are treated as regular expressions. |
 | `schema` | `bool` | `true` | Generates [Schema.org](https://schema.org/) markup as [JSON-LD](https://json-ld.org/).
 | `social` | `bool` | `true` | Generates [OpenGraph](https://ogp.me/) markup.
-| `twitter` | `bool` | `true` | Generates [Twitter Cards](https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/abouts-cards) markup.  Only has an effect, if `social` is also enabled. Since `0.2.0-beta` (⚠️ deprecated).
 | `robots` | `bool` | `true` | Generates the `robots` metatag and serve [robots.txt](https://developers.google.com/search/docs/advanced/robots/intro) at `http(s)://yourdomain.com/robots.txt`.
 | `robots.canonical` | `bool` | `true` | Generates canonical url meta tag. Requires `robots` option to be `true`. |
 | `robots.index` | `bool` | `true` | Allows crawlers to index pages. Can be overriden in global or page-specific settings from the panel. Requires `robots` option to be `true` for having an effect. If a page is excluded from the sitemap or unlisted, the robots meta tag will always contain `noindex`. |
@@ -208,7 +207,7 @@ return [
 
 #### `meta.social:after`
 
-Allows you to alter the OpenGraph/Twitter card data.
+Allows you to alter the OpenGraph card data.
 
 ```php
 return [

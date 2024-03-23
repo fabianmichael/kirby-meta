@@ -50,7 +50,7 @@ return [
     'fabianmichael.meta.state.off'                  => 'désactivé',
     'fabianmichael.meta.state.unset'                => 'Non renseigné',
     'fabianmichael.meta.og.headline'                => 'Partage sur les médias sociaux (OpenGraph)',
-    'fabianmichael.meta.og.help'                    => 'Les métadonnées [Open Graph](https://ogp.me/) sont utilisées par les réseaux sociaux (e.g. Facebook, Twitter) et la plupart des applications de messagerie (e.g. Signal, Telegram, iMessage).',
+    'fabianmichael.meta.og.help'                    => 'Les métadonnées [Open Graph](https://ogp.me/) sont utilisées par les réseaux sociaux (e.g. Facebook, Mastodon) et la plupart des applications de messagerie (e.g. Signal, Telegram, iMessage).',
     'fabianmichael.meta.og_site_name.label'         => 'Nom partagé du site',
     'fabianmichael.meta.og_site_name.help'          => 'Le nom qui sera affiché sur tous les médias sociaux à des fins de partage. Si vide, le titre du site sera utilisé.',
     'fabianmichael.meta.global_og_image.label'      => 'L\'image partagée par défaut (globale)',
@@ -77,10 +77,6 @@ return [
     'fabianmichael.meta.sitemap.changefreq.monthly'     => 'Mensuel',
     'fabianmichael.meta.sitemap.changefreq.yearly'      => 'Annuel',
     'fabianmichael.meta.sitemap.changefreq.never'       => 'Jamais',
-
-    'fabianmichael.meta.twitter.headline'       => 'Twitter',
-    'fabianmichael.meta.twitter.site.label'     => 'Nom d\'utilisateur Twitter associé au site',
-    'fabianmichael.meta.twitter.creator.label'  => 'Nom d\'utilisateur Twitter associé au contenu de cette page.',
 
     'fabianmichael.meta.no_og_image_fallback'   => 'Aucune image globale de repli n\'est définie. Merci d\'aller aux <a href="{ link }">paramètres globaux des méta-données</a> pour en configurer une.',
 

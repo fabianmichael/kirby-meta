@@ -13,10 +13,6 @@ return function (Kirby $kirby) {
 
     if ($kirby->option('fabianmichael.meta.social') !== false) {
         $fields['meta_global_ogengraph'] = 'fields/meta/global-opengraph-group';
-
-        if ($kirby->option('fabianmichael.meta.twitter')) {
-            $fields['meta_global_twitter'] = 'fields/meta/global-twitter-group';
-        }
     }
 
     if ($kirby->option('fabianmichael.meta.robots') !== false) {
