@@ -18,7 +18,6 @@ App::plugin('fabianmichael/meta', [
 
         'schema' => true,
         'social' => true,
-        'twitter' => false,
 
         'robots' => true,
         'robots.canonical' => true,
@@ -53,13 +52,11 @@ App::plugin('fabianmichael/meta', [
         'fields/meta/global-robots-group'       => require __DIR__ . '/blueprints/fields/meta/global-robots-group.php',
         'fields/meta/global-schema-group'       => __DIR__ . '/blueprints/fields/meta/global-schema-group.yml',
         'fields/meta/global-sitemap-changefreq' => require __DIR__ . '/blueprints/fields/meta/global-sitemap-changefreq.php',
-        'fields/meta/global-twitter-group'      => __DIR__ . '/blueprints/fields/meta/global-twitter-group.yml', // deprecated
         'fields/meta/og-image'                  => __DIR__ . '/blueprints/fields/meta/og-image.yml',
         'fields/meta/opengraph-group'           => __DIR__ . '/blueprints/fields/meta/opengraph-group.yml',
         'fields/meta/robots-group'              => require __DIR__ . '/blueprints/fields/meta/robots-group.php',
         'fields/meta/sitemap-changefreq'        => require __DIR__ . '/blueprints/fields/meta/sitemap-changefreq.php',
         'fields/meta/sitemap-priority'          => __DIR__ . '/blueprints/fields/meta/sitemap-priority.yml',
-        'fields/meta/twitter-group'             => __DIR__ . '/blueprints/fields/meta/twitter-group.yml', // deprecated
         'files/meta-logo'                       => __DIR__ . '/blueprints/files/meta-logo.yml',
         'files/meta-og-image'                   => __DIR__ . '/blueprints/files/meta-og-image.yml',
         'sections/meta/files'                   => __DIR__ . '/blueprints/sections/files.yml',

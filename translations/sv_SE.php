@@ -49,7 +49,7 @@ return [
     'fabianmichael.meta.state.off' => 'av',
     'fabianmichael.meta.state.unset' => 'inte satt',
     'fabianmichael.meta.og.headline' => 'Dela på sociala medier',
-    'fabianmichael.meta.og.help' => '[Open Graph](https://ogp.me/) metadata används av sociala nätverk (t.ex. Facebook, Twitter) och de flesta meddelandeappar (t.ex. Signal, Telegram, iMessage).',
+    'fabianmichael.meta.og.help' => '[Open Graph](https://ogp.me/) metadata används av sociala nätverk (t.ex. Facebook, Mastodon) och de flesta meddelandeappar (t.ex. Signal, Telegram, iMessage).',
     'fabianmichael.meta.og_site_name.label' => 'Dela webbplatsnamn',
     'fabianmichael.meta.og_site_name.help' => 'Namnet som ska visas för hela webbplatsen vid delning på sociala medier. Kommer att använda webbplatsens titel som fallback.',
     'fabianmichael.meta.global_og_image.label' => 'Standard delningsbild',
@@ -76,10 +76,6 @@ return [
     'fabianmichael.meta.sitemap.changefreq.monthly' => 'Månadsvis',
     'fabianmichael.meta.sitemap.changefreq.yearly' => 'Årligen',
     'fabianmichael.meta.sitemap.changefreq.never' => 'Aldrig',
-
-    'fabianmichael.meta.twitter.headline' => 'Twitter',
-    'fabianmichael.meta.twitter.site.label' => 'Twitter-användarnamn för webbplatsen',
-    'fabianmichael.meta.twitter.creator.label' => 'Twitter-användarnamn för innehållsskapare',
 
     'fabianmichael.meta.no_og_image_fallback' => 'Ingen global reservbild definierad. Gå till <a href="{ link }">globala metadatinställningar</a> och ladda upp en.',
 

@@ -49,7 +49,7 @@ return [
     'fabianmichael.meta.state.off' => 'slukket',
     'fabianmichael.meta.state.unset' => 'ikke indstillet',
     'fabianmichael.meta.og.headline' => 'Deling på sociale medier',
-    'fabianmichael.meta.og.help' => '[Open Graph](https://ogp.me/) metadata bruges af sociale netværk (f.eks. Facebook, Twitter) og de fleste beskedapps (f.eks. Signal, Telegram, iMessage).',
+    'fabianmichael.meta.og.help' => '[Open Graph](https://ogp.me/) metadata bruges af sociale netværk (f.eks. Facebook, Mastodon) og de fleste beskedapps (f.eks. Signal, Telegram, iMessage).',
     'fabianmichael.meta.og_site_name.label' => 'Del webstedets navn',
     'fabianmichael.meta.og_site_name.help' => 'Navnet der skal vises for hele webstedet til deling på sociale medier. Hvis ikke indstillet, vil webstedets titel blive brugt som fallback.',
     'fabianmichael.meta.global_og_image.label' => 'Standard delingsbillede',
@@ -76,10 +76,6 @@ return [
     'fabianmichael.meta.sitemap.changefreq.monthly' => 'Månedligt',
     'fabianmichael.meta.sitemap.changefreq.yearly' => 'Årligt',
     'fabianmichael.meta.sitemap.changefreq.never' => 'Aldrig',
-
-    'fabianmichael.meta.twitter.headline' => 'Twitter',
-    'fabianmichael.meta.twitter.site.label' => 'Twitter brugernavn for webstedet',
-    'fabianmichael.meta.twitter.creator.label' => 'Twitter brugernavn for indholdsopretter',
 
     'fabianmichael.meta.no_og_image_fallback' => 'Intet globalt fallback-billede defineret. Gå til <a href="{ link }">globale metadata indstillinger</a> og upload et.',
 
