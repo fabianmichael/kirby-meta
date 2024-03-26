@@ -16,7 +16,7 @@ browsers and beyond.
 - 🦊 Easy-to-understand language in the panel, providing a good middle ground between simplicity and extensive control options.
 - 🧙‍♂️ Most features can be enabled/disabled in config, panel UI only shows enabled features (thanks to dynamic blueprints)
 - 🪝 Hooks for altering the plugin's behavior
-- 🌍 All blueprints are fully translatable (*English, German, French and Swedish translations are included*)
+- 🌍 All blueprints are fully translatable (*English, German, French, Swedish and Dutch translations are included*)
 
 **Future plans:**
 
