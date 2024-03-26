@@ -4,54 +4,33 @@ use FabianMichael\Meta\Helper;
 use Kirby\Cms\App as Kirby;
 
 return function (Kirby $kirby): array {
-    $toggleType = Helper::toggleFieldType();
-
-    $getOptions = function (string $name) use ($kirby, $toggleType): array {
+    $getOptions = function (string $name) use ($kirby): array {
         $optionValue = $kirby->option('fabianmichael.meta.' . str_replace('_', '.', $name));
         $configDefaultLabel = tt('fabianmichael.meta.config_default_value.label', [
             'state' => ($optionValue === true ? t('fabianmichael.meta.state.on') : t('fabianmichael.meta.state.off')),
         ]);
 
-        if (in_array($toggleType, ['multi-toggle', 'toggles'])) {
-            return [
-                'options' => [
-                    [
-                        'value' => '',
-                        'text' => $configDefaultLabel,
-                    ],
-                    [
-                        'value' => '1',
-                        'text' => t('fabianmichael.meta.state.on'),
-                    ],
-                    [
-                        'value' => '0',
-                        'text' => t('fabianmichael.meta.state.off'),
-                    ],
+        return [
+            'options' => [
+                [
+                    'value' => '',
+                    'text' => $configDefaultLabel,
                 ],
-                'reset' => false,
-                'grow' => false,
-                'type' => $toggleType,
-                'translate' => false,
-                'width' => '1/2',
-            ];
-        } else {
-            return [
-                'placeholder' => $configDefaultLabel,
-                'options' => [
-                    [
-                        'value' => '1',
-                        'text' => t('fabianmichael.meta.state.on'),
-                    ],
-                    [
-                        'value' => '0',
-                        'text' => t('fabianmichael.meta.state.off'),
-                    ],
+                [
+                    'value' => '1',
+                    'text' => t('fabianmichael.meta.state.on'),
                 ],
-                'type' => $toggleType,
-                'translate' => false,
-                'width' => '1/2',
-            ];
-        }
+                [
+                    'value' => '0',
+                    'text' => t('fabianmichael.meta.state.off'),
+                ],
+            ],
+            'reset' => false,
+            'grow' => false,
+            'type' => 'toggles',
+            'translate' => false,
+            'width' => '1/2',
+        ];
     };
 
     return [

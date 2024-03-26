@@ -25,4 +25,27 @@ return [
         ],
         'save' => false,
     ],
+    'meta-robots-index-toggles' => [
+        'extends' => 'toggles',
+        'props' => [
+            'help' => function (string $help = null) {
+                return "bla";
+            }
+        ],
+        'computed' => [
+            'options' => function (): array {
+                $model = $this->model;
+                return array_map(function ($option) use ($model) {
+                    if ($option['value'] !== '') {
+                        return $option;
+                    }
+
+                    $option['text'] = $model->status();
+                    $option['icon'] = "status-{$model->status()}";
+
+                    return $option;
+                }, $this->getOptions());
+            }
+        ],
+    ],
 ];

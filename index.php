@@ -20,8 +20,8 @@ App::plugin('fabianmichael/meta', [
         'social' => true,
 
         'robots' => true,
+        'robots.index' => null,
         'robots.canonical' => true,
-        'robots.index' => true,
         'robots.follow' => true,
         'robots.archive' => true,
         'robots.imageindex' => true,
