@@ -4,9 +4,7 @@ use FabianMichael\Meta\Helper;
 use Kirby\Cms\App as Kirby;
 
 return function (Kirby $kirby): array {
-    $toggleType = Helper::toggleFieldType();
-
-    $getOptions = function (string $name) use ($kirby, $toggleType): array {
+    $getOptions = function (string $name) use ($kirby): array {
         $globalValue = $kirby
             ->site()
             ->content()
@@ -18,46 +16,27 @@ return function (Kirby $kirby): array {
             'state' => ($globalValue === true ? t('fabianmichael.meta.state.on') : t('fabianmichael.meta.state.off')),
         ]);
 
-        if (in_array($toggleType, ['multi-toggle', 'toggles'])) {
-            return [
-                'options' => [
-                    [
-                        'value' => '',
-                        'text' => $configDefaultLabel,
-                    ],
-                    [
-                        'value' => '1',
-                        'text' => t('fabianmichael.meta.state.on'),
-                    ],
-                    [
-                        'value' => '0',
-                        'text' => t('fabianmichael.meta.state.off'),
-                    ],
+        return [
+            'options' => [
+                [
+                    'value' => '',
+                    'text' => $configDefaultLabel,
                 ],
-                'reset' => false,
-                'grow' => false,
-                'type' => $toggleType,
-                'translate' => false,
-                'width' => '1/2',
-            ];
-        } else {
-            return [
-                'placeholder' => $configDefaultLabel,
-                'options' => [
-                    [
-                        'value' => '1',
-                        'text' => t('fabianmichael.meta.state.on'),
-                    ],
-                    [
-                        'value' => '0',
-                        'text' => t('fabianmichael.meta.state.off'),
-                    ],
+                [
+                    'value' => '1',
+                    'text' => t('fabianmichael.meta.state.on'),
                 ],
-                'type' => $toggleType,
-                'translate' => false,
-                'width' => '1/2',
-            ];
-        }
+                [
+                    'value' => '0',
+                    'text' => t('fabianmichael.meta.state.off'),
+                ],
+            ],
+            'type' => 'toggles',
+            'reset' => false,
+            'grow' => false,
+            'translate' => false,
+            'width' => '1/2',
+        ];
     };
 
     return [
@@ -69,10 +48,28 @@ return function (Kirby $kirby): array {
                 'help' =>  t('fabianmichael.meta.robots.help'),
                 'numbered' => false,
             ],
-            'robots_index' => array_merge([
+            'robots_index' => [
                 'label' => t('fabianmichael.meta.robots_index.label'),
+                'type' => 'meta-robots-index-toggles',
+                'reset' => false,
+                'grow' => false,
+                'options' => [
+                    [
+                        'value' => '',
+                        'text' => 'page status',
+                    ],
+                    [
+                        'value' => '1',
+                        'text' => t('fabianmichael.meta.state.on'),
+                    ],
+                    [
+                        'value' => '0',
+                        'text' => t('fabianmichael.meta.state.off'),
+                    ],
+                ],
                 'help' => t('fabianmichael.meta.robots_index.help'),
-            ], $getOptions('robots_index')),
+                'translate' => false,
+            ],
             'robots_follow' => array_merge([
                 'label' => t('fabianmichael.meta.robots_follow.label'),
                 'help' => t('fabianmichael.meta.robots_follow.help'),
