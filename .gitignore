@@ -2,6 +2,8 @@ node_modules
 .DS_Store
 .php-cs-fixer.cache
 
+.idea
+
 # files of Composer dependencies that are not needed for the plugin
 /vendor/**/.*
 /vendor/**/*.json
