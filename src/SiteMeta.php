@@ -16,7 +16,7 @@ class SiteMeta
             : null;
     }
 
-    public static function robots(?string $name = null): bool|string|null
+    public static function robots(string $name): bool
     {
         return site()
             ->content()
