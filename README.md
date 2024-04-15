@@ -63,10 +63,6 @@ The options below have to be set in your `config.php`. Please note that every op
 |:----|:-----|:--------|:------------|
 | `sitemap` | `bool` | `true` | When `true`, will generate an XML sitemap for search engines. The sitemap includes all listed pages by default. ⚠️ If you disable the `robots` setting, no robots.txt will be served to tell search engines where your sitemap is located. |
 | `sitemap.detailSettings` | `bool` | `false` | When `true`, the `<changefreq>` and `<priority>` tags are included in the sitemap and their corresponding fields are displayed in the panel. |
-| `sitemap.pages.exclude` | `array` | `[]` | An array of page IDs to exlude from the sitemap. Values are treated as regular expressions, so they can include wildcards like e.g. `about/.*`. The error page is always excluded. |
-| `sitemap.pages.includeUnlisted` | `array` | `[]` | An array of page IDs to include in the sitemap, even if their status is `unlisted`. Values are treated as regular expressions, so they can include wildcards like e.g. `about/.*`. |
-| `sitemap.templates.exclude` | `array` | `[]` | An array of template names to exlude from the sitemap. Values are treated as regular expressions, so they can include wildcards like e.g. `article-(internal|secret)` |
-| `sitemap.templates.includeUnlisted` | `array` | `[]` | An array of templates to include in the sitemap, even if their status is `unlisted`. Values are treated as regular expressions. |
 | `schema` | `bool` | `true` | Generates [Schema.org](https://schema.org/) markup as [JSON-LD](https://json-ld.org/).
 | `social` | `bool` | `true` | Generates [OpenGraph](https://ogp.me/) markup.
 | `robots` | `bool` | `true` | Generates the `robots` metatag and serve [robots.txt](https://developers.google.com/search/docs/advanced/robots/intro) at `http(s)://yourdomain.com/robots.txt`.

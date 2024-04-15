@@ -27,25 +27,33 @@ return [
     ],
     'meta-robots-index-toggles' => [
         'extends' => 'toggles',
-        'props' => [
-            'help' => function (string $help = null) {
-                return "bla";
-            }
-        ],
+        // 'props' => [
+        //     'disabled' => function (bool $disabled = null): bool {
+        //         if ($disabled === true && $this->model->metadata
+        //     }
+        // ],
         'computed' => [
             'options' => function (): array {
                 $model = $this->model;
+
                 return array_map(function ($option) use ($model) {
                     if ($option['value'] !== '') {
                         return $option;
                     }
 
-                    $option['text'] = $model->status();
+                    $option['text'] = tt('fabianmichael.meta.robots_index.auto', [
+                        'state' => $model->isListed()
+                            ? t('fabianmichael.meta.state.on')
+                            : t('fabianmichael.meta.state.off')
+                    ]);
                     $option['icon'] = "status-{$model->status()}";
 
                     return $option;
                 }, $this->getOptions());
-            }
+            },
+            // 'help' => function (string $help = null) {
+            //     return "bla {$this->disabled}";
+            // },
         ],
     ],
 ];

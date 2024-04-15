@@ -16,7 +16,7 @@ class PageMeta
     protected Page $page;
     protected Kirby $kirby;
     protected ?string $languageCode;
-    protected array $metadata = [];
+    protected array $defaults = [];
 
     public function __call($name, $arguments): mixed
     {
@@ -30,15 +30,13 @@ class PageMeta
         $this->page = $page;
 
         // Get metadata from page, if possible
-        if (method_exists($this->page, 'metadata') === true || $this->page->hasMethod('metadata') === true) {
-            $this->metadata = $this->page->metadata($languageCode);
-        }
+        $this->defaults = $this->page->metaDefaults($languageCode);
 
         // Allow other plugins/config to alter metadata after load
-        $this->metadata = $this->kirby->apply(
+        $this->defaults = $this->kirby->apply(
             'meta.load:after',
             [
-                'metadata'     => $this->metadata,
+                'metadata'     => $this->defaults,
                 'page'         => $this->page,
                 'languageCode' => $this->languageCode,
             ],
@@ -49,7 +47,7 @@ class PageMeta
     public function canonicalUrl(): string
     {
         return $this->meta_canonical_url()
-            ->or($this->metadata('canonical_url'))
+            ->or($this->default('canonical_url'))
             ->or($this->page->url())
             ->toString();
     }
@@ -70,7 +68,7 @@ class PageMeta
 
     public function get(
         string $key,
-        bool $metadataFallback = true,
+        bool $defaultFallback = true,
         bool $siteFallback = false,
         bool $configFallback = false,
         mixed $fallback = null
@@ -83,8 +81,8 @@ class PageMeta
         }
 
         // From page model metadata ...
-        if ($metadataFallback === true && array_key_exists($key, $this->metadata) === true) {
-            $value = $this->metadata[$key];
+        if ($defaultFallback === true && array_key_exists($key, $this->defaults) === true) {
+            $value = $this->defaults[$key];
 
             if (is_callable($value) === true) {
                 $value = $value->call($this->page);
@@ -151,9 +149,6 @@ class PageMeta
                 '@id'   => $ownerId,
                 'name'  => $site->meta_org_name()->toString(),
                 'url'   => $site->url(),
-                // 'sameAs' => [
-                //     'https://example.com',
-                // ],
             ];
 
             if ($logo = $site->meta_org_logo()->toFile()) {
@@ -177,7 +172,7 @@ class PageMeta
         }
 
         // Merge with page metadata …
-        $graph = array_merge($graph, $this->metadata('@graph', []));
+        $graph = array_merge($graph, $this->default('@graph', []));
 
         $json = [
             '@context' => 'https://schema.org',
@@ -212,7 +207,7 @@ class PageMeta
 
     public function lastmod()
     {
-        return (int) $this->metadata('lastmod', $this->page->modified('U', 'date'));
+        return (int) $this->default('lastmod', $this->page->modified('U', 'date'));
     }
 
     public function locale(): ?string
@@ -226,10 +221,10 @@ class PageMeta
         return null;
     }
 
-    public function metadata(string $name, mixed $fallback = null): mixed
+    public function default(string $name, mixed $fallback = null): mixed
     {
-        return array_key_exists($name, $this->metadata) === true
-            ? $this->metadata[$name]
+        return array_key_exists($name, $this->defaults) === true
+            ? $this->defaults[$name]
             : $fallback;
     }
 
@@ -250,13 +245,8 @@ class PageMeta
         if (is_string($name)) {
             // single robots value of page as boolean
 
-            // if page is a draft, always return false for everything
-            if (in_array($name, ['index', 'follow']) && $this->page->isDraft()) {
-                return false;
-            }
-
-            // if page is not in sitemap, it will also not be indexible
-            if ($name === 'index' && ! $this->page->isIndexible()) {
+            // if page is a draft or error, always return false
+            if (in_array($name, ['index', 'follow']) && ($this->page->isDraft() || $this->page->isErrorPage())) {
                 return false;
             }
 
@@ -268,7 +258,7 @@ class PageMeta
                 ->or(SiteMeta::robots($name))
                 ->toBool();
         } else {
-            // robots value for metatag as string|null
+            // robots value for meta tag as string
             $robots = [];
 
             foreach (['index', 'follow', 'archive', 'imageindex', 'snippet', 'translate'] as $prop) {
@@ -319,7 +309,7 @@ class PageMeta
 
         $social[] = [
             'property' => 'og:type',
-            'content'  => 'website', // TODO: make overridable from metadata() method
+            'content'  => 'website',
         ];
 
         $social[] = [
@@ -376,7 +366,7 @@ class PageMeta
         }
 
         // Additional metadata from page model
-        $social = array_merge($social, $this->metadata('@social', []));
+        $social = array_merge($social, $this->default('@social', []));
 
         // Hook
         $social = $this->kirby->apply(
@@ -428,7 +418,7 @@ class PageMeta
         }
 
         // Search in page model ...
-        if ($image = $this->metadata('og_image')) {
+        if ($image = $this->default('og_image')) {
             return $image;
         }
 
@@ -461,7 +451,7 @@ class PageMeta
 
     public function reports(): array
     {
-        $isIndexible = $this->page->isIndexible() && $this->robots('index');
+        $isIndexible = $this->page->isIndexible();
 
         return [
             [

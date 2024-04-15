@@ -1,6 +1,5 @@
 <?php
 
-use FabianMichael\Meta\Helper;
 use Kirby\Cms\App as Kirby;
 
 return function (Kirby $kirby): array {
@@ -19,10 +18,12 @@ return function (Kirby $kirby): array {
                 [
                     'value' => '1',
                     'text' => t('fabianmichael.meta.state.on'),
+                    'icon' => 'check',
                 ],
                 [
                     'value' => '0',
                     'text' => t('fabianmichael.meta.state.off'),
+                    'icon' => 'cancel',
                 ],
             ],
             'reset' => false,

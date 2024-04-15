@@ -64,8 +64,6 @@ class Sitemap
         $meta = $page->meta();
 
         if ($page->isIndexible() === false) {
-            // Exclude page, if explicitly excluded in page settings
-            // for global settings
             return;
         }
 
