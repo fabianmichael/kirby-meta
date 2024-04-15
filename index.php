@@ -28,6 +28,9 @@ App::plugin('fabianmichael/meta', [
         'robots.snippet' => true,
         'robots.translate' => true,
 
+        'darkvisitors.token' => null,
+        'darkvisitors.agentTypes' => ['AI Data Scraper'],
+
         'title.separators' => ['~' , '-' , '–' , '—' , ':' , '/' , '⋆' , '·' , '•' , '~' , '×' , '*' , '‣', '→', '←', '<' , '>' , '«' , '»' , '‹' , '›', '♠︎', '♣︎', '♥︎', '♦︎', '☙', '❦', '❧', '☭'],
         'theme.color' => null,
 

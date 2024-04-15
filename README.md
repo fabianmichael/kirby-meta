@@ -16,6 +16,7 @@ browsers and beyond.
 - 🦊 Easy-to-understand language in the panel, providing a good middle ground between simplicity and extensive control options.
 - 🧙‍♂️ Most features can be enabled/disabled in config, panel UI only shows enabled features (thanks to dynamic blueprints)
 - 🪝 Hooks for altering the plugin's behavior
+- 🤖 Automatic `robots.txt` generation, optionally exclude AI datascrapers by using the [Dark Visitors API](https://darkvisitors.com/)
 - 🌍 All blueprints are fully translatable (*English, German, French, Swedish and Dutch translations are included*)
 
 **Future plans:**
@@ -26,8 +27,8 @@ browsers and beyond.
 
 ## Requirements
 
-- PHP 8.0+
-- Kirby 3.6.0+
+- PHP 8.1+
+- Kirby 4.1.0+
 
 ## How it works
 
@@ -79,6 +80,8 @@ The options below have to be set in your `config.php`. Please note that every op
 | `title.separators` | `array` | `["~" , "-" , "–" , "—" , ":" , "/", …]` | List of available separator options for the `<title>` tag. The separator can be selected in the panel and is placed between page title and site title. |
 | `theme.color` | `string\|null` | `null` | If not empty, will generate a corresponding meta tag used by some browsers for coloring the UI. |
 | `panel.view.filter` | Provides a filter function for hiding certain pages from the metadata debug view in the panel. See the Kirby docs on [`$pages->filter()`](https://getkirby.com/docs/reference/objects/cms/pages/filter) for details. |
+| `darkvisitors.token` | `string\|null` | `null` | Provide an API token of the [Dark Visitors API](https://darkvisitors.com/) to exclude various Bots in your robots.txt file, mainly prevent your site content from being used as training data for "AI" models. |
+| `darkvisitors.agentTypes` | `array<string>` | `['AI Data Scraper']` | A list of agent types to exclude from indexing your site, see <https://darkvisitors.com/docs/robots-txts-api> for supported types. By default, AI assistants and search crawlers are not exluced since they might provide an actual benefit to users. |
 
 ### Blueprint setup
 
