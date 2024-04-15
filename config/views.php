@@ -1,6 +1,5 @@
 <?php
 
-use FabianMichael\Meta\Sitemap;
 use Kirby\Cms\Url;
 
 return [
@@ -35,7 +34,6 @@ return [
                     'title' => $page->title()->value(),
                     'meta_title' => $meta->get('meta_title')->value(),
                     'icon'  => $page->blueprint()->icon(),
-                    'is_indexible' => $page->isIndexible(),
                     'status'  => $page->status(),
                     'id' => $page->id(),
                     'url' => $page->url(),
@@ -43,7 +41,7 @@ return [
                     'template' => $page->template()->name(),
                     'panelUrl' => $page->panel()->url(),
                     'meta_description' => $meta->meta_description()->value(),
-                    'robots' => $meta->robots(),
+                    'is_indexible' => $page->isIndexible(),
                     'og_title' => $meta->og_title()->value(),
                     'og_description' => $meta->get('og_description', true, false)->value(),
                     'og_image_url' => $og_image_url,

@@ -25,15 +25,16 @@ return function (Kirby $kirby): array {
                 [
                     'value' => '1',
                     'text' => t('fabianmichael.meta.state.on'),
+                    'icon' => 'check',
                 ],
                 [
                     'value' => '0',
                     'text' => t('fabianmichael.meta.state.off'),
+                    'icon' => 'cancel',
                 ],
             ],
             'type' => 'toggles',
             'reset' => false,
-            'grow' => false,
             'translate' => false,
             'width' => '1/2',
         ];
@@ -52,7 +53,6 @@ return function (Kirby $kirby): array {
                 'label' => t('fabianmichael.meta.robots_index.label'),
                 'type' => 'meta-robots-index-toggles',
                 'reset' => false,
-                'grow' => false,
                 'options' => [
                     [
                         'value' => '',
@@ -61,10 +61,12 @@ return function (Kirby $kirby): array {
                     [
                         'value' => '1',
                         'text' => t('fabianmichael.meta.state.on'),
+                        'icon' => 'check',
                     ],
                     [
                         'value' => '0',
                         'text' => t('fabianmichael.meta.state.off'),
+                        'icon' => 'cancel',
                     ],
                 ],
                 'help' => t('fabianmichael.meta.robots_index.help'),
