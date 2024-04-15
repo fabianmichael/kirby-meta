@@ -1,7 +1,7 @@
 <?php return array(
     'root' => array(
         'name' => 'fabianmichael/kirby-meta',
-        'pretty_version' => '2.0.0-alpha1',
+        'pretty_version' => '2.0.0-alpha.1',
         'version' => '2.0.0.0-alpha1',
         'reference' => null,
         'type' => 'kirby-plugin',
@@ -11,7 +11,7 @@
     ),
     'versions' => array(
         'fabianmichael/kirby-meta' => array(
-            'pretty_version' => '2.0.0-alpha1',
+            'pretty_version' => '2.0.0-alpha.1',
             'version' => '2.0.0.0-alpha1',
             'reference' => null,
             'type' => 'kirby-plugin',
