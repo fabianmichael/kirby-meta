@@ -11,6 +11,7 @@ return [
     'fabianmichael.meta.title.help' => 'Der Seitentitel, so wie er in Suchmaschinen erscheinen soll. Wenn das Feld leer ist, wird stattdessen der Seitentitel ausgegeben.',
     'fabianmichael.meta.title_separator.label' => 'Titel-Trennzeichen',
     'fabianmichael.meta.title_separator.help' => 'Das Trennzeichen wird zwischen dem Titel der aktuellen Seite und dem Titel der Website angezeigt.',
+    'fabianmichael.meta.has-override.help' => 'Diese Einstellung wurde programmatisch gesetzt und kann für diese Seite nicht geändert werden.',
 
     'fabianmichael.meta.robots.headline' => 'Suchmaschinen',
     'fabianmichael.meta.robots.help' => 'Detaillierte Anweisungen, wie Suchmaschinen mit dieser Seite umgehen sollen.',

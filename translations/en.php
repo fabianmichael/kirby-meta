@@ -11,6 +11,7 @@ return [
     'fabianmichael.meta.title.help' => 'The page title as it should be displayed on search engines. Will default to Kirby page title when this field is empty.',
     'fabianmichael.meta.title_separator.label' => 'Title Separator',
     'fabianmichael.meta.title_separator.help' => 'Separator to be displayed between page and site title.',
+    'fabianmichael.meta.has-override.help' => 'This setting has been set programmatically and cannot be edited for this page.',
 
     'fabianmichael.meta.robots.headline' => 'Search engines',
     'fabianmichael.meta.robots.help' => 'Detailed instructions for how search engines should handle this page.',

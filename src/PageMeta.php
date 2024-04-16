@@ -7,6 +7,7 @@ use Kirby\Content\Field;
 use Kirby\Cms\File;
 use Kirby\Cms\Language;
 use Kirby\Cms\Page;
+use Kirby\Toolkit\A;
 
 class PageMeta
 {
@@ -17,6 +18,7 @@ class PageMeta
     protected Kirby $kirby;
     protected ?string $languageCode;
     protected array $defaults = [];
+    protected array $overrides = [];
 
     public function __call($name, $arguments): mixed
     {
@@ -31,6 +33,7 @@ class PageMeta
 
         // Get metadata from page, if possible
         $this->defaults = $this->page->metaDefaults($languageCode);
+        $this->overrides = $this->page->metaOverrides($languageCode);
 
         // Allow other plugins/config to alter metadata after load
         $this->defaults = $this->kirby->apply(
@@ -221,11 +224,19 @@ class PageMeta
         return null;
     }
 
-    public function default(string $name, mixed $fallback = null): mixed
+    public function default(string $key, mixed $fallback = null): mixed
     {
-        return array_key_exists($name, $this->defaults) === true
-            ? $this->defaults[$name]
-            : $fallback;
+        return A::get($this->defaults, $key, $fallback);
+    }
+
+    public function override(string $key, mixed $falllback = null): mixed
+    {
+        return A::get($this->overrides, $key, $falllback);
+    }
+
+    public function hasOverride(string $key, mixed $fallback = null): mixed
+    {
+        return A::get($this->overrides, $key, $fallback) !== $fallback;
     }
 
     public static function of(Page $page, ?string $languageCode = null): static
@@ -245,18 +256,41 @@ class PageMeta
         if (is_string($name)) {
             // single robots value of page as boolean
 
-            // if page is a draft or error, always return false
-            if (in_array($name, ['index', 'follow']) && ($this->page->isDraft() || $this->page->isErrorPage())) {
+            if ($name === 'index' && ($this->page->isDraft() || $this->page->isErrorPage())) {
+                // if page is a draft or error, always return false
                 return false;
             }
 
-            // load from content/fallback
-            return $this
-                ->page
-                ->content($this->languageCode)
-                ->get("robots_{$name}")
-                ->or(SiteMeta::robots($name))
-                ->toBool();
+            // load from overrrides
+            if ($name === 'index') {
+                $override = $this->override("robots.{$name}");
+
+                if (! is_null($override)) {
+                    return $override;
+                }
+            }
+
+            // load from content
+            $field = $this->page->content($this->languageCode)->get("robots_{$name}");
+
+            if ($field->isNotEmpty()) {
+                return $field->toBool();
+            }
+
+            // load from model
+            $default = $this->default("robots.{$name}");
+
+            if (!is_null($default)) {
+                return $default;
+            }
+
+            // fall back to page status
+            if ($name === 'index' && $this->page->isUnlisted()) {
+                return false;
+            }
+
+            return SiteMeta::robots($name);
+
         } else {
             // robots value for meta tag as string
             $robots = [];
