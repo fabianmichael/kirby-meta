@@ -11,6 +11,12 @@ return [
         return [];
     },
 
+    'metaOverrides' => function(?string $lang = null): array {
+        return [
+            // 'robots.index' => false
+        ];
+    },
+
     'isIndexible' => function (): bool {
         return $this->meta()->robots('index');
     },
