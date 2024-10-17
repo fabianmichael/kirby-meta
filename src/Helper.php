@@ -12,4 +12,9 @@ class Helper
             'color' => option('fabianmichael.meta.theme.color'),
         ], 'color');
     }
+
+    public static function isSmartyPantsEnabled(): bool
+    {
+        return option('smartypants', false) === true;
+    }
 }
