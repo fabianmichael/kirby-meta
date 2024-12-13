@@ -96,6 +96,7 @@ export default {
   position: relative;
   top: .07em;
   white-space: nowrap;
+  padding-block: .1em;
 }
 
 </style>
