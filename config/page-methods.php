@@ -20,4 +20,16 @@ return [
     'isIndexible' => function (): bool {
         return $this->meta()->robots('index');
     },
+
+    'isIndexibleStatusText' => function (): string {
+        return r($this->isIndexible(), 'indexible', 'not indexible');
+    },
+
+    'isIndexibleStatusIcon' => function (): string {
+        return r($this->isIndexible(), 'meta-eye', 'meta-eye-off');
+    },
+
+    'isIndexibleTheme' => function (): string {
+        return r($this->isIndexible(), 'info-icon', 'warning-icon');
+    },
 ];

@@ -97,4 +97,22 @@ App::plugin('fabianmichael/meta', [
         'sv_SE' => require __DIR__ . '/translations/sv_SE.php',
         'nl' => require __DIR__ . '/translations/nl.php',
     ],
+
+    'hooks' => [
+        'system.loadPlugins:after' => function() {
+            kirby()->extend([
+                'options' => [
+                    'panel.viewButtons.page' => [
+                        ...option('panel.viewButtons.page', ['preview', 'settings', 'languages', 'status']),
+                        'meta' => [
+                            'icon' => '{{ page.isIndexibleStatusIcon }}',
+                            'text' => '{{ page.isIndexibleStatusText }}',
+                            'theme' => '{{ page.isIndexibleTheme }}',
+                            'link'   => '{{ model.panel.url }}?tab=meta'
+                        ],
+                    ],
+                ],
+            ]);
+        },
+    ],
 ]);
