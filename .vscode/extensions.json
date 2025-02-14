@@ -1,0 +1,7 @@
+{
+  "recommendations": [
+    "stylelint.vscode-stylelint",
+    "esbenp.prettier-vscode",
+    "standard.vscode-standard"
+  ]
+}

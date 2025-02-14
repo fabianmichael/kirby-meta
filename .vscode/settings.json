@@ -1,0 +1,27 @@
+{
+  "css.validate": false,
+  "stylelint.config": null,
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll": "explicit"
+    }
+  },
+  "[markdown]": {
+    "editor.wordWrap": "on",
+    "editor.quickSuggestions": {
+      "comments": "off",
+      "strings": "off",
+      "other": "off"
+    }
+  },
+  "files.associations": {
+    "*.txt": "markdown"
+  },
+  "standard.enable": true,
+  "standard.autoFixOnSave": true,
+  "scss.format.enable": true,
+  "scss.validate": false,
+  "stylelint.validate": ["css"]
+}
