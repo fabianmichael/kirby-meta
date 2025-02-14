@@ -49,7 +49,7 @@ return [
                 return $this->model()->site()->title()->value();
             },
             'title_separator' => function (): string {
-                return SiteMeta::titleSeparator();
+                return option('fabianmichael.meta.title.separator');
             },
             'og_title_prefix' => function (): ?string {
                 return $this->model()

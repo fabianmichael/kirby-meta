@@ -429,7 +429,7 @@ class PageMeta
             $title[] = $this->page->content($this->languageCode)->get('meta_title')
                 ->or($this->page->title())->toString();
 
-            $title[] = SiteMeta::titleSeparator();
+            $title[] = option('fabianmichael.meta.title.separator');
             $title[] = $siteTitle->toString();
         }
 

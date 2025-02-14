@@ -73,7 +73,7 @@ The options below have to be set in your `config.php`. Please note that every op
 | `robots.imageindex` | `bool` | `true` | Allows crawlers to include images to appear in search results. Can be overriden in global or page-specific settings from the panel. Requires `robots` option to be `true` for having an effect. |
 | `robots.snippet` | `bool` | `true` | Allows crawlers to generate snippets from page content. Can be overriden in global or page-specific settings from the panel. Requires `robots` option to be `true` for having an effect. |
 | `robots.translate` | `bool` | `true` | Allows crawlers offer automated translation of your content. Can be overriden in global or page-specific settings from the panel. Requires `robots` option to be `true` for having an effect. |
-| `title.separators` | `array` | `["~" , "-" , "–" , "—" , ":" , "/", …]` | List of available separator options for the `<title>` tag. The separator can be selected in the panel and is placed between page title and site title. |
+| `title.separator` | `string` | `'|'` | Separator options for the `<title>` tag. |
 | `theme.color` | `string\|null` | `null` | If not empty, will generate a corresponding meta tag used by some browsers for coloring the UI. |
 | `panel.view.filter` | Provides a filter function for hiding certain pages from the metadata debug view in the panel. See the Kirby docs on [`$pages->filter()`](https://getkirby.com/docs/reference/objects/cms/pages/filter) for details. |
 | `darkvisitors.token` | `string\|null` | `null` | Provide an API token of the [Dark Visitors API](https://darkvisitors.com/) to exclude various Bots in your robots.txt file, mainly prevent your site content from being used as training data for "AI" models. |

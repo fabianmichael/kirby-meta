@@ -28,7 +28,7 @@ App::plugin('fabianmichael/meta', [
         'robots.snippet' => true,
         'robots.translate' => true,
 
-        'title.separators' => ['~' , '-' , '–' , '—' , ':' , '/' , '⋆' , '·' , '•' , '~' , '×' , '*' , '‣', '→', '←', '<' , '>' , '«' , '»' , '‹' , '›', '♠︎', '♣︎', '♥︎', '♦︎', '☙', '❦', '❧', '☭'],
+        'title.separator' => '|',
         'theme.color' => null,
 
         'panel.view.filter' => null,

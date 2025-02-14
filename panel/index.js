@@ -3,7 +3,6 @@
 import './panel.css'
 
 import SharePreviewSection from './components/SharePreviewSection.vue'
-import TitlePreviewField from './components/TitlePreviewField.vue'
 import MetaView from './components/MetaView.vue'
 
 panel.plugin('fabianmichael/meta', {
@@ -11,7 +10,6 @@ panel.plugin('fabianmichael/meta', {
     'k-meta-view': MetaView
   },
   fields: {
-    'meta-title-preview': TitlePreviewField,
     'meta-robots-index-toggles': {
       extends: 'k-toggles-field'
     }

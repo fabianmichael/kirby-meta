@@ -24,9 +24,4 @@ class SiteMeta
             ->or(option("fabianmichael.meta.robots.{$name}"))
             ->toBool();
     }
-
-    public static function titleSeparator()
-    {
-        return site()->meta_title_separator()->or('|')->toString();
-    }
 }
