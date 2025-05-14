@@ -473,6 +473,14 @@ class PageMeta
         return new Field($this->page, 'og_title', $titlePrefix . $title);
     }
 
+    public function panelTitleAfter(): string {
+        if (!$this->page->isHomePage()) {
+            return option('fabianmichael.meta.title.separator') . ' ' . $this->page->kirby()->site()->title();
+        }
+
+        return '';
+    }
+
     public function panelTitlePlaceholder(): string
     {
         if ($this->page->isHomePage()) {

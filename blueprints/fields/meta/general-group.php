@@ -22,7 +22,7 @@ return function (Kirby $kirby) {
             'type'        => 'text',
             'label'       => t('fabianmichael.meta.title.label'),
             'placeholder' => '{{ page.meta.panelTitlePlaceholder }}',
-            'after'       => option('fabianmichael.meta.title.separator') . ' ' . $kirby->site()->title(),
+            'after'       => '{{ page.meta.panelTitleAfter }}',
             'help'        => t('fabianmichael.meta.title.help'),
         ],
     ];
