@@ -1,6 +1,7 @@
 <?php
 
 use Kirby\Cms\Url;
+use Kirby\Panel\Ui\Buttons\LanguagesDropdown;
 
 return [
     [
@@ -53,6 +54,9 @@ return [
                 'component' => 'k-meta-view',
                 'props' => [
                     'pages' => $pages,
+                    'buttons' => [
+                        'languages' => fn () => new LanguagesDropdown(site()),
+                    ]
                 ],
             ];
         },

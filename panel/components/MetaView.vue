@@ -1,15 +1,19 @@
 <template>
-  <k-inside>
+  <k-panel-inside class="k-meta-view">
     <k-header>
       Metadata
       <template #buttons>
         <k-button
           text="Validate internal links"
+          variant="filled"
           icon="wand"
           :disabled="isBusy"
           @click="checkInternalLinks"
         />
-        <k-languages-dropdown />
+        <k-button-group
+          :buttons="buttons"
+          class="k-view-buttons"
+        />
       </template>
     </k-header>
     <table class="k-meta">
@@ -145,7 +149,7 @@
         </template>
       </tbody>
     </table>
-  </k-inside>
+  </k-panel-inside>
 </template>
 
 <script>
@@ -154,6 +158,10 @@ export default {
     dir: String,
     sort: String,
     pages: Object,
+    buttons: {
+      type: Array,
+      default: () => [],
+    },
   },
   data() {
     return {
@@ -163,6 +171,8 @@ export default {
   methods: {
     async checkInternalLinks() {
       this.isBusy = true;
+
+      // console.log("this", this.buttons)
 
       // Reset
       for (let i = 0, l = this.pages.length; i < l; i++) {
@@ -177,7 +187,7 @@ export default {
         const id   = page.id;
         const result = await window.panel.api.get(`meta/check-internal-links`, {
           id,
-          language: (this.$multilang ? this.$language.code : null),
+          language: window.panel.language?.code,
         });
         page.internalLinksResult = result;
         this.$set(this.pages, i, page);
@@ -228,7 +238,7 @@ export default {
 
 .k-meta td:nth-child(even),
 .k-meta th:nth-child(even) {
-  background: var(--color-gray-100);
+  background: rgb(from var(--table-color-th-back) r g b / 25%);
 }
 
 .k-meta td:nth-child(odd),
@@ -294,7 +304,7 @@ export default {
   display: grid;
   gap: var(--spacing-2);
   grid-template-columns: min-content 1fr 3fr auto;
-  background: var(--color-white);
+  background: var(--table-color-th-back);
   border-radius: var(--rounded);
   box-shadow: var(--shadow);
   padding: var(--spacing-2);
