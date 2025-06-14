@@ -4,7 +4,7 @@ return [
     'meta-robots-index-toggles' => [
         'extends' => 'toggles',
         'props' => [
-            'disabled' => function (bool $disabled = null): bool {
+            'disabled' => function (?bool $disabled = null): bool {
                 [, $prop] = explode('_', $this->name);
 
                 if ($this->model->meta()->hasOverride("robots.{$prop}")) {
@@ -33,7 +33,7 @@ return [
                     return $option;
                 }, $this->getOptions());
             },
-            'help' => function (string $help = null) {
+            'help' => function (?string $help = null) {
                 if ($this->disabled) {
                     return t('fabianmichael.meta.has-override.help');
                 }
