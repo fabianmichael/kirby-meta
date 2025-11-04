@@ -85,7 +85,7 @@ export default {
   },
   computed: {
     title() {
-      const { og_title, meta_title } = this.$panel.content.version('latest');
+      const { og_title, meta_title } = this.$panel.content.version('changes');
       const prefix = this.og_title_prefix || "";
       const title = this.page_is_homepage
         ? (og_title || meta_title || this.site_name)
@@ -94,11 +94,11 @@ export default {
       return prefix + title;
     },
     description() {
-      const { og_description, meta_description } = this.$panel.content.version('latest');
+      const { og_description, meta_description } = this.$panel.content.version('changes');
       return og_description || meta_description || this.page_metadata_description || this.site_meta_description || this.$t("fabianmichael.meta.description_missing");
     },
     store_image() {
-      return this.$panel.content.version('latest').og_image;
+      return this.$panel.content.version('changes').og_image;
     },
   },
   watch: {
