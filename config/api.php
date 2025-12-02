@@ -114,7 +114,7 @@ return [
                                 // skip links to files
                                 continue;
                             }
-
+                            $href = Url::to($path, ['params' => []]); // strip kirby params
                             $path = trim(parse_url($href, PHP_URL_PATH), '/');
 
                             if (empty($path) === true) {
