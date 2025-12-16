@@ -453,7 +453,11 @@ class PageMeta
 
         // Search in page model ...
         if ($image = $this->default('og_image')) {
-            return $image;
+            if ($image instanceof File) {
+                return $image;
+            } elseif ($image instanceof Field) {
+                return $image->toFile();
+            }
         }
 
         // Fallback to global thumbnail
