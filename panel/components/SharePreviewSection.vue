@@ -152,10 +152,11 @@ export default {
 }
 
 .k-meta-sharing-preview__source-badge {
-  background: var(--color-gray-900);
-  color: var(--color-white);
-  border-radius: var(--rounded-sm);
+  background: var(--item-color-back);
+  color: inherit;
+  border-radius: var(--rounded);
   bottom: var(--spacing-2);
+  box-shadow: var(--item-shadow);
   position: absolute;
   right: var(--spacing-2);
   font-size: .625rem;
@@ -164,7 +165,7 @@ export default {
 }
 
 .k-meta-sharing-preview__box {
-  background: var(--color-white);
+  background: var(--item-color-back);
   border-radius: var(--rounded);
   box-shadow: var(--shadow);
   display: flex;
@@ -205,7 +206,7 @@ export default {
 }
 
 .k-meta-sharing-preview__site-name {
-  color: var(--color-gray-600);
+  color: var(--color-text-dimmed);
   font-size: var(--text-xs);
 }
 
@@ -216,7 +217,7 @@ export default {
 }
 
 .k-meta-sharing-preview__preview-headline {
-  color: var(--color-dark);
+  color: var(--color-text);
   font-size: var(--text-base);
   line-height: var(--leading-tight);
   margin: var(--spacing-1) 0;
@@ -224,7 +225,7 @@ export default {
 }
 
 .k-meta-sharing-preview__preview-paragraph {
-  color: var(--color-gray-600);
+  color: var(--color-text-dimmed);
   font-size: var(--text-sm);
   line-height: var(--leading-normal);
   margin: 0;
