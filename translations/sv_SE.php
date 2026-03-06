@@ -104,4 +104,6 @@ return [
     'fabianmichael.meta.search_engines.visibility.label' => 'Sökmotorvisibilitet',
     'fabianmichael.meta.search_engines.visibility.yes' => 'Denna sida är indexerad av sökmotorer och kan visas i sökresultat',
     'fabianmichael.meta.search_engines.visibility.no' => 'Denna sida är dold från sökresultat',
+
+    'fabianmichael.meta.panelArea.label' => 'Metadata',
 ];

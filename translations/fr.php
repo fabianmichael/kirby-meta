@@ -108,4 +108,6 @@ return [
     'fabianmichael.meta.search_engines.visibility.yes'      => 'This page is indexed by search engines and may appear in search results',
     'fabianmichael.meta.search_engines.visibility.yes'      => 'Cette page est indexable par les moteurs de recherche et peut apparaitre dans les résultats de recherche.',
     'fabianmichael.meta.search_engines.visibility.no'       => 'Cette page n\'est pas autorisée à être indexée par les moteurs de recherche. Elle n\'apparaîtra pas dans les résultats de recherche.',
+
+    'fabianmichael.meta.panelArea.label' => 'Méta-données',
 ];

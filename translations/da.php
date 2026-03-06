@@ -104,4 +104,6 @@ return [
     'fabianmichael.meta.search_engines.visibility.label' => 'Søgemaskine synlighed',
     'fabianmichael.meta.search_engines.visibility.yes' => 'Denne side indekseres af søgemaskiner og kan vises i søgeresultaterne',
     'fabianmichael.meta.search_engines.visibility.no' => 'Denne side er skjult fra søgeresultaterne',
+
+    'fabianmichael.meta.panelArea.label' => 'Metadater',
 ];

@@ -104,4 +104,6 @@ return [
     'fabianmichael.meta.search_engines.visibility.label' => 'Zichtbaarheid in zoekmachine',
     'fabianmichael.meta.search_engines.visibility.yes' => 'Deze pagina wordt geïndexeerd door zoekmachines en kan verschijnen in zoekresultaten',
     'fabianmichael.meta.search_engines.visibility.no' => 'Deze pagina is verborgen in de zoekresultaten',
+
+    'fabianmichael.meta.panelArea.label' => 'Metagegevens',
 ];

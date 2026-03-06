@@ -106,4 +106,6 @@ return [
     'fabianmichael.meta.search_engines.visibility.label' => 'Search engine visbility',
     'fabianmichael.meta.search_engines.visibility.yes' => 'This page is indexed by search engines and may appear in search results',
     'fabianmichael.meta.search_engines.visibility.no' => 'This page is hidden from search results',
+
+    'fabianmichael.meta.panelArea.label' => 'Metadata',
 ];
