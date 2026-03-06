@@ -11,11 +11,13 @@ return [
     'fabianmichael.meta.title.help'                 => 'Le titre de la page tel qu\'il sera affiché pour les moteurs de recherche. Il sera remplacé par le titre de la page si ce champ reste vide.',
     'fabianmichael.meta.title_separator.label'      => 'Séparateur du titre',
     'fabianmichael.meta.title_separator.help'       => 'La séparateur s\'affiche entre le titre de la page et du site.',
+    'fabianmichael.meta.has-override.help'          => 'Ce paramètre a été défini par programme et ne peut pas être modifié pour cette page.',
 
     'fabianmichael.meta.robots.headline'            => 'Moteurs de recherche',
     'fabianmichael.meta.robots.help'                => 'Informations détaillées sur comment les moteurs de recherche traitent cette page.',
     'fabianmichael.meta.robots_index.label'         => 'Indexation',
-    'fabianmichael.meta.robots_index.help'          => 'Les moteurs de recherche sont autorisés à indexer cette page.',
+    'fabianmichael.meta.robots_index.auto'           => 'auto ({ state })',
+    'fabianmichael.meta.robots_index.help'          => 'Par défaut, les moteurs de recherche peuvent indexer les pages listées, pas les pages non listées. Ce paramètre permet de surcharger ce comportement. Les brouillons ne sont jamais indexables.',
     'fabianmichael.meta.robots_follow.label'        => 'Suivre les liens',
     'fabianmichael.meta.robots_follow.help'         => 'Les moteurs de recherche pourront suivre les liens sur cette page.',
     'fabianmichael.meta.robots_archive.label'       => 'Archiver',
@@ -40,8 +42,7 @@ return [
 
     'fabianmichael.meta.description.label'          => 'Description',
     'fabianmichael.meta.description.help'           => 'Une brève description de la page qui sera affichée juste en dessous du titre de la page par les moteurs de recherche.',
-    'fabianmichael.meta.global_description.help'    => 'The global description will be used as fallback for all pages, that don’t have a dedicated description.',
-    'fabianmichael.meta.global_description.help'    => 'Les description globale qui sera utilisée quand une page n\'a aucune description dédiée.',
+    'fabianmichael.meta.global_description.help'    => 'La description globale sera utilisée comme repli pour toutes les pages qui n\'ont pas de description dédiée.',
     'fabianmichael.meta.canonical_url.label'        => 'URL Canonique',
     'fabianmichael.meta.canonical_url.help'         => 'L\'URL canonique de la page. Équivaut par défaut à l\'URL de la page quand ce champ est vide.',
     'fabianmichael.meta.global_default_value.label' => 'Global ({ state })',
@@ -81,10 +82,8 @@ return [
     'fabianmichael.meta.no_og_image_fallback'   => 'Aucune image globale de repli n\'est définie. Merci d\'aller aux <a href="{ link }">paramètres globaux des méta-données</a> pour en configurer une.',
 
     'fabianmichael.meta.schema.person_privacy_notice.label' => 'Avis de confidentialité',
-    'fabianmichael.meta.schema.person_privacy_notice.text'  => 'By selecting a user, you will expose personal information such as the email address and profile image to search engines, other crawlers and everyone who reads the source code of your website.',
     'fabianmichael.meta.schema.person_privacy_notice.text'  => 'En sélectionnant un utilisateur, vous exposez certaines données personnelles telles que son adresse email et son image de profil aux moteurs de recherche, aux autres robots et à toute personne consultant le code source du site internet.',
     'fabianmichael.meta.sharing_preview.headline'           => 'Aperçu des données partagées',
-    'fabianmichael.meta.description_missing'                => '[Share Description and fallback Description Missing]',
     'fabianmichael.meta.description_missing'                => '[Aucune description, ni de description de repli]',
     'fabianmichael.meta.source.og_image'                    => 'Source: Image pour les partages',
     'fabianmichael.meta.source.metadata'                    => 'Source: Image de la page',
@@ -105,7 +104,6 @@ return [
     'fabianmichael.meta.search_engines.visibility.visible'  => 'Visible',
     'fabianmichael.meta.search_engines.visibility.hidden'   => 'Caché',
     'fabianmichael.meta.search_engines.visibility.label'    => 'Visibilité pour les moteurs de recherche',
-    'fabianmichael.meta.search_engines.visibility.yes'      => 'This page is indexed by search engines and may appear in search results',
     'fabianmichael.meta.search_engines.visibility.yes'      => 'Cette page est indexable par les moteurs de recherche et peut apparaitre dans les résultats de recherche.',
     'fabianmichael.meta.search_engines.visibility.no'       => 'Cette page n\'est pas autorisée à être indexée par les moteurs de recherche. Elle n\'apparaîtra pas dans les résultats de recherche.',
 
