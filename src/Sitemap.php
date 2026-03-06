@@ -20,9 +20,9 @@ class Sitemap
         $this->languages   = $this->kirby->languages();
     }
 
-    public static function factory(...$args): static
+    public static function factory(): static
     {
-        return new static(...$args);
+        return new static();
     }
 
     public function generate(): string
