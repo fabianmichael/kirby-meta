@@ -33,10 +33,6 @@ App::plugin('fabianmichael/meta', [
         'theme.color' => null,
 
         'panel.view.filter' => null,
-
-        // DarkVisitors API integration (https://darkvisitors.com/)
-        'darkvisitors.token' => null,
-        'darkvisitors.agentTypes' => ['AI Data Scraper'],
     ],
 
     'api' => require __DIR__ . '/config/api.php',
