@@ -27,6 +27,7 @@ App::plugin('fabianmichael/meta', [
         'robots.imageindex' => true,
         'robots.snippet' => true,
         'robots.translate' => true,
+        'robots.forceNoIndex' => false,
 
         'title.separator' => '|',
         'theme.color' => null,
@@ -42,7 +43,7 @@ App::plugin('fabianmichael/meta', [
 
     'areas' => [
         'meta' => [
-            'label' => 'Metadata',
+            'label' => t('fabianmichael.meta.panelArea.label'),
             'icon'  => 'search',
             'menu'  => true,
             'views' => require __DIR__ . '/config/views.php',
