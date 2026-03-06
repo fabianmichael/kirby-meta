@@ -38,7 +38,7 @@ App::plugin('fabianmichael/meta', [
     'api' => require __DIR__ . '/config/api.php',
 
     'areas' => [
-        'meta' => [
+        'meta' => fn () => [
             'label' => t('fabianmichael.meta.panelArea.label'),
             'icon'  => 'search',
             'menu'  => true,
