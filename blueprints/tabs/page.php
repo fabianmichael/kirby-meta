@@ -45,7 +45,7 @@ return function (Kirby $kirby) {
     }
 
     return [
-        'icon' => 'search',
+        'icon' => 'meta-seo',
         'label' => t('fabianmichael.meta.tab.label'),
         'columns' => $columns,
     ];

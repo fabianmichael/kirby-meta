@@ -108,4 +108,14 @@ return [
     'fabianmichael.meta.search_engines.visibility.no' => 'Denne side er skjult fra søgeresultaterne',
 
     'fabianmichael.meta.panelArea.label' => 'Metadater',
+    'fabianmichael.meta.robots.forceNoIndex.button' => 'Indexering deaktiveret!',
+    'fabianmichael.meta.robots.forceNoIndex.close' => 'Luk',
+    'fabianmichael.meta.robots.forceNoIndex.infoText' => '
+        <h2 style="font-size: var(--text-font-size); line-height: var(--text-line-height);">Stealth-tilstand</h2>
+        <p>
+            Indexering af søgemaskiner er blevet deaktiveret via konfiguration.
+            Sider vil altid bede søgemaskiner om at indeksere dem via Meta-Tag.
+            Denne tilstand bruges til at forhindre søgemaskiner fra at indeksere et websted under udvikling eller test, uden at ændre de faktiske indstillinger via panelet.
+        </p>
+        <p>Ændre <code>fabianmichael.meta.robots.forceNoIndex</code> i konfigurationen til <code>false</code> for at aktivere indexering igen.</p>',
 ];

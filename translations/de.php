@@ -109,4 +109,15 @@ return [
     'fabianmichael.meta.search_engines.visibility.no' => 'Diese Seite wird in den Suchergebnissen versteckt',
 
     'fabianmichael.meta.panelArea.label' => 'Metadaten',
+    'fabianmichael.meta.robots.forceNoIndex.button' => 'Indexierung deaktiviert!',
+    'fabianmichael.meta.robots.forceNoIndex.close' => 'Schließen',
+    'fabianmichael.meta.robots.forceNoIndex.infoText' => '
+        <h2 style="font-size: var(--text-font-size); line-height: var(--text-line-height);">Stealth-Modus</h2>
+        <p>
+            Indexierung durch Suchmaschinen wurde durch die Konfiguration deaktiviert.
+            Seiten werden immer Suchmaschinen dazu auffordern, sie nicht zu indexieren via Meta-Tag.
+            Dieser Modus wird verwendet, um Suchmaschinen während der Entwicklung oder Testphase
+            von der Indexierung auszuschließen, ohne tatsächliche Einstellungen über das Panel zu ändern.
+        </p>
+        <p>Ändere <code>fabianmichael.meta.robots.forceNoIndex</code> in der Konfiguration auf <code>false</code> um die Indexierung wieder zu aktivieren.</p>',
 ];

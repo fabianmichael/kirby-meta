@@ -110,6 +110,17 @@ App::plugin('fabianmichael/meta', [
                     ],
                 ],
             ]);
+
+            if (option('fabianmichael.meta.robots.forceNoIndex') === true) {
+                kirby()->extend([
+                    'options' => [
+                        'panel.viewButtons.site' => [
+                            ...option('panel.viewButtons.site', ['open', 'preview', 'languages']),
+                            'force-noindex-info',
+                        ],
+                    ],
+                ]);
+            }
         },
     ],
 ]);

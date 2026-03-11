@@ -108,4 +108,15 @@ return [
     'fabianmichael.meta.search_engines.visibility.no' => 'This page is hidden from search results',
 
     'fabianmichael.meta.panelArea.label' => 'Metadata',
+    'fabianmichael.meta.robots.forceNoIndex.button' => 'Indexing disabled!',
+    'fabianmichael.meta.robots.forceNoIndex.close' => 'Close',
+    'fabianmichael.meta.robots.forceNoIndex.infoText' => '
+        <h2 style="font-size: var(--text-font-size); line-height: var(--text-line-height);">Stealth mode</h2>
+        <p>
+            Indexing by search engines has been forcibly disabled via config.
+            Pages will always tell search engines to not index them via meta tag.
+            This mode is used to prevent search engines from indexing a site during
+            development or testing without changing actual settings via the panel.
+        </p>
+        <p>Change <code>fabianmichael.meta.robots.forceNoIndex</code> in the config to <code>false</code> to enable indexing again.</p>',
 ];
