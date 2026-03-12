@@ -425,7 +425,6 @@ class PageMeta
             $title[] = $this->page->content($this->languageCode)->get('meta_title')
                 ->or($siteTitle)->toString();
         } else {
-            // TODO: Support pagination
             $title[] = $this->page->content($this->languageCode)->get('meta_title')
                 ->or($this->page->title())->toString();
 
