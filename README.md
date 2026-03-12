@@ -27,8 +27,8 @@ browsers and beyond.
 
 ## Requirements
 
-- PHP 8.1+
-- Kirby 4.1.0+
+- PHP 8.14+
+- Kirby 5.3.0+
 
 ## How it works
 
@@ -73,10 +73,11 @@ The options below have to be set in your `config.php`. Please note that every op
 | `robots.imageindex` | `bool` | `true` | Allows crawlers to include images to appear in search results. Can be overriden in global or page-specific settings from the panel. Requires `robots` option to be `true` for having an effect. |
 | `robots.snippet` | `bool` | `true` | Allows crawlers to generate snippets from page content. Can be overriden in global or page-specific settings from the panel. Requires `robots` option to be `true` for having an effect. |
 | `robots.translate` | `bool` | `true` | Allows crawlers offer automated translation of your content. Can be overriden in global or page-specific settings from the panel. Requires `robots` option to be `true` for having an effect. |
-| `robots.forceNoIndex` | `bool` | `false` | This will force-override all robots settings. You will still get a proper preview in the panel and everything will look like normal, but the robots meta tag will always have a content of none. This is useful for staging servers, where users want to edit content like normal, but you want to ensure that pages will not appear in search engines. The plugin will still generate a sitemap for debugging purposes. |
 | `title.separator` | `string` | `'|'` | Separator options for the `<title>` tag. |
 | `theme.color` | `string\|null` | `null` | If not empty, will generate a corresponding meta tag used by some browsers for coloring the UI. |
 | `panel.view.filter` | Provides a filter function for hiding certain pages from the metadata debug view in the panel. See the Kirby docs on [`$pages->filter()`](https://getkirby.com/docs/reference/objects/cms/pages/filter) for details. |
+| `stealthMode` | `bool` | `false` | This will force-override all robots settings. You will still get a proper preview in the panel and everything will look like normal, but the robots meta tag will always have a content of none. This is useful for staging servers, where users want to edit content like normal, but you want to ensure that pages will not appear in search engines. The plugin will still generate a sitemap for debugging purposes. |
+
 
 ### Blueprint setup
 
