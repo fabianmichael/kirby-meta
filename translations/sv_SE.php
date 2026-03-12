@@ -108,14 +108,14 @@ return [
     'fabianmichael.meta.search_engines.visibility.no' => 'Denna sida är dold från sökresultat',
 
     'fabianmichael.meta.panelArea.label' => 'Metadata',
-    'fabianmichael.meta.robots.forceNoIndex.button' => 'Indexering avaktiverad!',
-    'fabianmichael.meta.robots.forceNoIndex.close' => 'Stänga',
-    'fabianmichael.meta.robots.forceNoIndex.infoText' => '
+    'fabianmichael.meta.stealthMode.button' => 'Indexering avaktiverad!',
+    'fabianmichael.meta.stealthMode.close' => 'Stänga',
+    'fabianmichael.meta.stealthMode.infoText' => '
         <h2 style="font-size: var(--text-font-size); line-height: var(--text-line-height);">Stealth-läge</h2>
         <p>
             Indexering av sökmotorer har forceringstänkts av konfiguration.
             Sidor kommer alltid att be sökmotorer om att inte indexera dem via det Meta-Tag.
             Detta läge används för att förhindra sökmotorer från att indexera en webbplats under utveckling eller test, utan att ändra de faktiska inställningarna via panelen.
         </p>
-        <p>Ändra <code>fabianmichael.meta.robots.forceNoIndex</code> i konfigurationen till <code>false</code> för att aktivera indexering igen.</p>',
+        <p>Ändra <code>fabianmichael.meta.stealthMode</code> i konfigurationen till <code>false</code> för att aktivera indexering igen.</p>',
 ];

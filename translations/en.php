@@ -108,9 +108,9 @@ return [
     'fabianmichael.meta.search_engines.visibility.no' => 'This page is hidden from search results',
 
     'fabianmichael.meta.panelArea.label' => 'Metadata',
-    'fabianmichael.meta.robots.forceNoIndex.button' => 'Indexing disabled!',
-    'fabianmichael.meta.robots.forceNoIndex.close' => 'Close',
-    'fabianmichael.meta.robots.forceNoIndex.infoText' => '
+    'fabianmichael.meta.stealthMode.button' => 'Indexing disabled!',
+    'fabianmichael.meta.stealthMode.close' => 'Close',
+    'fabianmichael.meta.stealthMode.infoText' => '
         <h2 style="font-size: var(--text-font-size); line-height: var(--text-line-height);">Stealth mode</h2>
         <p>
             Indexing by search engines has been forcibly disabled via config.
@@ -118,5 +118,5 @@ return [
             This mode is used to prevent search engines from indexing a site during
             development or testing without changing actual settings via the panel.
         </p>
-        <p>Change <code>fabianmichael.meta.robots.forceNoIndex</code> in the config to <code>false</code> to enable indexing again.</p>',
+        <p>Change <code>fabianmichael.meta.stealthMode</code> in the config to <code>false</code> to enable indexing again.</p>',
 ];

@@ -108,14 +108,14 @@ return [
     'fabianmichael.meta.search_engines.visibility.no'       => 'Cette page n\'est pas autorisée à être indexée par les moteurs de recherche. Elle n\'apparaîtra pas dans les résultats de recherche.',
 
     'fabianmichael.meta.panelArea.label' => 'Méta-données',
-    'fabianmichael.meta.robots.forceNoIndex.button' => 'Indexation désactivée !',
-    'fabianmichael.meta.robots.forceNoIndex.close' => 'Fermer',
-    'fabianmichael.meta.robots.forceNoIndex.infoText' => '
+    'fabianmichael.meta.stealthMode.button' => 'Indexation désactivée !',
+    'fabianmichael.meta.stealthMode.close' => 'Fermer',
+    'fabianmichael.meta.stealthMode.infoText' => '
         <h2 style="font-size: var(--text-font-size); line-height: var(--text-line-height);">Mode stealth</h2>
         <p>
             L\'indexation par les moteurs de recherche a été désactivée via la configuration.
             Les pages vont toujours demander aux moteurs de recherche de ne pas les indexer via le Meta-Tag.
             Ce mode est utilisé pour empêcher les moteurs de recherche d\'indexer un site pendant la phase de développement ou de test, sans modifier les paramètres réels via le panneau.
         </p>
-        <p>Modifiez <code>fabianmichael.meta.robots.forceNoIndex</code> dans la configuration pour <code>false</code> pour activer l\'indexation à nouveau.</p>',
+        <p>Modifiez <code>fabianmichael.meta.stealthMode</code> dans la configuration pour <code>false</code> pour activer l\'indexation à nouveau.</p>',
 ];

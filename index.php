@@ -27,7 +27,7 @@ App::plugin('fabianmichael/meta', [
         'robots.imageindex' => true,
         'robots.snippet' => true,
         'robots.translate' => true,
-        'robots.forceNoIndex' => false,
+        'stealthMode' => false,
 
         'title.separator' => '|',
         'theme.color' => null,
@@ -111,7 +111,7 @@ App::plugin('fabianmichael/meta', [
                 ],
             ]);
 
-            if (option('fabianmichael.meta.robots.forceNoIndex') === true) {
+            if (option('fabianmichael.meta.stealthMode') === true) {
                 kirby()->extend([
                     'options' => [
                         'panel.viewButtons.site' => [

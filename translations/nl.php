@@ -108,14 +108,14 @@ return [
     'fabianmichael.meta.search_engines.visibility.no' => 'Deze pagina is verborgen in de zoekresultaten',
 
     'fabianmichael.meta.panelArea.label' => 'Metagegevens',
-    'fabianmichael.meta.robots.forceNoIndex.button' => 'Indexering uitgeschakeld!',
-    'fabianmichael.meta.robots.forceNoIndex.close' => 'Sluiten',
-    'fabianmichael.meta.robots.forceNoIndex.infoText' => '
+    'fabianmichael.meta.stealthMode.button' => 'Indexering uitgeschakeld!',
+    'fabianmichael.meta.stealthMode.close' => 'Sluiten',
+    'fabianmichael.meta.stealthMode.infoText' => '
         <h2 style="font-size: var(--text-font-size); line-height: var(--text-line-height);">Stealth-modus</h2>
         <p>
             Indexering door zoekmachines is uitgeschakeld via de configuratie.
             Pagina\'s zullen altijd zoekmachines vragen om ze niet te indexeren via het Meta-Tag.
             Deze modus wordt gebruikt om zoekmachines te voorkomen om een website te indexeren tijdens ontwikkeling of test, zonder de echte instellingen via het paneel te wijzigen.
         </p>
-        <p>Verander <code>fabianmichael.meta.robots.forceNoIndex</code> in de configuratie naar <code>false</code> om indexering opnieuw in te schakelen.</p>',
+        <p>Verander <code>fabianmichael.meta.stealthMode</code> in de configuratie naar <code>false</code> om indexering opnieuw in te schakelen.</p>',
 ];
