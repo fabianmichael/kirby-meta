@@ -1,13 +1,13 @@
 <template>
   <k-button
-    class="k-meta-force-no-index-view-button"
+    class="k-meta-stealth-mode-view-button"
     icon="meta-seo"
     variant="filled"
     theme="warning"
     size="sm"
     @click="applause"
   >
-    {{ $t('fabianmichael.meta.robots.forceNoIndex.button') }}
+    {{ $t('fabianmichael.meta.stealthMode.button') }}
   </k-button>
 </template>
 
@@ -21,11 +21,11 @@ export default {
       this.$panel.dialog.open({
         component: 'k-text-dialog',
         props: {
-          class: 'k-meta-force-no-index-view-button-dialog',
+          class: 'k-meta-stealth-mode-view-button-dialog',
           size: 'medium',
-          text: this.$t('fabianmichael.meta.robots.forceNoIndex.infoText'),
+          text: this.$t('fabianmichael.meta.stealthMode.infoText'),
           cancelButton: {
-            text: this.$t('fabianmichael.meta.robots.forceNoIndex.close'),
+            text: this.$t('fabianmichael.meta.stealthMode.close'),
           },
           submitButton: false,
         },
@@ -37,7 +37,7 @@ export default {
 
 <style>
 
-.k-meta-force-no-index-view-button {
+.k-meta-stealth-mode-view-button {
   font-weight: 500;
   background: repeating-linear-gradient(
     135deg,

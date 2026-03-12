@@ -116,7 +116,7 @@ App::plugin('fabianmichael/meta', [
                     'options' => [
                         'panel.viewButtons.site' => [
                             ...option('panel.viewButtons.site', ['open', 'preview', 'languages']),
-                            'force-noindex-info',
+                            'meta-stealth-mode-info',
                         ],
                     ],
                 ]);
