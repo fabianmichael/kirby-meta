@@ -20,11 +20,6 @@ class PageMeta
     protected array $defaults = [];
     protected array $overrides = [];
 
-    public function __call($name, $arguments): mixed
-    {
-        return $this->get(strtolower($name), ...$arguments);
-    }
-
     protected function __construct(Page $page, ?string $languageCode = null)
     {
         $this->kirby = $page->kirby();
