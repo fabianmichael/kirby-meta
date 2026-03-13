@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'fabianmichael.meta.tab.label'                  => 'Métadonnées (SEO)',
+    'fabianmichael.meta.tab.label'                  => 'Métadonnées & SEO',
     'fabianmichael.meta.page_title.placeholder'     => 'Titre de la page',
     'fabianmichael.meta.title_preview.label'        => 'Aperçu du titre',
     'fabianmichael.meta.global_settings.headline'   => 'Paramètres globaux',
@@ -11,11 +11,13 @@ return [
     'fabianmichael.meta.title.help'                 => 'Le titre de la page tel qu\'il sera affiché pour les moteurs de recherche. Il sera remplacé par le titre de la page si ce champ reste vide.',
     'fabianmichael.meta.title_separator.label'      => 'Séparateur du titre',
     'fabianmichael.meta.title_separator.help'       => 'La séparateur s\'affiche entre le titre de la page et du site.',
+    'fabianmichael.meta.has-override.help'          => 'Ce paramètre a été défini par programme et ne peut pas être modifié pour cette page.',
 
     'fabianmichael.meta.robots.headline'            => 'Moteurs de recherche',
     'fabianmichael.meta.robots.help'                => 'Informations détaillées sur comment les moteurs de recherche traitent cette page.',
     'fabianmichael.meta.robots_index.label'         => 'Indexation',
-    'fabianmichael.meta.robots_index.help'          => 'Les moteurs de recherche sont autorisés à indexer cette page.',
+    'fabianmichael.meta.robots_index.auto'           => 'auto ({ state })',
+    'fabianmichael.meta.robots_index.help'          => 'Par défaut, les moteurs de recherche peuvent indexer les pages listées, pas les pages non listées. Ce paramètre permet de surcharger ce comportement. Les brouillons ne sont jamais indexables.',
     'fabianmichael.meta.robots_follow.label'        => 'Suivre les liens',
     'fabianmichael.meta.robots_follow.help'         => 'Les moteurs de recherche pourront suivre les liens sur cette page.',
     'fabianmichael.meta.robots_archive.label'       => 'Archiver',
@@ -40,8 +42,7 @@ return [
 
     'fabianmichael.meta.description.label'          => 'Description',
     'fabianmichael.meta.description.help'           => 'Une brève description de la page qui sera affichée juste en dessous du titre de la page par les moteurs de recherche.',
-    'fabianmichael.meta.global_description.help'    => 'The global description will be used as fallback for all pages, that don’t have a dedicated description.',
-    'fabianmichael.meta.global_description.help'    => 'Les description globale qui sera utilisée quand une page n\'a aucune description dédiée.',
+    'fabianmichael.meta.global_description.help'    => 'La description globale sera utilisée comme repli pour toutes les pages qui n\'ont pas de description dédiée.',
     'fabianmichael.meta.canonical_url.label'        => 'URL Canonique',
     'fabianmichael.meta.canonical_url.help'         => 'L\'URL canonique de la page. Équivaut par défaut à l\'URL de la page quand ce champ est vide.',
     'fabianmichael.meta.global_default_value.label' => 'Global ({ state })',
@@ -50,7 +51,7 @@ return [
     'fabianmichael.meta.state.off'                  => 'désactivé',
     'fabianmichael.meta.state.unset'                => 'Non renseigné',
     'fabianmichael.meta.og.headline'                => 'Partage sur les médias sociaux (OpenGraph)',
-    'fabianmichael.meta.og.help'                    => 'Les métadonnées [Open Graph](https://ogp.me/) sont utilisées par les réseaux sociaux (e.g. Facebook, Twitter) et la plupart des applications de messagerie (e.g. Signal, Telegram, iMessage).',
+    'fabianmichael.meta.og.help'                    => 'Les métadonnées [Open Graph](https://ogp.me/) sont utilisées par les réseaux sociaux (e.g. Facebook, Mastodon) et la plupart des applications de messagerie (e.g. Signal, Telegram, iMessage).',
     'fabianmichael.meta.og_site_name.label'         => 'Nom partagé du site',
     'fabianmichael.meta.og_site_name.help'          => 'Le nom qui sera affiché sur tous les médias sociaux à des fins de partage. Si vide, le titre du site sera utilisé.',
     'fabianmichael.meta.global_og_image.label'      => 'L\'image partagée par défaut (globale)',
@@ -78,17 +79,11 @@ return [
     'fabianmichael.meta.sitemap.changefreq.yearly'      => 'Annuel',
     'fabianmichael.meta.sitemap.changefreq.never'       => 'Jamais',
 
-    'fabianmichael.meta.twitter.headline'       => 'Twitter',
-    'fabianmichael.meta.twitter.site.label'     => 'Nom d\'utilisateur Twitter associé au site',
-    'fabianmichael.meta.twitter.creator.label'  => 'Nom d\'utilisateur Twitter associé au contenu de cette page.',
-
     'fabianmichael.meta.no_og_image_fallback'   => 'Aucune image globale de repli n\'est définie. Merci d\'aller aux <a href="{ link }">paramètres globaux des méta-données</a> pour en configurer une.',
 
     'fabianmichael.meta.schema.person_privacy_notice.label' => 'Avis de confidentialité',
-    'fabianmichael.meta.schema.person_privacy_notice.text'  => 'By selecting a user, you will expose personal information such as the email address and profile image to search engines, other crawlers and everyone who reads the source code of your website.',
     'fabianmichael.meta.schema.person_privacy_notice.text'  => 'En sélectionnant un utilisateur, vous exposez certaines données personnelles telles que son adresse email et son image de profil aux moteurs de recherche, aux autres robots et à toute personne consultant le code source du site internet.',
     'fabianmichael.meta.sharing_preview.headline'           => 'Aperçu des données partagées',
-    'fabianmichael.meta.description_missing'                => '[Share Description and fallback Description Missing]',
     'fabianmichael.meta.description_missing'                => '[Aucune description, ni de description de repli]',
     'fabianmichael.meta.source.og_image'                    => 'Source: Image pour les partages',
     'fabianmichael.meta.source.metadata'                    => 'Source: Image de la page',
@@ -109,7 +104,18 @@ return [
     'fabianmichael.meta.search_engines.visibility.visible'  => 'Visible',
     'fabianmichael.meta.search_engines.visibility.hidden'   => 'Caché',
     'fabianmichael.meta.search_engines.visibility.label'    => 'Visibilité pour les moteurs de recherche',
-    'fabianmichael.meta.search_engines.visibility.yes'      => 'This page is indexed by search engines and may appear in search results',
     'fabianmichael.meta.search_engines.visibility.yes'      => 'Cette page est indexable par les moteurs de recherche et peut apparaitre dans les résultats de recherche.',
     'fabianmichael.meta.search_engines.visibility.no'       => 'Cette page n\'est pas autorisée à être indexée par les moteurs de recherche. Elle n\'apparaîtra pas dans les résultats de recherche.',
+
+    'fabianmichael.meta.panelArea.label' => 'Méta-données',
+    'fabianmichael.meta.robots.forceNoIndex.button' => 'Indexation désactivée !',
+    'fabianmichael.meta.robots.forceNoIndex.close' => 'Fermer',
+    'fabianmichael.meta.robots.forceNoIndex.infoText' => '
+        <h2 style="font-size: var(--text-font-size); line-height: var(--text-line-height);">Mode stealth</h2>
+        <p>
+            L\'indexation par les moteurs de recherche a été désactivée via la configuration.
+            Les pages vont toujours demander aux moteurs de recherche de ne pas les indexer via le Meta-Tag.
+            Ce mode est utilisé pour empêcher les moteurs de recherche d\'indexer un site pendant la phase de développement ou de test, sans modifier les paramètres réels via le panneau.
+        </p>
+        <p>Modifiez <code>fabianmichael.meta.robots.forceNoIndex</code> dans la configuration pour <code>false</code> pour activer l\'indexation à nouveau.</p>',
 ];

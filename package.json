@@ -1,9 +1,18 @@
 {
+  "name": "fabianmichael/kirby-meta",
   "scripts": {
-    "dev": "npx -y kirbyup panel/index.js --watch",
-    "build": "npx -y kirbyup panel/index.js"
+    "dev": "kirbyup serve panel/index.js",
+    "build": "kirbyup panel/index.js"
   },
   "devDependencies": {
-    "kirbyup": "^0.22.2"
+    "eslint": "^10.0.2",
+    "eslint-config-xo": "^0.50.0",
+    "kirbyup": "^3.4.1",
+    "prettier": "^3.8.1",
+    "standard": "^17.1.2",
+    "stylelint": "^17.4.0",
+    "stylelint-config-prettier-scss": "^1.0.0",
+    "stylelint-config-standard": "^40.0.0",
+    "stylelint-order": "^7.0.1"
   }
 }

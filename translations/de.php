@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'fabianmichael.meta.tab.label' => 'Metadaten (SEO)',
+    'fabianmichael.meta.tab.label' => 'Metadaten & SEO',
     'fabianmichael.meta.page_title.placeholder' => 'Seitentitel',
     'fabianmichael.meta.title_preview.label' => 'Titel (Vorschau)',
     'fabianmichael.meta.global_settings.headline' => 'Globale Einstellungen',
@@ -11,11 +11,13 @@ return [
     'fabianmichael.meta.title.help' => 'Der Seitentitel, so wie er in Suchmaschinen erscheinen soll. Wenn das Feld leer ist, wird stattdessen der Seitentitel ausgegeben.',
     'fabianmichael.meta.title_separator.label' => 'Titel-Trennzeichen',
     'fabianmichael.meta.title_separator.help' => 'Das Trennzeichen wird zwischen dem Titel der aktuellen Seite und dem Titel der Website angezeigt.',
+    'fabianmichael.meta.has-override.help' => 'Diese Einstellung wurde programmatisch gesetzt und kann für diese Seite nicht geändert werden.',
 
     'fabianmichael.meta.robots.headline' => 'Suchmaschinen',
     'fabianmichael.meta.robots.help' => 'Detaillierte Anweisungen, wie Suchmaschinen mit dieser Seite umgehen sollen.',
-    'fabianmichael.meta.robots_index.label' => 'Indizieren',
-    'fabianmichael.meta.robots_index.help' => 'Suchmaschinen werden diese Seite indizieren.',
+    'fabianmichael.meta.robots_index.label' => 'Indexieren',
+    'fabianmichael.meta.robots_index.auto' => 'auto ({ state })',
+    'fabianmichael.meta.robots_index.help' => 'Suchmaschinen dürfen standardmäßig gelistete Seiten indexieren, ungelistete Seiten hingegen nicht. Diese Einstellung kann genutzt werden, um das Standardverhalten zu überschreiben. Entwürfe sind niemals indexierbar.',
     'fabianmichael.meta.robots_follow.label' => 'Links folgen',
     'fabianmichael.meta.robots_follow.help' => 'Suchmaschinen werden Links auf dieser Seite folgen.',
     'fabianmichael.meta.robots_archive.label' => 'Archivierung',
@@ -26,9 +28,9 @@ return [
     'fabianmichael.meta.robots_snippet.help' => 'Suchmaschinen dürfen Textschnipsel aus dieser Seite generieren.',
 
     'fabianmichael.meta.global_robots.headline' => 'Suchmaschinen-Einstellungen',
-    'fabianmichael.meta.global_robots.help' => 'Standard-Einstellungen für Anweisungen an Suchmaschinen, in welcher Weise sie Seiten dieser Website indizieren dürfen. Seiten können individuelle Einstellungen verwenden, um dieses Verhaltern zu überschreiben.',
+    'fabianmichael.meta.global_robots.help' => 'Standard-Einstellungen für Anweisungen an Suchmaschinen, in welcher Weise sie Seiten dieser Website indexieren dürfen. Seiten können individuelle Einstellungen verwenden, um dieses Verhaltern zu überschreiben.',
     'fabianmichael.meta.global_robots_index.label' => 'Indexierung',
-    'fabianmichael.meta.global_robots_index.help' => 'Suchmaschinen werden diese Website indizieren.',
+    'fabianmichael.meta.global_robots_index.help' => 'Suchmaschinen dürfen diese Website indexieren. Diese globale Einstellung kann für einzelne Unterseiten überschrieben werden.',
     'fabianmichael.meta.global_robots_follow.label' => 'Links folgen',
     'fabianmichael.meta.global_robots_follow.help' => 'Suchmaschinen werden Verlinkungen auf dieser Website folgen.',
     'fabianmichael.meta.global_robots_archive.label' => 'Archivierung',
@@ -44,7 +46,7 @@ return [
     'fabianmichael.meta.canonical_url.label' => 'Eindeutige URL',
     'fabianmichael.meta.canonical_url.help' => 'Eindeutige URL zu dieser Seite. Standardmäßig wird die normale URL verwendet, falls dieses Feld leer ist.',
     'fabianmichael.meta.global_default_value.label' => 'Global ({ state })',
-    'fabianmichael.meta.config_default_value.label' => 'Konfiguration ({ state })',
+    'fabianmichael.meta.config_default_value.label' => 'Standard ({ state })',
     'fabianmichael.meta.state.on' => 'ja',
     'fabianmichael.meta.state.off' => 'nein',
     'fabianmichael.meta.state.unset' => 'nicht gesetzt',
@@ -78,10 +80,6 @@ return [
     'fabianmichael.meta.sitemap.changefreq.yearly' => 'Jährlich',
     'fabianmichael.meta.sitemap.changefreq.never' => 'Niemals',
 
-    'fabianmichael.meta.twitter.headline' => 'Twitter',
-    'fabianmichael.meta.twitter.site.label' => 'Twitter-Benutzername der Website',
-    'fabianmichael.meta.twitter.creator.label' => 'Twitter-Benutzername des Authors',
-
     'fabianmichael.meta.no_og_image_fallback' => 'Kein globales "Teilen"-Bild definiert. Ein solches Bild sollte in den <a href="{ link }">globalen Einstellungen</a> hochgeladen werden.',
 
     'fabianmichael.meta.schema.person_privacy_notice.label' => 'Hinweis zum Datenschutz',
@@ -109,4 +107,17 @@ return [
     'fabianmichael.meta.search_engines.visibility.label' => 'Sichtbarkeit in Suchmaschinen',
     'fabianmichael.meta.search_engines.visibility.yes' => 'Diese Seite wird von Suchmaschinen indexizert und kann in Suchergebnissen erscheinen',
     'fabianmichael.meta.search_engines.visibility.no' => 'Diese Seite wird in den Suchergebnissen versteckt',
+
+    'fabianmichael.meta.panelArea.label' => 'Metadaten',
+    'fabianmichael.meta.robots.forceNoIndex.button' => 'Indexierung deaktiviert!',
+    'fabianmichael.meta.robots.forceNoIndex.close' => 'Schließen',
+    'fabianmichael.meta.robots.forceNoIndex.infoText' => '
+        <h2 style="font-size: var(--text-font-size); line-height: var(--text-line-height);">Stealth-Modus</h2>
+        <p>
+            Indexierung durch Suchmaschinen wurde durch die Konfiguration deaktiviert.
+            Seiten werden immer Suchmaschinen dazu auffordern, sie nicht zu indexieren via Meta-Tag.
+            Dieser Modus wird verwendet, um Suchmaschinen während der Entwicklung oder Testphase
+            von der Indexierung auszuschließen, ohne tatsächliche Einstellungen über das Panel zu ändern.
+        </p>
+        <p>Ändere <code>fabianmichael.meta.robots.forceNoIndex</code> in der Konfiguration auf <code>false</code> um die Indexierung wieder zu aktivieren.</p>',
 ];

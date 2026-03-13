@@ -3,6 +3,7 @@
 use FabianMichael\Meta\SiteMeta;
 use Kirby\Cms\App;
 use Kirby\Cms\Page;
+use Kirby\Http\Remote;
 
 return function (App $kirby) {
     $routes = [];
@@ -12,12 +13,12 @@ return function (App $kirby) {
             'pattern' => 'robots.txt',
             'method' => 'ALL',
             'action' => function () use ($kirby) {
-                $robots = [
-                    'User-agent: *',
-                    'Allow: /',
-                ];
+                $robots = [];
+                $robots[] = 'User-agent: *';
+                $robots[] = 'Allow: /';
 
                 if ($kirby->option('fabianmichael.meta.sitemap') === true && SiteMeta::robots('index') === true) {
+                    $robots[] = '';
                     $robots[] = 'Sitemap: ' . url('sitemap.xml');
                 }
 

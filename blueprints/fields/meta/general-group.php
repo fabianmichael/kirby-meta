@@ -22,11 +22,8 @@ return function (Kirby $kirby) {
             'type'        => 'text',
             'label'       => t('fabianmichael.meta.title.label'),
             'placeholder' => '{{ page.meta.panelTitlePlaceholder }}',
+            'after'       => '{{ page.meta.panelTitleAfter }}',
             'help'        => t('fabianmichael.meta.title.help'),
-        ],
-        'meta_title_preview' => [
-            'type' => 'meta-title-preview',
-            'label' => t('fabianmichael.meta.title_preview.label'),
         ],
     ];
 

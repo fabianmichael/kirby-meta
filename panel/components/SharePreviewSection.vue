@@ -1,8 +1,8 @@
 <template>
-  <div class="k-meta-sharing-preview">
+  <k-section class="k-meta-sharing-preview">
     <div class="k-meta-sharing-preview__label k-field-label">
       <k-icon type="share"/>
-      <span>{{ headline }}</span>
+      <k-label>{{ headline }}</k-label>
     </div>
     <div class="k-meta-sharing-preview__box">
       <div
@@ -30,7 +30,7 @@
         </p>
       </div>
     </div>
-  </div>
+  </k-section>
 </template>
 
 <script>
@@ -85,7 +85,7 @@ export default {
   },
   computed: {
     title() {
-      const { og_title, meta_title } = this.$store.getters["content/values"]();
+      const { og_title, meta_title } = this.$panel.content.version('changes');
       const prefix = this.og_title_prefix || "";
       const title = this.page_is_homepage
         ? (og_title || meta_title || this.site_name)
@@ -94,11 +94,11 @@ export default {
       return prefix + title;
     },
     description() {
-      const { og_description, meta_description } = this.$store.getters["content/values"]();
+      const { og_description, meta_description } = this.$panel.content.version('changes');
       return og_description || meta_description || this.page_metadata_description || this.site_meta_description || this.$t("fabianmichael.meta.description_missing");
     },
     store_image() {
-      return this.$store.getters["content/values"]().og_image;
+      return this.$panel.content.version('changes').og_image;
     },
   },
   watch: {
@@ -117,7 +117,7 @@ export default {
       if (this.store_image.length > 0) {
         this.$api.files
           .get(
-            this.$store.getters["content/model"]().api,
+            this.parent,
             this.store_image[0].filename,
             { view: "compact", }
           ).then((response) => {
@@ -142,6 +142,8 @@ export default {
 
 .k-meta-sharing-preview__label {
   display: flex;
+  align-items: center;
+  margin-block-end: var(--spacing-1);
 }
 
 .k-meta-sharing-preview__label > * + * {
@@ -150,10 +152,11 @@ export default {
 }
 
 .k-meta-sharing-preview__source-badge {
-  background: var(--color-gray-900);
-  color: var(--color-white);
-  border-radius: var(--rounded-sm);
+  background: var(--item-color-back);
+  color: inherit;
+  border-radius: var(--rounded);
   bottom: var(--spacing-2);
+  box-shadow: var(--item-shadow);
   position: absolute;
   right: var(--spacing-2);
   font-size: .625rem;
@@ -162,12 +165,11 @@ export default {
 }
 
 .k-meta-sharing-preview__box {
-  background: var(--color-white);
+  background: var(--item-color-back);
   border-radius: var(--rounded);
   box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
-  max-width: 438px;
   overflow: hidden;
   position: relative;
   width: 100%;
@@ -204,7 +206,7 @@ export default {
 }
 
 .k-meta-sharing-preview__site-name {
-  color: var(--color-gray-600);
+  color: var(--color-text-dimmed);
   font-size: var(--text-xs);
 }
 
@@ -215,7 +217,7 @@ export default {
 }
 
 .k-meta-sharing-preview__preview-headline {
-  color: var(--color-dark);
+  color: var(--color-text);
   font-size: var(--text-base);
   line-height: var(--leading-tight);
   margin: var(--spacing-1) 0;
@@ -223,7 +225,7 @@ export default {
 }
 
 .k-meta-sharing-preview__preview-paragraph {
-  color: var(--color-gray-600);
+  color: var(--color-text-dimmed);
   font-size: var(--text-sm);
   line-height: var(--leading-normal);
   margin: 0;

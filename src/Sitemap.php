@@ -20,9 +20,9 @@ class Sitemap
         $this->languages   = $this->kirby->languages();
     }
 
-    public static function factory(...$args): static
+    public static function factory(): static
     {
-        return new static(...$args);
+        return new static();
     }
 
     public function generate(): string
@@ -59,13 +59,11 @@ class Sitemap
     protected function urlsForPage(
         Page $page,
         DOMDocument $doc,
-        DOMElement $root): void
-        {
+        DOMElement $root
+    ): void {
         $meta = $page->meta();
 
-        if (static::isPageIndexible($page) === false) {
-            // Exclude page, if explicitly excluded in page settings
-            // for global settings
+        if ($page->isIndexible() === false) {
             return;
         }
 
@@ -110,55 +108,5 @@ class Sitemap
         ], 'include') !== false) {
             $root->appendChild($url);
         }
-    }
-
-    public static function isPageIndexible(Page $page): bool
-    {
-        // pages have to pass a set of for being indexible. If any test
-        // fails, the page is excluded from index
-
-        $templatesExclude = option('fabianmichael.meta.sitemap.templates.exclude', []);
-        $templatesExcludeRegex = '!^(?:' . implode('|', $templatesExclude) . ')$!i';
-
-        $templatesIncludeUnlisted = option('fabianmichael.meta.sitemap.templates.includeUnlisted', []);
-        $templatesIncludeUnlistedRegex = '!^(?:' . implode('|', $templatesIncludeUnlisted) . ')$!i';
-
-        $pagesExclude = option('fabianmichael.meta.sitemap.pages.exclude', []);
-        $pagesExcludeRegex = '!^(?:' . implode('|', $pagesExclude) . ')$!i';
-
-        $pagesIncludeUnlisted = option('fabianmichael.meta.sitemap.pages.includeUnlisted', []);
-        $pagesIncludeUnlistedRegex = '!^(?:' . implode('|', $pagesIncludeUnlisted) . ')$!i';
-
-        if ($page->isErrorPage()) {
-            // error page is always excluded from sitemap
-            return false;
-        }
-
-
-        if (! $page->isHomePage() && $page->status() === 'unlisted') {
-            if (preg_match($templatesIncludeUnlistedRegex, $page->intendedTemplate()->name()) !== 1
-                && preg_match($pagesIncludeUnlistedRegex, $page->id()) !== 1) {
-                // unlisted pages are only indexible, if exceptions are
-                // defined for them based on page id or template
-                return false;
-            }
-        }
-
-        if (preg_match($templatesExcludeRegex, $page->intendedTemplate()->name()) === 1) {
-            // page is in exclude-list of templates
-            return false;
-        }
-
-        if (preg_match($pagesExcludeRegex, $page->id()) === 1) {
-            // page is in exclude-list of page IDs
-            return false;
-        }
-
-        if (! is_null($page->parent())) {
-            // test indexability of parent pages as well
-            return static::isPageIndexible($page->parent());
-        }
-
-        return true;
     }
 }

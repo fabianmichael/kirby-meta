@@ -3,10 +3,11 @@
 namespace FabianMichael\Meta;
 
 use Kirby\Cms\App as Kirby;
-use Kirby\Cms\Field;
+use Kirby\Content\Field;
 use Kirby\Cms\File;
 use Kirby\Cms\Language;
 use Kirby\Cms\Page;
+use Kirby\Toolkit\A;
 
 class PageMeta
 {
@@ -16,7 +17,8 @@ class PageMeta
     protected Page $page;
     protected Kirby $kirby;
     protected ?string $languageCode;
-    protected array $metadata = [];
+    protected array $defaults = [];
+    protected array $overrides = [];
 
     public function __call($name, $arguments): mixed
     {
@@ -30,15 +32,14 @@ class PageMeta
         $this->page = $page;
 
         // Get metadata from page, if possible
-        if (method_exists($this->page, 'metadata') === true || $this->page->hasMethod('metadata') === true) {
-            $this->metadata = $this->page->metadata($languageCode);
-        }
+        $this->defaults = $this->page->metaDefaults($languageCode);
+        $this->overrides = $this->page->metaOverrides($languageCode);
 
         // Allow other plugins/config to alter metadata after load
-        $this->metadata = $this->kirby->apply(
+        $this->defaults = $this->kirby->apply(
             'meta.load:after',
             [
-                'metadata'     => $this->metadata,
+                'metadata'     => $this->defaults,
                 'page'         => $this->page,
                 'languageCode' => $this->languageCode,
             ],
@@ -49,7 +50,7 @@ class PageMeta
     public function canonicalUrl(): string
     {
         return $this->meta_canonical_url()
-            ->or($this->metadata('canonical_url'))
+            ->or($this->default('canonical_url'))
             ->or($this->page->url())
             ->toString();
     }
@@ -70,7 +71,7 @@ class PageMeta
 
     public function get(
         string $key,
-        bool $metadataFallback = true,
+        bool $defaultFallback = true,
         bool $siteFallback = false,
         bool $configFallback = false,
         mixed $fallback = null
@@ -83,8 +84,8 @@ class PageMeta
         }
 
         // From page model metadata ...
-        if ($metadataFallback === true && array_key_exists($key, $this->metadata) === true) {
-            $value = $this->metadata[$key];
+        if ($defaultFallback === true && array_key_exists($key, $this->defaults) === true) {
+            $value = $this->defaults[$key];
 
             if (is_callable($value) === true) {
                 $value = $value->call($this->page);
@@ -151,9 +152,6 @@ class PageMeta
                 '@id'   => $ownerId,
                 'name'  => $site->meta_org_name()->toString(),
                 'url'   => $site->url(),
-                // 'sameAs' => [
-                //     'https://example.com',
-                // ],
             ];
 
             if ($logo = $site->meta_org_logo()->toFile()) {
@@ -177,7 +175,7 @@ class PageMeta
         }
 
         // Merge with page metadata …
-        $graph = array_merge($graph, $this->metadata('@graph', []));
+        $graph = array_merge($graph, $this->default('@graph', []));
 
         $json = [
             '@context' => 'https://schema.org',
@@ -212,7 +210,7 @@ class PageMeta
 
     public function lastmod()
     {
-        return (int) $this->metadata('lastmod', $this->page->modified('U', 'date'));
+        return (int) $this->default('lastmod', $this->page->modified('U', 'date'));
     }
 
     public function locale(): ?string
@@ -226,11 +224,19 @@ class PageMeta
         return null;
     }
 
-    public function metadata(string $name, mixed $fallback = null): mixed
+    public function default(string $key, mixed $fallback = null): mixed
     {
-        return array_key_exists($name, $this->metadata) === true
-            ? $this->metadata[$name]
-            : $fallback;
+        return A::get($this->defaults, $key, $fallback);
+    }
+
+    public function override(string $key, mixed $falllback = null): mixed
+    {
+        return A::get($this->overrides, $key, $falllback);
+    }
+
+    public function hasOverride(string $key, mixed $fallback = null): mixed
+    {
+        return A::get($this->overrides, $key, $fallback) !== $fallback;
     }
 
     public static function of(Page $page, ?string $languageCode = null): static
@@ -250,25 +256,43 @@ class PageMeta
         if (is_string($name)) {
             // single robots value of page as boolean
 
-            // if page is a draft, always return false for everything
-            if (in_array($name, ['index', 'follow']) && $this->page->isDraft()) {
+            if ($name === 'index' && ($this->page->isDraft() || $this->page->isErrorPage())) {
+                // if page is a draft or error, always return false
                 return false;
             }
 
-            // if page is not in sitemap, it will also not be indexible
-            if ($name === 'index' && ! Sitemap::isPageIndexible($this->page)) {
+            // load from overrrides
+            if ($name === 'index') {
+                $override = $this->override("robots.{$name}");
+
+                if (! is_null($override)) {
+                    return $override;
+                }
+            }
+
+            // load from content
+            $field = $this->page->content($this->languageCode)->get("robots_{$name}");
+
+            if ($field->isNotEmpty()) {
+                return $field->toBool();
+            }
+
+            // load from model
+            $default = $this->default("robots.{$name}");
+
+            if (!is_null($default)) {
+                return $default;
+            }
+
+            // fall back to page status
+            if ($name === 'index' && $this->page->isUnlisted()) {
                 return false;
             }
 
-            // load from content/fallback
-            return $this
-                ->page
-                ->content($this->languageCode)
-                ->get("robots_{$name}")
-                ->or(SiteMeta::robots($name))
-                ->toBool();
+            return SiteMeta::robots($name);
+
         } else {
-            // robots value for metatag as string|null
+            // robots value for meta tag as string
             $robots = [];
 
             foreach (['index', 'follow', 'archive', 'imageindex', 'snippet', 'translate'] as $prop) {
@@ -319,7 +343,7 @@ class PageMeta
 
         $social[] = [
             'property' => 'og:type',
-            'content'  => 'website', // TODO: make overridable from metadata() method
+            'content'  => 'website',
         ];
 
         $social[] = [
@@ -375,32 +399,8 @@ class PageMeta
             }
         }
 
-        // Twitter
-        if (option('fabianmichael.meta.twitter')) {
-            $social[] = [
-                'name' => 'twitter:card',
-                'content' => 'summary_large_image',
-            ];
-
-            $twitterSite = $this->get('twitter_site', false, true);
-            if ($twitterSite->isNotEmpty() === true) {
-                $social[] = [
-                    'name' => 'twitter:site',
-                    'content' => '@' . ltrim($twitterSite->toString(), '@'),
-                ];
-            }
-
-            $twitterCreator = $this->get('twitter_creator', true, true);
-            if ($twitterCreator->isNotEmpty() === true) {
-                $social[] = [
-                    'name' => 'twitter:creator',
-                    'content' => '@' . ltrim($twitterCreator->toString(), '@'),
-                ];
-            }
-        }
-
         // Additional metadata from page model
-        $social = array_merge($social, $this->metadata('@social', []));
+        $social = array_merge($social, $this->default('@social', []));
 
         // Hook
         $social = $this->kirby->apply(
@@ -429,7 +429,7 @@ class PageMeta
             $title[] = $this->page->content($this->languageCode)->get('meta_title')
                 ->or($this->page->title())->toString();
 
-            $title[] = SiteMeta::titleSeparator();
+            $title[] = option('fabianmichael.meta.title.separator');
             $title[] = $siteTitle->toString();
         }
 
@@ -452,8 +452,12 @@ class PageMeta
         }
 
         // Search in page model ...
-        if ($image = $this->metadata('og_image')) {
-            return $image;
+        if ($image = $this->default('og_image')) {
+            if ($image instanceof File) {
+                return $image;
+            } elseif ($image instanceof Field) {
+                return $image->toFile();
+            }
         }
 
         // Fallback to global thumbnail
@@ -473,6 +477,14 @@ class PageMeta
         return new Field($this->page, 'og_title', $titlePrefix . $title);
     }
 
+    public function panelTitleAfter(): string {
+        if (!$this->page->isHomePage()) {
+            return option('fabianmichael.meta.title.separator') . ' ' . $this->page->kirby()->site()->title();
+        }
+
+        return '';
+    }
+
     public function panelTitlePlaceholder(): string
     {
         if ($this->page->isHomePage()) {
@@ -485,7 +497,7 @@ class PageMeta
 
     public function reports(): array
     {
-        $isIndexible = Sitemap::isPageIndexible($this->page) && $this->robots('index');
+        $isIndexible = $this->page->isIndexible();
 
         return [
             [

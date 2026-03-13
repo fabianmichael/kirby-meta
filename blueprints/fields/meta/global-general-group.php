@@ -17,20 +17,6 @@ return function (Kirby $kirby) {
             'label' => t('fabianmichael.meta.description.label'),
             'help' => t('fabianmichael.meta.global_description.help'),
         ],
-        'meta_title_separator' => [
-            'type' => 'select',
-            'label' => t('fabianmichael.meta.title_separator.label'),
-            'default' => '',
-            'placeholder' => '|',
-            'options' => $kirby->option('fabianmichael.meta.title.separators'),
-            'width' => '1/3',
-            'help' => t('fabianmichael.meta.title_separator.help'),
-        ],
-        'meta_title_preview' => [
-            'type' => 'meta-title-preview',
-            'label' => 'Preview',
-            'width' => '2/3',
-        ],
     ];
 
     // sitemap
@@ -47,7 +33,6 @@ return function (Kirby $kirby) {
             'width' => '1/2',
         ];
     }
-
 
     return [
         'type' => 'group',

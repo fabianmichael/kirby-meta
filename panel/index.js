@@ -1,27 +1,33 @@
 /* global panel */
 
-import "./panel.css";
+import './panel.css'
 
-// import Section from "./components/Section.vue";
-import SharePreviewSection from "./components/SharePreviewSection.vue";
-import TitlePreviewField from "./components/TitlePreviewField.vue";
-import MetaView from "./components/MetaView.vue";
+import SharePreviewSection from './components/SharePreviewSection.vue'
+import MetaView from './components/MetaView.vue'
+import ForceNoIndexViewButton from './components/ForceNoIndexViewButton.vue'
 
-panel.plugin("fabianmichael/meta", {
+panel.plugin('fabianmichael/meta', {
   components: {
-    "k-meta-view": MetaView,
+    'k-meta-view': MetaView
   },
   fields: {
-    "meta-title-preview": TitlePreviewField,
+    'meta-robots-index-toggles': {
+      extends: 'k-toggles-field'
+    }
   },
   sections: {
-  //   meta: Section,
-    "meta-share-preview": SharePreviewSection,
+    'meta-share-preview': SharePreviewSection
   },
   icons: {
-    "meta-true": '<g fill="currentColor"><polygon points="12.4,6 11,4.6 7,8.6 5,6.6 3.6,8 7,11.4 "></polygon></g>',
-    "meta-false": '<g fill="currentColor"><polygon points="10.1,4.5 8,6.6 5.9,4.5 4.5,5.9 6.6,8 4.5,10.1 5.9,11.5 8,9.4 10.1,11.5 11.5,10.1 9.4,8 11.5,5.9 "></polygon></g>',
-    "meta-robot": '<g fill="currentColor"><path d="M10,0v2h2v2H4V2h2V0H0v2h2v2H0v12h16V4h-2V2h2V0H10z M14,14H2V6h2h8h2V14z"></path><rect x="4" y="7" width="3" height="2"></rect><rect x="9" y="7" width="3" height="2"></rect><rect x="5" y="10" width="6" height="3"></rect>',
-  //   "meta-bulb": '<path d="M8,0C4.7,0,2,2.7,2,6c0,2.2,1.2,4.1,3,5.2V15c0,0.6,0.4,1,1,1h4c0.6,0,1-0.4,1-1v-3.8c1.8-1.1,3-3,3-5.2 C14,2.7,11.3,0,8,0z M7,14v-1h2v1H7z M9.6,9.7C9.2,9.8,9,10.2,9,10.6V12H7v-1.4c0-0.4-0.2-0.8-0.6-0.9C4.9,9,4,7.6,4,6 c0-2.2,1.8-4,4-4s4,1.8,4,4C12,7.6,11.1,9,9.6,9.7z"></path>',
+    'meta-true': '<path d="M10 15.2 19.2 6l1.4 1.4L10 18l-6.4-6.4L5 10.2l5 5Z"/>',
+    'meta-false': '<path d="m12 10.6 5-5 1.4 1.5-5 4.9 5 5-1.5 1.4-4.9-5-5 5L5.6 17l5-5-5-5L7 5.7l5 5Z"/>',
+    'meta-searcheye': '<path d="m18 16.6 4.3 4.3-1.4 1.4-4.3-4.3a9 9 0 1 1 1.4-1.4Zm-2-.7A7 7 0 0 0 11 4a7 7 0 1 0 4.9 12l.1-.1Zm-3.8-8.7a2 2 0 1 0 2.6 2.6 4 4 0 1 1-2.6-2.6Z"/>',
+    'meta-robots': '<path d="M13.5 2c0 .444-.193.843-.5 1.118V5h5a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3h5V3.118A1.5 1.5 0 1 1 13.5 2ZM6 7a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1H6Zm-4 3H0v6h2v-6Zm20 0h2v6h-2v-6ZM9 14.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Zm6 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z" />',
+    'meta-eye-off': '<path d="M17.883 19.297A10.949 10.949 0 0 1 12 21c-5.392 0-9.878-3.88-10.818-9A10.982 10.982 0 0 1 4.52 5.935L1.394 2.808l1.414-1.414 19.799 19.798-1.414 1.415-3.31-3.31ZM5.936 7.35A8.965 8.965 0 0 0 3.223 12a9.005 9.005 0 0 0 13.201 5.838l-2.028-2.028A4.5 4.5 0 0 1 8.19 9.604L5.936 7.35Zm6.978 6.978-3.242-3.241a2.5 2.5 0 0 0 3.241 3.241Zm7.893 2.265-1.431-1.431A8.935 8.935 0 0 0 20.778 12 9.005 9.005 0 0 0 9.552 5.338L7.974 3.76C9.221 3.27 10.58 3 12 3c5.392 0 9.878 3.88 10.819 9a10.947 10.947 0 0 1-2.012 4.593Zm-9.084-9.084a4.5 4.5 0 0 1 4.769 4.769l-4.77-4.77Z"/>',
+    'meta-eye': '<path d="M12 3c5.392 0 9.878 3.88 10.819 9-.94 5.12-5.427 9-10.819 9-5.392 0-9.878-3.88-10.818-9C2.122 6.88 6.608 3 12 3Zm0 16a9.005 9.005 0 0 0 8.778-7 9.005 9.005 0 0 0-17.555 0A9.005 9.005 0 0 0 12 19Zm0-2.5a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9Zm0-2a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>',
+    'meta-seo': '<path d="M8 3C4.13401 3 1 6.13401 1 10C1 13.866 4.13401 17 8 17H9.07089C9.02417 16.6734 9 16.3395 9 16C9 15.6605 9.02417 15.3266 9.07089 15H8C5.23858 15 3 12.7614 3 10C3 7.23858 5.23858 5 8 5H16C18.7614 5 21 7.23858 21 10C21 10.3428 20.9655 10.6775 20.8998 11.0008C21.4853 11.5748 21.9704 12.2508 22.3264 13C22.7583 12.0907 23 11.0736 23 10C23 6.13401 19.866 3 16 3H8ZM16 13C14.3431 13 13 14.3431 13 16C13 17.6569 14.3431 19 16 19C17.6569 19 19 17.6569 19 16C19 14.3431 17.6569 13 16 13ZM11 16C11 13.2386 13.2386 11 16 11C18.7614 11 21 13.2386 21 16C21 17.0191 20.6951 17.967 20.1716 18.7574L22.7071 21.2929L21.2929 22.7071L18.7574 20.1716C17.967 20.6951 17.0191 21 16 21C13.2386 21 11 18.7614 11 16Z"></path>',
+  },
+  viewButtons: {
+    'force-noindex-info': ForceNoIndexViewButton
   }
-});
+})

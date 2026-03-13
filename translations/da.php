@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'fabianmichael.meta.tab.label' => 'Metadata (SEO)',
+    'fabianmichael.meta.tab.label' => 'Metadata & SEO',
     'fabianmichael.meta.page_title.placeholder' => 'Sidetitel',
     'fabianmichael.meta.title_preview.label' => 'Titel forhåndsvisning',
     'fabianmichael.meta.global_settings.headline' => ' Globale indstillinger',
@@ -11,11 +11,13 @@ return [
     'fabianmichael.meta.title.help' => 'Sidens titel som den skal vises på søgemaskiner. Hvis dette felt er tomt, vil Kirby sidens titel blive brugt som standard.',
     'fabianmichael.meta.title_separator.label' => 'Titel Separator',
     'fabianmichael.meta.title_separator.help' => 'Separator der vises mellem side og webstedets titel.',
+    'fabianmichael.meta.has-override.help' => 'Denne indstilling er sat programmatisk og kan ikke ændres for denne side.',
 
     'fabianmichael.meta.robots.headline' => 'Søgemaskiner',
     'fabianmichael.meta.robots.help' => 'Detaljerede instruktioner til hvordan søgemaskiner skal håndtere denne side.',
     'fabianmichael.meta.robots_index.label' => 'Indeksering',
-    'fabianmichael.meta.robots_index.help' => 'Søgemaskiner må indeksere denne side.',
+    'fabianmichael.meta.robots_index.auto' => 'auto ({ state })',
+    'fabianmichael.meta.robots_index.help' => 'Søgemaskiner må som standard indeksere listede sider, mens ulistede sider udelukkes. Denne indstilling kan bruges til at tilsidesætte standarden. Kladder vil aldrig være indekserbare.',
     'fabianmichael.meta.robots_follow.label' => 'Følg links',
     'fabianmichael.meta.robots_follow.help' => 'Søgemaskiner vil følge links på denne side.',
     'fabianmichael.meta.robots_archive.label' => 'Arkivering',
@@ -49,7 +51,7 @@ return [
     'fabianmichael.meta.state.off' => 'slukket',
     'fabianmichael.meta.state.unset' => 'ikke indstillet',
     'fabianmichael.meta.og.headline' => 'Deling på sociale medier',
-    'fabianmichael.meta.og.help' => '[Open Graph](https://ogp.me/) metadata bruges af sociale netværk (f.eks. Facebook, Twitter) og de fleste beskedapps (f.eks. Signal, Telegram, iMessage).',
+    'fabianmichael.meta.og.help' => '[Open Graph](https://ogp.me/) metadata bruges af sociale netværk (f.eks. Facebook, Mastodon) og de fleste beskedapps (f.eks. Signal, Telegram, iMessage).',
     'fabianmichael.meta.og_site_name.label' => 'Del webstedets navn',
     'fabianmichael.meta.og_site_name.help' => 'Navnet der skal vises for hele webstedet til deling på sociale medier. Hvis ikke indstillet, vil webstedets titel blive brugt som fallback.',
     'fabianmichael.meta.global_og_image.label' => 'Standard delingsbillede',
@@ -76,10 +78,6 @@ return [
     'fabianmichael.meta.sitemap.changefreq.monthly' => 'Månedligt',
     'fabianmichael.meta.sitemap.changefreq.yearly' => 'Årligt',
     'fabianmichael.meta.sitemap.changefreq.never' => 'Aldrig',
-
-    'fabianmichael.meta.twitter.headline' => 'Twitter',
-    'fabianmichael.meta.twitter.site.label' => 'Twitter brugernavn for webstedet',
-    'fabianmichael.meta.twitter.creator.label' => 'Twitter brugernavn for indholdsopretter',
 
     'fabianmichael.meta.no_og_image_fallback' => 'Intet globalt fallback-billede defineret. Gå til <a href="{ link }">globale metadata indstillinger</a> og upload et.',
 
@@ -108,4 +106,16 @@ return [
     'fabianmichael.meta.search_engines.visibility.label' => 'Søgemaskine synlighed',
     'fabianmichael.meta.search_engines.visibility.yes' => 'Denne side indekseres af søgemaskiner og kan vises i søgeresultaterne',
     'fabianmichael.meta.search_engines.visibility.no' => 'Denne side er skjult fra søgeresultaterne',
+
+    'fabianmichael.meta.panelArea.label' => 'Metadater',
+    'fabianmichael.meta.robots.forceNoIndex.button' => 'Indexering deaktiveret!',
+    'fabianmichael.meta.robots.forceNoIndex.close' => 'Luk',
+    'fabianmichael.meta.robots.forceNoIndex.infoText' => '
+        <h2 style="font-size: var(--text-font-size); line-height: var(--text-line-height);">Stealth-tilstand</h2>
+        <p>
+            Indexering af søgemaskiner er blevet deaktiveret via konfiguration.
+            Sider vil altid bede søgemaskiner om at indeksere dem via Meta-Tag.
+            Denne tilstand bruges til at forhindre søgemaskiner fra at indeksere et websted under udvikling eller test, uden at ændre de faktiske indstillinger via panelet.
+        </p>
+        <p>Ændre <code>fabianmichael.meta.robots.forceNoIndex</code> i konfigurationen til <code>false</code> for at aktivere indexering igen.</p>',
 ];

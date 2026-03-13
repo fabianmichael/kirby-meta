@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'fabianmichael.meta.tab.label' => 'Metadata (SEO)',
+    'fabianmichael.meta.tab.label' => 'Metadata & SEO',
     'fabianmichael.meta.page_title.placeholder' => 'Sidtitel',
     'fabianmichael.meta.title_preview.label' => 'Titelförhandsgranskning',
     'fabianmichael.meta.global_settings.headline' => 'Globala inställningar',
@@ -11,11 +11,13 @@ return [
     'fabianmichael.meta.title.help' => 'Sidans titel som den ska visas i sökmotorer. Kommer att använda Kirbys sidtitel som standard när detta fält är tomt.',
     'fabianmichael.meta.title_separator.label' => 'Titelseparator',
     'fabianmichael.meta.title_separator.help' => 'Separator som ska visas mellan sid- och webbplatsens titel.',
+    'fabianmichael.meta.has-override.help' => 'Denna inställning har satts programmatiskt och kan inte redigeras för denna sida.',
 
     'fabianmichael.meta.robots.headline' => 'Sökmotorer',
     'fabianmichael.meta.robots.help' => 'Detaljerade instruktioner om hur sökmotorer ska hantera denna sida.',
     'fabianmichael.meta.robots_index.label' => 'Indexering',
-    'fabianmichael.meta.robots_index.help' => 'Sökmotorer får indexera denna sida.',
+    'fabianmichael.meta.robots_index.auto' => 'auto ({ state })',
+    'fabianmichael.meta.robots_index.help' => 'Sökmotorer får som standard indexera listade sidor, medan olistade sidor exkluderas. Denna inställning kan användas för att åsidosätta standarden. Utkast kommer aldrig att vara indexerbare.',
     'fabianmichael.meta.robots_follow.label' => 'Följ länkar',
     'fabianmichael.meta.robots_follow.help' => 'Sökmotorer kommer att följa länkar på denna sida.',
     'fabianmichael.meta.robots_archive.label' => 'Arkivering',
@@ -49,7 +51,7 @@ return [
     'fabianmichael.meta.state.off' => 'av',
     'fabianmichael.meta.state.unset' => 'inte satt',
     'fabianmichael.meta.og.headline' => 'Dela på sociala medier',
-    'fabianmichael.meta.og.help' => '[Open Graph](https://ogp.me/) metadata används av sociala nätverk (t.ex. Facebook, Twitter) och de flesta meddelandeappar (t.ex. Signal, Telegram, iMessage).',
+    'fabianmichael.meta.og.help' => '[Open Graph](https://ogp.me/) metadata används av sociala nätverk (t.ex. Facebook, Mastodon) och de flesta meddelandeappar (t.ex. Signal, Telegram, iMessage).',
     'fabianmichael.meta.og_site_name.label' => 'Dela webbplatsnamn',
     'fabianmichael.meta.og_site_name.help' => 'Namnet som ska visas för hela webbplatsen vid delning på sociala medier. Kommer att använda webbplatsens titel som fallback.',
     'fabianmichael.meta.global_og_image.label' => 'Standard delningsbild',
@@ -76,10 +78,6 @@ return [
     'fabianmichael.meta.sitemap.changefreq.monthly' => 'Månadsvis',
     'fabianmichael.meta.sitemap.changefreq.yearly' => 'Årligen',
     'fabianmichael.meta.sitemap.changefreq.never' => 'Aldrig',
-
-    'fabianmichael.meta.twitter.headline' => 'Twitter',
-    'fabianmichael.meta.twitter.site.label' => 'Twitter-användarnamn för webbplatsen',
-    'fabianmichael.meta.twitter.creator.label' => 'Twitter-användarnamn för innehållsskapare',
 
     'fabianmichael.meta.no_og_image_fallback' => 'Ingen global reservbild definierad. Gå till <a href="{ link }">globala metadatinställningar</a> och ladda upp en.',
 
@@ -108,4 +106,16 @@ return [
     'fabianmichael.meta.search_engines.visibility.label' => 'Sökmotorvisibilitet',
     'fabianmichael.meta.search_engines.visibility.yes' => 'Denna sida är indexerad av sökmotorer och kan visas i sökresultat',
     'fabianmichael.meta.search_engines.visibility.no' => 'Denna sida är dold från sökresultat',
+
+    'fabianmichael.meta.panelArea.label' => 'Metadata',
+    'fabianmichael.meta.robots.forceNoIndex.button' => 'Indexering avaktiverad!',
+    'fabianmichael.meta.robots.forceNoIndex.close' => 'Stänga',
+    'fabianmichael.meta.robots.forceNoIndex.infoText' => '
+        <h2 style="font-size: var(--text-font-size); line-height: var(--text-line-height);">Stealth-läge</h2>
+        <p>
+            Indexering av sökmotorer har forceringstänkts av konfiguration.
+            Sidor kommer alltid att be sökmotorer om att inte indexera dem via det Meta-Tag.
+            Detta läge används för att förhindra sökmotorer från att indexera en webbplats under utveckling eller test, utan att ändra de faktiska inställningarna via panelen.
+        </p>
+        <p>Ändra <code>fabianmichael.meta.robots.forceNoIndex</code> i konfigurationen till <code>false</code> för att aktivera indexering igen.</p>',
 ];

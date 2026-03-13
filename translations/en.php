@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'fabianmichael.meta.tab.label' => 'Metadata (SEO)',
+    'fabianmichael.meta.tab.label' => 'Metadata & SEO',
     'fabianmichael.meta.page_title.placeholder' => 'Page title',
     'fabianmichael.meta.title_preview.label' => 'Title preview',
     'fabianmichael.meta.global_settings.headline' => 'Global settings',
@@ -11,11 +11,13 @@ return [
     'fabianmichael.meta.title.help' => 'The page title as it should be displayed on search engines. Will default to Kirby page title when this field is empty.',
     'fabianmichael.meta.title_separator.label' => 'Title Separator',
     'fabianmichael.meta.title_separator.help' => 'Separator to be displayed between page and site title.',
+    'fabianmichael.meta.has-override.help' => 'This setting has been set programmatically and cannot be edited for this page.',
 
     'fabianmichael.meta.robots.headline' => 'Search engines',
     'fabianmichael.meta.robots.help' => 'Detailed instructions for how search engines should handle this page.',
     'fabianmichael.meta.robots_index.label' => 'Indexing',
-    'fabianmichael.meta.robots_index.help' => 'Search engines are allowed to index this page.',
+    'fabianmichael.meta.robots_index.auto' => 'auto ({ state })',
+    'fabianmichael.meta.robots_index.help' => 'Search engines may index listed pages by default, while unlisted pages are excluded. This setting can be used to override the defaults. Drafts pages will never be indexible.',
     'fabianmichael.meta.robots_follow.label' => 'Follow links',
     'fabianmichael.meta.robots_follow.help' => 'Search engines will follow links on this page.',
     'fabianmichael.meta.robots_archive.label' => 'Archiving',
@@ -28,7 +30,7 @@ return [
     'fabianmichael.meta.global_robots.headline' => 'Search engine settings',
     'fabianmichael.meta.global_robots.help' => 'Detailed instructions for how search engines should handle pages of this site by default. Pages can have their individual settings to override these defaults.',
     'fabianmichael.meta.global_robots_index.label' => 'Indexing',
-    'fabianmichael.meta.global_robots_index.help' => 'Search engines are allowed to index this site.',
+    'fabianmichael.meta.global_robots_index.help' => 'Search engines are allowed to index this site. This setting can be overridden for specific subpages.',
     'fabianmichael.meta.global_robots_follow.label' => 'Follow links',
     'fabianmichael.meta.global_robots_follow.help' => 'Search engines will follow links on this site.',
     'fabianmichael.meta.global_robots_archive.label' => 'Archiving',
@@ -49,7 +51,7 @@ return [
     'fabianmichael.meta.state.off' => 'off',
     'fabianmichael.meta.state.unset' => 'not set',
     'fabianmichael.meta.og.headline' => 'Social media sharing',
-    'fabianmichael.meta.og.help' => '[Open Graph](https://ogp.me/) metadata is consumed by social networks (e.g. Facebook, Twitter) and most messenger apps (e.g. Signal, Telegram, iMessage).',
+    'fabianmichael.meta.og.help' => '[Open Graph](https://ogp.me/) metadata is consumed by social networks (e.g. Facebook, Mastodon) and most messenger apps (e.g. Signal, Telegram, iMessage).',
     'fabianmichael.meta.og_site_name.label' => 'Share site name',
     'fabianmichael.meta.og_site_name.help' => 'The name which should be displayed for the overall site for social media sharing. Will use site title as fallback.',
     'fabianmichael.meta.global_og_image.label' => 'Default share image',
@@ -76,10 +78,6 @@ return [
     'fabianmichael.meta.sitemap.changefreq.monthly' => 'Monthly',
     'fabianmichael.meta.sitemap.changefreq.yearly' => 'Yearly',
     'fabianmichael.meta.sitemap.changefreq.never' => 'Never',
-
-    'fabianmichael.meta.twitter.headline' => 'Twitter',
-    'fabianmichael.meta.twitter.site.label' => 'Twitter username of website',
-    'fabianmichael.meta.twitter.creator.label' => 'Twitter username of content creator',
 
     'fabianmichael.meta.no_og_image_fallback' => 'No global fallback image defined. Please go to <a href="{ link }">global metadata settings</a> and upload one.',
 
@@ -108,4 +106,17 @@ return [
     'fabianmichael.meta.search_engines.visibility.label' => 'Search engine visbility',
     'fabianmichael.meta.search_engines.visibility.yes' => 'This page is indexed by search engines and may appear in search results',
     'fabianmichael.meta.search_engines.visibility.no' => 'This page is hidden from search results',
+
+    'fabianmichael.meta.panelArea.label' => 'Metadata',
+    'fabianmichael.meta.robots.forceNoIndex.button' => 'Indexing disabled!',
+    'fabianmichael.meta.robots.forceNoIndex.close' => 'Close',
+    'fabianmichael.meta.robots.forceNoIndex.infoText' => '
+        <h2 style="font-size: var(--text-font-size); line-height: var(--text-line-height);">Stealth mode</h2>
+        <p>
+            Indexing by search engines has been forcibly disabled via config.
+            Pages will always tell search engines to not index them via meta tag.
+            This mode is used to prevent search engines from indexing a site during
+            development or testing without changing actual settings via the panel.
+        </p>
+        <p>Change <code>fabianmichael.meta.robots.forceNoIndex</code> in the config to <code>false</code> to enable indexing again.</p>',
 ];

@@ -14,7 +14,7 @@ return [
         }
 
         if (empty($text) === false) {
-            return '<span data-theme="notice" class="k-meta-warning-box">' . $text . '</span>';
+            return '<span class="k-meta-warning-box">⚠️ ' . $text . '</span>';
         }
     },
     'indexedPages' => function () {

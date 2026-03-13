@@ -16,7 +16,8 @@ browsers and beyond.
 - 🦊 Easy-to-understand language in the panel, providing a good middle ground between simplicity and extensive control options.
 - 🧙‍♂️ Most features can be enabled/disabled in config, panel UI only shows enabled features (thanks to dynamic blueprints)
 - 🪝 Hooks for altering the plugin's behavior
-- 🌍 All blueprints are fully translatable (*English, German, French and Swedish translations are included*)
+- 🤖 Automatic `robots.txt` generation
+- 🌍 All blueprints are fully translatable (*English, German, French, Swedish and Dutch translations are included*)
 
 **Future plans:**
 
@@ -26,8 +27,8 @@ browsers and beyond.
 
 ## Requirements
 
-- PHP 8.0+
-- Kirby 3.6.0+
+- PHP 8.1+
+- Kirby 4.1.0+
 
 ## How it works
 
@@ -62,13 +63,8 @@ The options below have to be set in your `config.php`. Please note that every op
 |:----|:-----|:--------|:------------|
 | `sitemap` | `bool` | `true` | When `true`, will generate an XML sitemap for search engines. The sitemap includes all listed pages by default. ⚠️ If you disable the `robots` setting, no robots.txt will be served to tell search engines where your sitemap is located. |
 | `sitemap.detailSettings` | `bool` | `false` | When `true`, the `<changefreq>` and `<priority>` tags are included in the sitemap and their corresponding fields are displayed in the panel. |
-| `sitemap.pages.exclude` | `array` | `[]` | An array of page IDs to exlude from the sitemap. Values are treated as regular expressions, so they can include wildcards like e.g. `about/.*`. The error page is always excluded. |
-| `sitemap.pages.includeUnlisted` | `array` | `[]` | An array of page IDs to include in the sitemap, even if their status is `unlisted`. Values are treated as regular expressions, so they can include wildcards like e.g. `about/.*`. |
-| `sitemap.templates.exclude` | `array` | `[]` | An array of template names to exlude from the sitemap. Values are treated as regular expressions, so they can include wildcards like e.g. `article-(internal|secret)` |
-| `sitemap.templates.includeUnlisted` | `array` | `[]` | An array of templates to include in the sitemap, even if their status is `unlisted`. Values are treated as regular expressions. |
 | `schema` | `bool` | `true` | Generates [Schema.org](https://schema.org/) markup as [JSON-LD](https://json-ld.org/).
 | `social` | `bool` | `true` | Generates [OpenGraph](https://ogp.me/) markup.
-| `twitter` | `bool` | `true` | Generates [Twitter Cards](https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/abouts-cards) markup.  Only has an effect, if `social` is also enabled. Since `0.2.0-beta` (⚠️ deprecated).
 | `robots` | `bool` | `true` | Generates the `robots` metatag and serve [robots.txt](https://developers.google.com/search/docs/advanced/robots/intro) at `http(s)://yourdomain.com/robots.txt`.
 | `robots.canonical` | `bool` | `true` | Generates canonical url meta tag. Requires `robots` option to be `true`. |
 | `robots.index` | `bool` | `true` | Allows crawlers to index pages. Can be overriden in global or page-specific settings from the panel. Requires `robots` option to be `true` for having an effect. If a page is excluded from the sitemap or unlisted, the robots meta tag will always contain `noindex`. |
@@ -77,8 +73,8 @@ The options below have to be set in your `config.php`. Please note that every op
 | `robots.imageindex` | `bool` | `true` | Allows crawlers to include images to appear in search results. Can be overriden in global or page-specific settings from the panel. Requires `robots` option to be `true` for having an effect. |
 | `robots.snippet` | `bool` | `true` | Allows crawlers to generate snippets from page content. Can be overriden in global or page-specific settings from the panel. Requires `robots` option to be `true` for having an effect. |
 | `robots.translate` | `bool` | `true` | Allows crawlers offer automated translation of your content. Can be overriden in global or page-specific settings from the panel. Requires `robots` option to be `true` for having an effect. |
-| `robots.forceNoIndex` | `bool` | `false` | This will force-override all robots settings. You will still get a proper preview in the panel and everything will look like normal, but the robots meta tag will always have a content of none. This is useful for staging servers, where users want to edit content like normal, but you want to ensure that pages will not appear in search engines. |
-| `title.separators` | `array` | `["~" , "-" , "–" , "—" , ":" , "/", …]` | List of available separator options for the `<title>` tag. The separator can be selected in the panel and is placed between page title and site title. |
+| `robots.forceNoIndex` | `bool` | `false` | This will force-override all robots settings. You will still get a proper preview in the panel and everything will look like normal, but the robots meta tag will always have a content of none. This is useful for staging servers, where users want to edit content like normal, but you want to ensure that pages will not appear in search engines. The plugin will still generate a sitemap for debugging purposes. |
+| `title.separator` | `string` | `'|'` | Separator options for the `<title>` tag. |
 | `theme.color` | `string\|null` | `null` | If not empty, will generate a corresponding meta tag used by some browsers for coloring the UI. |
 | `panel.view.filter` | Provides a filter function for hiding certain pages from the metadata debug view in the panel. See the Kirby docs on [`$pages->filter()`](https://getkirby.com/docs/reference/objects/cms/pages/filter) for details. |
 
@@ -125,17 +121,46 @@ Now you are ready to add/edit metadata from the panel.
 
 ## Advanced usage
 
-### Providing metadata from page models
+### Default values from page models
 
-Sometimes, you want special behavior for certain templates. The easiest way to achieve this is by creating a page model and implementing a `$page->metadata()` method, that returns an array some or even all of the following keys:
+Sometimes, you want special behavior for certain templates. The easiest way to achieve this is by creating a page model and implementing a `$page->metaDefaults()` method, that returns an array some or even all of the following keys:
 
 | Key | Type | Description |
 |:----|:-----|:------------|
+| `robots.*` | `bool` | Override the default indexing status of a page. |
 | `meta_description` | `string` | Provide a default description that is used, when the user had not entered a dedicated description for this page. This could e.g. be a truncated version of the page's text content. |
 | `og_title_prefix` | `string` | Will be put in front of the page's OpenGraph title, e.g. `'ℹ️ '` or `'[Recipe ]` |
 | `og_image File` | `Kirby\Cms\File` | A `File` object, that sets the default OpenGraph image for this page. You can even generate custom images programatically and Wrap them in a `File` object, e.g. for the docs of your product (getkirby.com does this for the reference pages).
 | `@graph` | `array` | Things to add to the JSON-LD metadata in the page's head. If you need to reference the organization or person behind the website, use `url('/#owner')`. If you need to reference the website itself, use `url('/#website')`. |
 | `@social` | `array` | Extend the social meta tags generated by the plugin. |
+
+### Overrides from page models
+
+If you want to disable certain settings, you can implement a `$page->metaOverrides()` method for that. If you provide an override, this forces a certain behavior for a page. Currently, the following settings are supported:
+
+| Key | Type | Description |
+|:----|:-----|:------------|
+| `robots.index` | `bool` | Force the indexing status of a page and disable the corresponding setting for that page. |
+
+
+#### Example
+
+The following example will disable the user setting for indexing indexing in the metadata tab and will result in a `noindex` robots meta tag and also exclude the page from the sitemap.
+
+```php
+# site/models/legal.php
+
+class LegalPage extends Page {
+  public function metaOverrides(): array
+  {
+    return [
+      'robots.index' => false,
+    ];
+  }
+}
+
+
+```
 
 ### Using hooks
 
@@ -145,7 +170,7 @@ the meta plugin provides a set of handy hooks, allowing you to further add/remov
 
 #### `meta.load:after`
 
-After metadata has been loaded by calling the `$page->metadata()` method on a model. This allows you to inject additional data.
+After metadata has been loaded by calling the `$page->metaDefaults()` method on a model. This allows you to inject additional data.
 
 ```php
 return [
@@ -209,7 +234,7 @@ return [
 
 #### `meta.social:after`
 
-Allows you to alter the OpenGraph/Twitter card data.
+Allows you to alter the OpenGraph card data.
 
 ```php
 return [

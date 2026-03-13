@@ -18,11 +18,10 @@ App::plugin('fabianmichael/meta', [
 
         'schema' => true,
         'social' => true,
-        'twitter' => false,
 
         'robots' => true,
-        'robots.canonical' => true,
         'robots.index' => true,
+        'robots.canonical' => true,
         'robots.follow' => true,
         'robots.archive' => true,
         'robots.imageindex' => true,
@@ -30,7 +29,7 @@ App::plugin('fabianmichael/meta', [
         'robots.translate' => true,
         'robots.forceNoIndex' => false,
 
-        'title.separators' => ['~' , '-' , '–' , '—' , ':' , '/' , '⋆' , '·' , '•' , '~' , '×' , '*' , '‣', '→', '←', '<' , '>' , '«' , '»' , '‹' , '›', '♠︎', '♣︎', '♥︎', '♦︎', '☙', '❦', '❧', '☭'],
+        'title.separator' => '|',
         'theme.color' => null,
 
         'panel.view.filter' => null,
@@ -39,8 +38,8 @@ App::plugin('fabianmichael/meta', [
     'api' => require __DIR__ . '/config/api.php',
 
     'areas' => [
-        'meta' => [
-            'label' => 'Metadata',
+        'meta' => fn () => [
+            'label' => t('fabianmichael.meta.panelArea.label'),
             'icon'  => 'search',
             'menu'  => true,
             'views' => require __DIR__ . '/config/views.php',
@@ -54,13 +53,11 @@ App::plugin('fabianmichael/meta', [
         'fields/meta/global-robots-group'       => require __DIR__ . '/blueprints/fields/meta/global-robots-group.php',
         'fields/meta/global-schema-group'       => __DIR__ . '/blueprints/fields/meta/global-schema-group.yml',
         'fields/meta/global-sitemap-changefreq' => require __DIR__ . '/blueprints/fields/meta/global-sitemap-changefreq.php',
-        'fields/meta/global-twitter-group'      => __DIR__ . '/blueprints/fields/meta/global-twitter-group.yml', // deprecated
         'fields/meta/og-image'                  => __DIR__ . '/blueprints/fields/meta/og-image.yml',
         'fields/meta/opengraph-group'           => __DIR__ . '/blueprints/fields/meta/opengraph-group.yml',
         'fields/meta/robots-group'              => require __DIR__ . '/blueprints/fields/meta/robots-group.php',
         'fields/meta/sitemap-changefreq'        => require __DIR__ . '/blueprints/fields/meta/sitemap-changefreq.php',
         'fields/meta/sitemap-priority'          => __DIR__ . '/blueprints/fields/meta/sitemap-priority.yml',
-        'fields/meta/twitter-group'             => __DIR__ . '/blueprints/fields/meta/twitter-group.yml', // deprecated
         'files/meta-logo'                       => __DIR__ . '/blueprints/files/meta-logo.yml',
         'files/meta-og-image'                   => __DIR__ . '/blueprints/files/meta-og-image.yml',
         'sections/meta/files'                   => __DIR__ . '/blueprints/sections/files.yml',
@@ -95,5 +92,35 @@ App::plugin('fabianmichael/meta', [
         'en' => require __DIR__ . '/translations/en.php',
         'fr' => require __DIR__ . '/translations/fr.php',
         'sv_SE' => require __DIR__ . '/translations/sv_SE.php',
+        'nl' => require __DIR__ . '/translations/nl.php',
+    ],
+
+    'hooks' => [
+        'system.loadPlugins:after' => function() {
+            kirby()->extend([
+                'options' => [
+                    'panel.viewButtons.page' => [
+                        ...option('panel.viewButtons.page', ['preview', 'settings', 'languages', 'status']),
+                        'meta' => [
+                            'icon' => '{{ page.isIndexibleStatusIcon }}',
+                            'text' => '{{ page.isIndexibleStatusText }}',
+                            'theme' => '{{ page.isIndexibleTheme }}',
+                            'link'   => '{{ model.panel.url }}?tab=meta'
+                        ],
+                    ],
+                ],
+            ]);
+
+            if (option('fabianmichael.meta.robots.forceNoIndex') === true) {
+                kirby()->extend([
+                    'options' => [
+                        'panel.viewButtons.site' => [
+                            ...option('panel.viewButtons.site', ['open', 'preview', 'languages']),
+                            'force-noindex-info',
+                        ],
+                    ],
+                ]);
+            }
+        },
     ],
 ]);
