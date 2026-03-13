@@ -24,23 +24,23 @@ return [
         /** @var Page $this */
 
         return [
-            'meta_title' => null,
-            'meta_canonical_url' => null,
-            'meta_description' => null,
+            // 'meta_title' => null,
+            // 'meta_canonical_url' => null,
+            // 'meta_description' => null,
 
-            'sitemap_priority' => null,
-            'sitemap_changefreq' => null,
+            // 'sitemap_priority' => null,
+            // 'sitemap_changefreq' => null,
 
-            'robots_index' => null,
-            'robots_follow' => null,
-            'robots_archive' => null,
-            'robots_imageindex' => null,
-            'robots_snippet' => null,
-            'robots_translate' => null,
+            // 'robots_index' => null,
+            // 'robots_follow' => null,
+            // 'robots_archive' => null,
+            // 'robots_imageindex' => null,
+            // 'robots_snippet' => null,
+            // 'robots_translate' => null,
 
-            'og_title' => null,
-            'og_description' => null,
-            'og_image' => null,
+            // 'og_title' => null,
+            // 'og_description' => null,
+            // 'og_image' => null,
         ];
     },
 
