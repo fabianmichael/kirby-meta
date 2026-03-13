@@ -1,7 +1,7 @@
-<title><?= $meta->title()->html() ?></title>
+<title><?= html($meta->title()) ?></title>
 
-<?php if ($meta->description()->isNotEmpty()): ?>
-    <meta name="description" content="<?= $meta->description()->html() ?>">
+<?php if ($description = $meta->description()): ?>
+    <meta name="description" content="<?= html($description) ?>">
 <?php endif ?>
 
 <?php if ($themeColor = \FabianMichael\Meta\Helper::themeColor()): ?>
