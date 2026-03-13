@@ -34,17 +34,6 @@ class PageMeta
         // Get metadata from page, if possible
         $this->defaults = $this->page->metaDefaults($languageCode);
         $this->overrides = $this->page->metaOverrides($languageCode);
-
-        // Allow other plugins/config to alter metadata after load
-        $this->defaults = $this->kirby->apply(
-            'meta.load:after',
-            [
-                'metadata'     => $this->defaults,
-                'page'         => $this->page,
-                'languageCode' => $this->languageCode,
-            ],
-            'metadata'
-        );
     }
 
     /**
