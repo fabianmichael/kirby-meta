@@ -11,8 +11,23 @@ panel.plugin('fabianmichael/meta', {
     'k-meta-view': MetaView
   },
   fields: {
+    'meta-text': {
+      extends: 'k-text-field'
+    },
+    'meta-range': {
+      extends: 'k-range-field'
+    },
     'meta-robots-index-toggles': {
       extends: 'k-toggles-field'
+    },
+    'meta-select': {
+      extends: 'k-select-field'
+    },
+    'meta-url': {
+      extends: 'k-url-field'
+    },
+    'meta-files': {
+      extends: 'k-files-field'
     }
   },
   sections: {

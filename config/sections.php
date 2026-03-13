@@ -1,6 +1,8 @@
 <?php
 
 use FabianMichael\Meta\SiteMeta;
+use Kirby\Cms\File;
+use Kirby\Content\Field;
 
 return [
     'meta-share-preview' => [
@@ -35,6 +37,21 @@ return [
                 $site = $this->model()->site();
 
                 return $site->og_site_name()->or($site->title())->value();
+            },
+            'og_image_override' => function (): ?array {
+                if (!$this->model()->meta()->hasOverride('og_image')) {
+                    return null;
+                }
+
+                $image = $this->model()->meta()->override('og_image');
+
+                if ($image instanceof Field) {
+                    $image = $image->toFile();
+                }
+
+                if ($image instanceof File) {
+                    return $image->crop(1200, 630)->toArray();
+                }
             },
             'site_og_image' => function (): ?array {
                 $image = $this->model()

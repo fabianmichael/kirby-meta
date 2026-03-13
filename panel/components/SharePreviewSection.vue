@@ -6,6 +6,7 @@
     </div>
     <div class="k-meta-sharing-preview__box">
       <div
+        v-if="og_image"
         class="k-meta-sharing-preview__image-container"
         :data-image-missing="!og_image"
         :data-image-missing-text="$t('fabianmichael.meta.og_image.missing')"
@@ -60,6 +61,7 @@ export default {
       url: null,
       og_title_prefix: null,
 
+      og_image_override: null,
       og_image: null,
       og_image_source: null,
     };
@@ -79,6 +81,7 @@ export default {
     this.site_title = response.site_title;
     this.title_separator = response.title_separator;
     this.og_title_prefix = response.og_title_prefix;
+    this.og_image_override = response.og_image_override;
     this.url = response.url;
 
     this.updateOgImage();
@@ -114,7 +117,10 @@ export default {
       return this.$api.get(this.parent + "/sections/" + this.name);
     },
     updateOgImage() {
-      if (this.store_image.length > 0) {
+      if (this.og_image_override !== null) {
+        this.og_image = this.og_image_override.url;
+        this.og_image_source = this.$t("fabianmichael.meta.source.override");
+      } else if (this.store_image.length > 0) {
         this.$api.files
           .get(
             this.parent,
@@ -128,7 +134,7 @@ export default {
         this.og_image = this.metadata_og_image.url;
         this.og_image_source = this.$t("fabianmichael.meta.source.metadata");
       } else if (this.site_og_image !== null) {
-        this.og_image = this.site_og_image.url
+        this.og_image = this.site_og_image.url;
         this.og_image_source = this.$t("fabianmichael.meta.source.site");
       } else {
         this.og_image = null;
@@ -202,7 +208,7 @@ export default {
 }
 
 .k-meta-sharing-preview__content-container {
-  padding: var(--spacing-2) var(--spacing-3) var(--spacing-3);
+  padding: var(--spacing-2) var(--spacing-3);
 }
 
 .k-meta-sharing-preview__site-name {

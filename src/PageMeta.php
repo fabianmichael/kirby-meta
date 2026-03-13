@@ -47,35 +47,77 @@ class PageMeta
         );
     }
 
+    /**
+     * Get the canonical URL for this pageto be used in the canonical link tag.
+     *
+     * @return string The canonical URL.
+     */
     public function canonicalUrl(): string
     {
-        return $this->meta_canonical_url()
-            ->or($this->default('canonical_url'))
-            ->or($this->page->url())
-            ->toString();
+        return $this->get('meta_canonical_url',
+            defaultFallback: true,
+            siteFallback: false,
+            configFallback: false,
+            respectOverrides: true,
+            fallback: $this->page->url()
+        )->toString() ?: $this->page->url();
     }
 
+    /**
+     * Get the changefreq for this page to be used in the XML sitemap.
+     *
+     * @return ?string The changefreq.
+     */
     public function changefreq(): ?string
     {
-        $changefreq = $this->get('sitemap_changefreq', true, true, false);
-
-        return $changefreq->isNotEmpty()
-            ? $changefreq->toString()
-            : null;
+        return $this->get('sitemap_changefreq',
+                defaultFallback: true,
+                siteFallback: true,
+                configFallback: false,
+                respectOverrides: true,
+                fallback: null
+            )->or(null)->value();
     }
 
+    /**
+     * Get the meta description as Field object for this page.
+     *
+     * @return Field The meta description field.
+     */
     public function description(): Field
-    {
-        return $this->get('meta_description', true, true, false);
+    {        return $this->get('meta_description',
+            defaultFallback: true,
+            siteFallback: true,
+            configFallback: false,
+            respectOverrides: true,
+            fallback: null
+        );
     }
 
+    /**
+     * Get a meta value for this page.
+     *
+     * @param string $key The key of the meta value.
+     * @param bool $defaultFallback Whether to use the default fallback value.
+     * @param bool $siteFallback Whether to use the site fallback value.
+     * @param bool $configFallback Whether to use the config fallback value.
+     * @param bool $respectOverrides Whether to respect overrides.
+     * @param mixed $fallback The fallback value.
+     * @return Field The meta value.
+     */
     public function get(
         string $key,
         bool $defaultFallback = true,
         bool $siteFallback = false,
         bool $configFallback = false,
+        bool $respectOverrides = true,
         mixed $fallback = null
     ): Field {
+        // Overrides always take precedence
+        if ($respectOverrides === true && $this->hasOverride($key)) {
+            return new Field($this->page, $key, $this->override($key));
+        }
+
         // From content file ...
         $field = $this->page->content($this->languageCode)->get($key);
 
@@ -98,10 +140,10 @@ class PageMeta
 
         // From site as fallback ...
         if ($siteFallback === true) {
-            $value = $this->page->site()->content($this->languageCode)->get($key);
+            $field = $this->page->site()->content($this->languageCode)->get($key);
 
-            if ($value->isNotEmpty()) {
-                return $value;
+            if ($field->isNotEmpty()) {
+                return $field;
             }
         }
 
@@ -234,9 +276,9 @@ class PageMeta
         return A::get($this->overrides, $key, $falllback);
     }
 
-    public function hasOverride(string $key, mixed $fallback = null): mixed
+    public function hasOverride(string $key): bool
     {
-        return A::get($this->overrides, $key, $fallback) !== $fallback;
+        return array_key_exists($key, $this->overrides) === true;
     }
 
     public static function of(Page $page, ?string $languageCode = null): static
@@ -244,6 +286,11 @@ class PageMeta
         return new static($page, $languageCode);
     }
 
+    /**
+     * Get the priority for this page to be used in the XML sitemap.
+     *
+     * @return ?float The priority.
+     */
     public function priority(): ?float
     {
         $priority = $this->get('sitemap_priority', true, true, false, 0.5)->toFloat();
@@ -251,6 +298,14 @@ class PageMeta
         return (float) max(0, min(1, $priority)); // 0 <= value <= 1
     }
 
+    /**
+     * Get the robots value for this page. If the `$name` parameter is provided,
+     * the value will be returned as boolean. If no `$name` parameter is provided,
+     * the computed value for the meta tag will be returnedas string.
+     *
+     * @param ?string $name The name of the robots value.
+     * @return bool|string The robots value.
+     */
     public function robots(?string $name = null): bool|string
     {
         if (is_string($name)) {
@@ -263,10 +318,8 @@ class PageMeta
 
             // load from overrrides
             if ($name === 'index') {
-                $override = $this->override("robots.{$name}");
-
-                if (! is_null($override)) {
-                    return $override;
+                if ($this->hasOverride("robots_{$name}")) {
+                    return (bool)$this->override("robots_{$name}");
                 }
             }
 
@@ -278,15 +331,10 @@ class PageMeta
             }
 
             // load from model
-            $default = $this->default("robots.{$name}");
+            $default = $this->default("robots_{$name}");
 
             if (!is_null($default)) {
                 return $default;
-            }
-
-            // fall back to page status
-            if ($name === 'index' && $this->page->isUnlisted()) {
-                return false;
             }
 
             return SiteMeta::robots($name);
@@ -313,6 +361,11 @@ class PageMeta
         }
     }
 
+    /**
+     * Get the social metadata for this page for the OpenGraph protocol.
+     *
+     * @return array The social metadata.
+     */
     public function social(): array
     {
         $social = [];
@@ -337,8 +390,7 @@ class PageMeta
 
         $social[] = [
             'property' => 'og:url',
-            'content'  => $this->get('og_url', true)
-                ->or($this->canonicalUrl())->toString(),
+            'content' => $this->canonicalUrl(),
         ];
 
         $social[] = [
@@ -416,10 +468,19 @@ class PageMeta
         return $social;
     }
 
+    /**
+     * Get the title for this page to be used in the title tag.
+     *
+     * @return Field The title field.
+     */
     public function title(): Field
     {
         $title = [];
         $siteTitle = $this->page->site()->title();
+
+        if ($this->hasOverride('meta_title')) {
+            return new Field($this->page, 'title', $this->override('meta_title'));
+        }
 
         if ($this->page->isHomePage() === true) {
             $title[] = $this->page->content($this->languageCode)->get('meta_title')
@@ -439,14 +500,24 @@ class PageMeta
     {
         return $this
             ->get('og_description', true, false)
-            ->or($this->get('meta_description', true, true));
+            ->or($this->gdescription());
     }
 
     public function og_image(bool $fallback = true): ?File
     {
+        if ($this->hasOverride('og_image')) {
+            $image = $this->override('og_image');
+
+            if ($image instanceof File) {
+                return $image;
+            } elseif ($image instanceof Field) {
+                return $image->toFile();
+            }
+        }
+
         // Overrule auto-generated image if custom one is set:
         // In content file ...
-        if ($image = $this->get('og_image', false)->toFile()) {
+        if ($image = $this->get('og_image', defaultFallback: false, respectOverrides: false)->toFile()) {
             return $image;
         }
 
@@ -469,22 +540,25 @@ class PageMeta
 
     public function og_title(): Field
     {
-        $site = $this->page->site();
         $titlePrefix = $this->get(key: 'og_title_prefix', fallback: '');
         $title = $this->get('og_title')->or($this->title());
 
         return new Field($this->page, 'og_title', $titlePrefix . $title);
     }
 
-    public function panelTitleAfter(): string {
+    public function panelTitleAfter(): ?string {
+        if ($this->hasOverride('meta_title')) {
+            return null;
+        }
+
         if (!$this->page->isHomePage()) {
             return option('fabianmichael.meta.title.separator') . ' ' . $this->page->kirby()->site()->title();
         }
 
-        return '';
+        return null;
     }
 
-    public function panelTitlePlaceholder(): string
+    public function panelTitlePlaceholder(): ?string
     {
         if ($this->page->isHomePage()) {
             return $this->page->content($this->languageCode)->get('meta_title')

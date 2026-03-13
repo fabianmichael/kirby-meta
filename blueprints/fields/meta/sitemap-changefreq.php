@@ -14,7 +14,7 @@ return function (Kirby $kirby) {
     ]);
 
     return [
-        'type' => 'select',
+        'type' => 'meta-select',
         'label' => t('fabianmichael.meta.sitemap.changefreq.label'),
         'placeholder' => $placeholder,
         'translate' => false,

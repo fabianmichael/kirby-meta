@@ -11,7 +11,6 @@ return [
     'fabianmichael.meta.title.help' => 'Sidans titel som den ska visas i sökmotorer. Kommer att använda Kirbys sidtitel som standard när detta fält är tomt.',
     'fabianmichael.meta.title_separator.label' => 'Titelseparator',
     'fabianmichael.meta.title_separator.help' => 'Separator som ska visas mellan sid- och webbplatsens titel.',
-    'fabianmichael.meta.has-override.help' => 'Denna inställning har satts programmatiskt och kan inte redigeras för denna sida.',
 
     'fabianmichael.meta.robots.headline' => 'Sökmotorer',
     'fabianmichael.meta.robots.help' => 'Detaljerade instruktioner om hur sökmotorer ska hantera denna sida.',
@@ -26,6 +25,8 @@ return [
     'fabianmichael.meta.robots_imageindex.help' => 'Sökmotorer kommer att associera denna sida med bildsökresultat.',
     'fabianmichael.meta.robots_snippet.label' => 'Snippets',
     'fabianmichael.meta.robots_snippet.help' => 'Sökmotorer kommer att visa beskrivning för denna sida.',
+    'fabianmichael.meta.robots_translate.label' => 'Översätt',
+    'fabianmichael.meta.robots_translate.help' => 'Sökmotorer får översätta denna sida.',
 
     'fabianmichael.meta.global_robots.headline' => 'Inställningar för sökmotorer',
     'fabianmichael.meta.global_robots.help' => 'Detaljerade instruktioner om hur sökmotorer ska hantera sidor på denna webbplats som standard. Sidor kan ha sina individuella inställningar som åsidosätter dessa standarder.',
@@ -39,6 +40,8 @@ return [
     'fabianmichael.meta.global_robots_imageindex.help' => 'Sökmotorer kommer att associera sidor med bildsökresultat.',
     'fabianmichael.meta.global_robots_snippet.label' => 'Snippets',
     'fabianmichael.meta.global_robots_snippet.help' => 'Sökmotorer kommer att visa beskrivningar för sidor.',
+    'fabianmichael.meta.global_robots_translate.label' => 'Översätt',
+    'fabianmichael.meta.global_robots_translate.help' => 'Sökmotorer får översätta sidor på denna webbplats.',
 
     'fabianmichael.meta.description.label' => 'Beskrivning',
     'fabianmichael.meta.description.help' => 'En kort beskrivning av sidan som kommer att visas under sidtiteln av sökmotorer.',
@@ -57,7 +60,7 @@ return [
     'fabianmichael.meta.global_og_image.label' => 'Standard delningsbild',
     'fabianmichael.meta.global_og_image.help' => 'En bild som ska representera dina delade länkar på sociala medier och appar. Kommer att beskäras automatiskt. Denna globala bild används som fallback för sidor som inte har en dedikerad bild.<br><br>**Rekommenderad storlek:** 1200&thinsp;&times;&thinsp;630&nbsp;px<br>**Format:** JPEG, PNG, GIF, WebP, AVIF',
     'fabianmichael.meta.og_image.label' => 'Delbild',
-    'fabianmichael.meta.og_image.help' => 'En bild som ska representera dina delade länkar på sociala medier och appar. Kommer att beskäras automatiskt. Kommer att använda den globalt definierade fallbackbilden som fallback.<br><br>**Rekommenderad storlek:** 1200&thinsp;&times;&thinsp;630&nbsp;px<br>**Format:** JPEG, PNG, GIF, WebP, AVIF {< site.metaPanelWarning("no_og_image_fallback") >}',
+    'fabianmichael.meta.og_image.help' => 'En bild som ska representera dina delade länkar på sociala medier och appar. Kommer att beskäras automatiskt. Kommer att använda den globalt definierade fallbackbilden som fallback.<br><br>**Rekommenderad storlek:** 1200&thinsp;&times;&thinsp;630&nbsp;px<br>**Format:** JPEG, PNG, GIF, WebP, AVIF {< site.metaPanelOgImageWarning("no_og_image_fallback") >}',
     'fabianmichael.meta.og_title.label' => 'Del-titel (överstyrning)',
     'fabianmichael.meta.og_title.help' => 'Titeln på din sida som den ska visas vid delning. Kommer att använda **Titel (överstyrning)** och sidtitel som fallback.',
     'fabianmichael.meta.og_description.label' => 'Del-beskrivning',
@@ -85,6 +88,7 @@ return [
     'fabianmichael.meta.schema.person_privacy_notice.text' => 'Genom att välja en användare kommer du att exponera personlig information som e-postadress och profilbild för sökmotorer, andra webbskrapor och alla som läser källkoden till din webbplats.',
     'fabianmichael.meta.sharing_preview.headline' => 'Delningsförhandsvisning',
     'fabianmichael.meta.description_missing' => '[Delbeskrivning och fallback-beskrivning saknas]',
+    'fabianmichael.meta.source.override' => 'Källa: Programmatiskt överstyr',
     'fabianmichael.meta.source.og_image' => 'Källa: Delbild',
     'fabianmichael.meta.source.metadata' => 'Källa: Sidminiatyr',
     'fabianmichael.meta.source.site' => 'Källa: Fallback-miniatyr',
@@ -118,4 +122,6 @@ return [
             Detta läge används för att förhindra sökmotorer från att indexera en webbplats under utveckling eller test, utan att ändra de faktiska inställningarna via panelen.
         </p>
         <p>Ändra <code>fabianmichael.meta.stealthMode</code> i konfigurationen till <code>false</code> för att aktivera indexering igen.</p>',
+
+    'fabianmichael.meta.override.help' => 'Denna inställning har satts programmatiskt och kan inte redigeras för denna sida.',
 ];

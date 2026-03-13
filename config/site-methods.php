@@ -2,7 +2,7 @@
 
 
 return [
-    'metaPanelWarning' => function (string $type) {
+    'metaPanelOgImageWarning' => function (string $type) {
         $text = '';
 
         if ($type === 'no_og_image_fallback') {
@@ -14,7 +14,7 @@ return [
         }
 
         if (empty($text) === false) {
-            return '<span class="k-meta-warning-box">⚠️ ' . $text . '</span>';
+            return '<span class="k-meta-warning-box"><svg class="k-icon" aria-hidden="true" data-type="alert" style="display: inline-block; --icon-size: 1em; vertical-align: -.12em;"><use xlink:href="#icon-alert"/></svg> ' . $text . '</span>';
         }
     },
     'indexedPages' => function () {

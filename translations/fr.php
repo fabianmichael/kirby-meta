@@ -11,7 +11,6 @@ return [
     'fabianmichael.meta.title.help'                 => 'Le titre de la page tel qu\'il sera affiché pour les moteurs de recherche. Il sera remplacé par le titre de la page si ce champ reste vide.',
     'fabianmichael.meta.title_separator.label'      => 'Séparateur du titre',
     'fabianmichael.meta.title_separator.help'       => 'La séparateur s\'affiche entre le titre de la page et du site.',
-    'fabianmichael.meta.has-override.help'          => 'Ce paramètre a été défini par programme et ne peut pas être modifié pour cette page.',
 
     'fabianmichael.meta.robots.headline'            => 'Moteurs de recherche',
     'fabianmichael.meta.robots.help'                => 'Informations détaillées sur comment les moteurs de recherche traitent cette page.',
@@ -26,6 +25,8 @@ return [
     'fabianmichael.meta.robots_imageindex.help'     => 'Les moteurs de recherche pourront associer cette page à des résultate de recherche d\'images.',
     'fabianmichael.meta.robots_snippet.label'       => 'Aperçus',
     'fabianmichael.meta.robots_snippet.help'        => 'Les moteurs de recherche pourront afficher un aperçu de la page parmi les résultats de recherche.',
+    'fabianmichael.meta.robots_translate.label'     => 'Traduire',
+    'fabianmichael.meta.robots_translate.help'      => 'Les moteurs de recherche sont autorisés à traduire cette page.',
 
     'fabianmichael.meta.global_robots.headline'         => 'Paramètres des moteurs de recherche',
     'fabianmichael.meta.global_robots.help'             => 'Des informations détaillées sur comment les moteurs de recherche doivent traiter les pages de ce site. Les pages peuvent avoir leurs propres paramètres pour remplacer ceux-ci.',
@@ -39,6 +40,8 @@ return [
     'fabianmichael.meta.global_robots_imageindex.help'  => 'Les moteurs de recherche pourront associer cette page à des résultate de recherche d\'images.',
     'fabianmichael.meta.global_robots_snippet.label'    => 'Aperçus',
     'fabianmichael.meta.global_robots_snippet.help'     => 'Les moteurs de recherche pourront afficher un aperçu de la page parmi les résultats de recherche.',
+    'fabianmichael.meta.global_robots_translate.label' => 'Traduire',
+    'fabianmichael.meta.global_robots_translate.help' => 'Les moteurs de recherche sont autorisés à traduire cette page.',
 
     'fabianmichael.meta.description.label'          => 'Description',
     'fabianmichael.meta.description.help'           => 'Une brève description de la page qui sera affichée juste en dessous du titre de la page par les moteurs de recherche.',
@@ -57,7 +60,7 @@ return [
     'fabianmichael.meta.global_og_image.label'      => 'L\'image partagée par défaut (globale)',
     'fabianmichael.meta.global_og_image.help'       => 'Une image qui illustre vos pages sur les médias sociaux quand un lien est partagé. Elle sera automatiquement recadrée pour respecter les standards. Cette image est utilisée pour tout contenu n\'ayant pas d\'image dédiée.<br><br>**Dimensions recommandées:** 1200&thinsp;&times;&thinsp;630&nbsp;px<br>**Formats:** JPEG, PNG, GIF, WebP, AVIF',
     'fabianmichael.meta.og_image.label'             => 'Image pour les partages',
-    'fabianmichael.meta.og_image.help'              => 'Une image qui illustre vos pages sur les médias sociaux quand un lien est partagé. Elle sera automatiquement recadrée pour respecter les standards. Si vide, l\'image par défaut sera utilisée.<br><br>**Dimensions recommandées:** 1200&thinsp;&times;&thinsp;630&nbsp;px<br>**Formats:** JPEG, PNG, GIF, WebP, AVIF {< site.metaPanelWarning("no_og_image_fallback") >}',
+    'fabianmichael.meta.og_image.help'              => 'Une image qui illustre vos pages sur les médias sociaux quand un lien est partagé. Elle sera automatiquement recadrée pour respecter les standards. Si vide, l\'image par défaut sera utilisée.<br><br>**Dimensions recommandées:** 1200&thinsp;&times;&thinsp;630&nbsp;px<br>**Formats:** JPEG, PNG, GIF, WebP, AVIF {< site.metaPanelOgImageWarning("no_og_image_fallback") >}',
     'fabianmichael.meta.og_title.label'             => 'Titre pour les partages',
     'fabianmichael.meta.og_title.help'              => 'Le titre de votre page telle qu\'elle devra apparaitre quand elle est partagée. Si vide, **Titre (Forcé)** ou le titre de la page sera utilisé.',
     'fabianmichael.meta.og_description.label'       => 'Description pour les partages',
@@ -85,6 +88,7 @@ return [
     'fabianmichael.meta.schema.person_privacy_notice.text'  => 'En sélectionnant un utilisateur, vous exposez certaines données personnelles telles que son adresse email et son image de profil aux moteurs de recherche, aux autres robots et à toute personne consultant le code source du site internet.',
     'fabianmichael.meta.sharing_preview.headline'           => 'Aperçu des données partagées',
     'fabianmichael.meta.description_missing'                => '[Aucune description, ni de description de repli]',
+    'fabianmichael.meta.source.override'                    => 'Source: Programmatiquement surchargé',
     'fabianmichael.meta.source.og_image'                    => 'Source: Image pour les partages',
     'fabianmichael.meta.source.metadata'                    => 'Source: Image de la page',
     'fabianmichael.meta.source.site'                        => 'Source: Image globale du site',
@@ -118,4 +122,6 @@ return [
             Ce mode est utilisé pour empêcher les moteurs de recherche d\'indexer un site pendant la phase de développement ou de test, sans modifier les paramètres réels via le panneau.
         </p>
         <p>Modifiez <code>fabianmichael.meta.stealthMode</code> dans la configuration pour <code>false</code> pour activer l\'indexation à nouveau.</p>',
+
+    'fabianmichael.meta.override.help' => 'Ce paramètre a été défini par programme et ne peut pas être modifié pour cette page.',
 ];

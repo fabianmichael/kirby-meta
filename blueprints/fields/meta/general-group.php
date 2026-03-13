@@ -13,13 +13,13 @@ return function (Kirby $kirby) {
             'numbered' => false,
         ],
         'meta_description' => [
-            'type'        => 'text',
+            'type'        => 'meta-text',
             'label'       => t('fabianmichael.meta.description.label'),
-            'placeholder' => '{{ page.meta.get("meta_description", true, true) }}',
+            'placeholder' => 'asdasd{{ page.meta.get("meta_description", true, true) }}',
             'help'        => t('fabianmichael.meta.description.help'),
         ],
         'meta_title' => [
-            'type'        => 'text',
+            'type'        => 'meta-text',
             'label'       => t('fabianmichael.meta.title.label'),
             'placeholder' => '{{ page.meta.panelTitlePlaceholder }}',
             'after'       => '{{ page.meta.panelTitleAfter }}',
@@ -31,7 +31,7 @@ return function (Kirby $kirby) {
 
     if ($kirby->option('fabianmichael.meta.robots') !== false && $kirby->option('fabianmichael.meta.robots.canonical') !== false) {
         $fields['meta_canonical_url'] = [
-            'type' => 'url',
+            'type' => 'meta-url',
             'label' => t('fabianmichael.meta.canonical_url.label'),
             'placeholder' => '{{ page.url }}',
             'help' => t('fabianmichael.meta.canonical_url.help'),

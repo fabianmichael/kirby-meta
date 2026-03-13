@@ -11,7 +11,6 @@ return [
     'fabianmichael.meta.title.help' => 'De paginatitel zoals deze moet worden weergegeven in zoekmachines. Standaard wordt de Kirby-paginatitel gebruikt als dit veld leeg is.',
     'fabianmichael.meta.title_separator.label' => 'Titel scheidingsteken',
     'fabianmichael.meta.title_separator.help' => 'Scheidingsteken dat moet worden weergegeven tussen pagina- en sitetitel.',
-    'fabianmichael.meta.has-override.help' => 'Deze instelling is programmatisch ingesteld en kan niet worden bewerkt voor deze pagina.',
 
     'fabianmichael.meta.robots.headline' => 'Zoekmachines',
     'fabianmichael.meta.robots.help' => 'Gedetailleerde instructies voor hoe zoekmachines met deze pagina moeten omgaan.',
@@ -26,6 +25,8 @@ return [
     'fabianmichael.meta.robots_imageindex.help' => 'Zoekmachines zullen deze pagina associëren met zoekresultaten voor afbeeldingen.',
     'fabianmichael.meta.robots_snippet.label' => 'Fragmenten',
     'fabianmichael.meta.robots_snippet.help' => 'Zoekmachines tonen beschrijving fragmenten voor deze pagina.',
+    'fabianmichael.meta.robots_translate.label' => 'Vertaal',
+    'fabianmichael.meta.robots_translate.help' => 'Zoekmachines mogen deze pagina vertalen.',
 
     'fabianmichael.meta.global_robots.headline' => 'Zoekmachine-instellingen',
     'fabianmichael.meta.global_robots.help' => 'Gedetailleerde instructies voor hoe zoekmachines standaard met pagina\'s van deze site moeten omgaan. Pagina\'s kunnen hun individuele instellingen hebben om deze standaardinstellingen te overschrijven.',
@@ -39,6 +40,8 @@ return [
     'fabianmichael.meta.global_robots_imageindex.help' => 'Zoekmachines zullen pagina\'s associëren met zoekresultaten voor afbeeldingen.',
     'fabianmichael.meta.global_robots_snippet.label' => 'Fragmenten',
     'fabianmichael.meta.global_robots_snippet.help' => 'Zoekmachines geven beschrijving fragmenten voor pagina\'s weer.',
+    'fabianmichael.meta.global_robots_translate.label' => 'Vertaal',
+    'fabianmichael.meta.global_robots_translate.help' => 'Zoekmachines mogen pagina\'s op deze site vertalen.',
 
     'fabianmichael.meta.description.label' => 'Beschrijving',
     'fabianmichael.meta.description.help' => 'Een korte beschrijving van de pagina die door zoekmachines onder de paginatitel wordt weergegeven.',
@@ -57,7 +60,7 @@ return [
     'fabianmichael.meta.global_og_image.label' => 'Standaard afbeelding delen',
     'fabianmichael.meta.global_og_image.help' => 'Een afbeelding die je gedeelde links binnen sociale mediawebsites en -apps moet vertegenwoordigen. Wordt automatisch bijgesneden. Deze algemene afbeelding wordt gebruikt als reserve voor pagina\'s die geen speciale afbeelding hebben.<br><br>**Aanbevolen grootte:** 1200&thinsp;&times;&thinsp;630&nbsp;px<br>**Formaten:** JPEG, PNG, GIF, WebP, AVIF',
     'fabianmichael.meta.og_image.label' => 'Afbeelding delen',
-    'fabianmichael.meta.og_image.help' => 'Een afbeelding die uw gedeelde links binnen sociale mediawebsites en -apps moet vertegenwoordigen. Wordt automatisch bijgesneden. Zal de globaal gedefinieerde fallback-afbeelding als fallback gebruiken.<br><br>**Aanbevolen grootte:** 1200&thinsp;&times;&thinsp;630&nbsp;px<br>**Formaten:** JPEG, PNG, GIF, WebP, AVIF {< site.metaPanelWarning("no_og_image_fallback") >}',
+    'fabianmichael.meta.og_image.help' => 'Een afbeelding die uw gedeelde links binnen sociale mediawebsites en -apps moet vertegenwoordigen. Wordt automatisch bijgesneden. Zal de globaal gedefinieerde fallback-afbeelding als fallback gebruiken.<br><br>**Aanbevolen grootte:** 1200&thinsp;&times;&thinsp;630&nbsp;px<br>**Formaten:** JPEG, PNG, GIF, WebP, AVIF {< site.metaPanelOgImageWarning("no_og_image_fallback") >}',
     'fabianmichael.meta.og_title.label' => 'Titel delen (overschrijven)',
     'fabianmichael.meta.og_title.help' => 'De titel van uw pagina zoals deze zou moeten verschijnen wanneer deze wordt gedeeld. Zal **Titel (overschrijven)** en paginatitel gebruiken als reserve.',
     'fabianmichael.meta.og_description.label' => 'Deel beschrijving',
@@ -85,6 +88,7 @@ return [
     'fabianmichael.meta.schema.person_privacy_notice.text' => 'Door een gebruiker te selecteren, maakt u persoonlijke informatie, zoals het e-mailadres en de profielafbeelding, openbaar aan zoekmachines, andere crawlers en iedereen die de broncode van uw website leest.' ,
     'fabianmichael.meta.sharing_preview.headline' => 'Deel voorbeeld',
     'fabianmichael.meta.description_missing' => '[Deelbeschrijving en reservebeschrijving ontbreekt]',
+    'fabianmichael.meta.source.override' => 'Bron: Programmatisch overschreden',
     'fabianmichael.meta.source.og_image' => 'Bron: deel afbeelding',
     'fabianmichael.meta.source.metadata' => 'Bron: Paginaminiatuur',
     'fabianmichael.meta.source.site' => 'Bron: Terugvalminiatuur',
@@ -118,4 +122,6 @@ return [
             Deze modus wordt gebruikt om zoekmachines te voorkomen om een website te indexeren tijdens ontwikkeling of test, zonder de echte instellingen via het paneel te wijzigen.
         </p>
         <p>Verander <code>fabianmichael.meta.stealthMode</code> in de configuratie naar <code>false</code> om indexering opnieuw in te schakelen.</p>',
+
+    'fabianmichael.meta.override.help' => 'Deze instelling is programmatisch ingesteld en kan niet worden bewerkt voor deze pagina.',
 ];

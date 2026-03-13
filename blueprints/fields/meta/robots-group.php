@@ -2,8 +2,8 @@
 
 use Kirby\Cms\App;
 
-return function (Kirby $kirby): array {
 return function (App $kirby): array {
+    $getOptions = function (string $name) use ($kirby): array {
         $globalValue = $kirby
             ->site()
             ->content()
@@ -14,6 +14,8 @@ return function (App $kirby): array {
         $configDefaultLabel = tt('fabianmichael.meta.global_default_value.label', [
             'state' => ($globalValue === true ? t('fabianmichael.meta.state.on') : t('fabianmichael.meta.state.off')),
         ]);
+
+        $configDefaultLabel = $globalValue === true ? 'on' : 'off';
 
         return [
             'options' => [
@@ -32,7 +34,7 @@ return function (App $kirby): array {
                     'icon' => 'cancel',
                 ],
             ],
-            'type' => 'toggles',
+            'type' => 'meta-robots-index-toggles',
             'reset' => false,
             'translate' => false,
             'width' => '1/2',
@@ -70,6 +72,7 @@ return function (App $kirby): array {
                 ],
                 'help' => t('fabianmichael.meta.robots_index.help'),
                 'translate' => false,
+                'width' => '1/2',
             ],
             'robots_follow' => array_merge([
                 'label' => t('fabianmichael.meta.robots_follow.label'),
@@ -87,6 +90,10 @@ return function (App $kirby): array {
                 'label' => t('fabianmichael.meta.robots_snippet.label'),
                 'help' => t('fabianmichael.meta.robots_snippet.help'),
             ], $getOptions('robots_snippet')),
+            'robots_translate' => array_merge([
+                'label' => t('fabianmichael.meta.robots_translate.label'),
+                'help' => t('fabianmichael.meta.robots_translate.help'),
+            ], $getOptions('robots_translate')),
         ],
     ];
 };

@@ -63,6 +63,10 @@ return function (Kirby $kirby): array {
                 'label' => t('fabianmichael.meta.global_robots_snippet.label'),
                 'help' => t('fabianmichael.meta.global_robots_snippet.help'),
             ], $getOptions('robots_snippet')),
+            'robots_translate' => array_merge([
+                'label' => t('fabianmichael.meta.global_robots_translate.label'),
+                'help' => t('fabianmichael.meta.global_robots_translate.help'),
+            ], $getOptions('robots_translate')),
         ],
     ];
 };

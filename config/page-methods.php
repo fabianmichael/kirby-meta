@@ -23,7 +23,25 @@ return [
     'metaDefaults' => function(?string $lang = null): array {
         /** @var Page $this */
 
-        return [];
+        return [
+            'meta_title' => null,
+            'meta_canonical_url' => null,
+            'meta_description' => null,
+
+            'sitemap_priority' => null,
+            'sitemap_changefreq' => null,
+
+            'robots_index' => null,
+            'robots_follow' => null,
+            'robots_archive' => null,
+            'robots_imageindex' => null,
+            'robots_snippet' => null,
+            'robots_translate' => null,
+
+            'og_title' => null,
+            'og_description' => null,
+            'og_image' => null,
+        ];
     },
 
     /**
@@ -37,7 +55,7 @@ return [
         /** @var Page $this */
 
         return [
-            // 'robots.index' => false
+            // insert overrides here when overriding this method
         ];
     },
 
@@ -85,6 +103,6 @@ return [
     'isIndexibleTheme' => function (): string {
         /** @var Page $this */
 
-        return r($this->isIndexible(), 'info-icon', 'warning-icon');
+        return r($this->isIndexible(), 'positive-icon', 'empty');
     },
 ];

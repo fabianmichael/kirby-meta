@@ -1,4 +1,4 @@
-type: files
+type: meta-files
 label: fabianmichael.meta.og_image.label
 multiple: false
 empty: fabianmichael.meta.image.empty

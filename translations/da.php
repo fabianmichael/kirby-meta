@@ -11,7 +11,6 @@ return [
     'fabianmichael.meta.title.help' => 'Sidens titel som den skal vises på søgemaskiner. Hvis dette felt er tomt, vil Kirby sidens titel blive brugt som standard.',
     'fabianmichael.meta.title_separator.label' => 'Titel Separator',
     'fabianmichael.meta.title_separator.help' => 'Separator der vises mellem side og webstedets titel.',
-    'fabianmichael.meta.has-override.help' => 'Denne indstilling er sat programmatisk og kan ikke ændres for denne side.',
 
     'fabianmichael.meta.robots.headline' => 'Søgemaskiner',
     'fabianmichael.meta.robots.help' => 'Detaljerede instruktioner til hvordan søgemaskiner skal håndtere denne side.',
@@ -26,6 +25,8 @@ return [
     'fabianmichael.meta.robots_imageindex.help' => 'Søgemaskiner vil associere denne side med billedsøgeresultater.',
     'fabianmichael.meta.robots_snippet.label' => 'Uddrag',
     'fabianmichael.meta.robots_snippet.help' => 'Søgemaskiner vil vise beskrivelsesuddrag for denne side.',
+    'fabianmichael.meta.robots_translate.label' => 'Oversætte',
+    'fabianmichael.meta.robots_translate.help' => 'Søgemaskiner må oversætte denne side.',
 
     'fabianmichael.meta.global_robots.headline' => 'Søgemaskine indstillinger',
     'fabianmichael.meta.global_robots.help' => 'Detaljerede instruktioner til hvordan søgemaskiner skal håndtere sider på dette websted som standard. Sider kan have individuelle indstillinger for at tilsidesætte disse standarder.',
@@ -39,6 +40,8 @@ return [
     'fabianmichael.meta.global_robots_imageindex.help' => 'Søgemaskiner vil associere sider med billedsøgeresultater.',
     'fabianmichael.meta.global_robots_snippet.label' => 'Uddrag',
     'fabianmichael.meta.global_robots_snippet.help' => 'Søgemaskiner vil vise beskrivelsesuddrag for sider.',
+    'fabianmichael.meta.global_robots_translate.label' => 'Oversætte',
+    'fabianmichael.meta.global_robots_translate.help' => 'Søgemaskiner må oversætte sider på dette websted.',
 
     'fabianmichael.meta.description.label' => 'Beskrivelse',
     'fabianmichael.meta.description.help' => 'En kort beskrivelse af siden der vil blive vist under sidens titel af søgemaskiner.',
@@ -57,7 +60,7 @@ return [
     'fabianmichael.meta.global_og_image.label' => 'Standard delingsbillede',
     'fabianmichael.meta.global_og_image.help' => 'Et billede der skal repræsentere dine delte links på sociale medier og apps. Billedet vil automatisk blive beskåret. Dette globale billede bruges som fallback for sider der ikke har et dedikeret billede.<br><br>**Anbefalet størrelse:** 1200&thinsp;&times;&thinsp;630&nbsp;px<br>**Formater:** JPEG, PNG, GIF, WebP, AVIF',
     'fabianmichael.meta.og_image.label' => 'Delingsbillede',
-    'fabianmichael.meta.og_image.help' => 'Et billede der skal repræsentere dine delte links på sociale medier og apps. Billedet vil automatisk blive beskåret. Det globale fallback-billede vil blive brugt som fallback.<br><br>**Anbefalet størrelse:** 1200&thinsp;&times;&thinsp;630&nbsp;px<br>**Formater:** JPEG, PNG, GIF, WebP, AVIF {< site.metaPanelWarning("no_og_image_fallback") >}',
+    'fabianmichael.meta.og_image.help' => 'Et billede der skal repræsentere dine delte links på sociale medier og apps. Billedet vil automatisk blive beskåret. Det globale fallback-billede vil blive brugt som fallback.<br><br>**Anbefalet størrelse:** 1200&thinsp;&times;&thinsp;630&nbsp;px<br>**Formater:** JPEG, PNG, GIF, WebP, AVIF {< site.metaPanelOgImageWarning("no_og_image_fallback") >}',
     'fabianmichael.meta.og_title.label' => 'Delingstitel (tilsidesæt)',
     'fabianmichael.meta.og_title.help' => 'Sidens titel som den vil blive vist ved deling. Hvis ikke indstillet, vil både **Titel (Tilsidesæt)** og sidens titel blive brugt som fallback.',
     'fabianmichael.meta.og_description.label' => 'Delingsbeskrivelse',
@@ -85,6 +88,7 @@ return [
     'fabianmichael.meta.schema.person_privacy_notice.text' => 'Ved at vælge en bruger vil du eksponere personlige oplysninger som e-mailadresse og profilbillede for søgemaskiner, andre webcrawler og alle der læser kildekoden på din hjemmeside.',
     'fabianmichael.meta.sharing_preview.headline' => 'Del forhåndsvisning',
     'fabianmichael.meta.description_missing' => '[Delingsbeskrivelse og fallback-beskrivelse mangler]',
+    'fabianmichael.meta.source.override' => 'Kilde: Programmatisk tilsidesat',
     'fabianmichael.meta.source.og_image' => 'Kilde: Delingsbillede',
     'fabianmichael.meta.source.metadata' => 'Kilde: Side miniaturebillede',
     'fabianmichael.meta.source.site' => 'Kilde: Fallback miniaturebillede',
@@ -118,4 +122,6 @@ return [
             Denne tilstand bruges til at forhindre søgemaskiner fra at indeksere et websted under udvikling eller test, uden at ændre de faktiske indstillinger via panelet.
         </p>
         <p>Ændre <code>fabianmichael.meta.stealthMode</code> i konfigurationen til <code>false</code> for at aktivere indexering igen.</p>',
+
+    'fabianmichael.meta.override.help' => 'Denne værdi er programmatisk tilsidesat og kan ikke ændres.',
 ];

@@ -7,3 +7,16 @@
   margin-top: var(--spacing-4);
   padding: .375rem var(--box-padding-inline);;
 }
+
+.k-field-type-meta-text .k-input[data-disabled="true"] {
+  pointer-events: auto;
+}
+
+.k-field-type-meta-text .k-string-input:disabled::placeholder {
+  opacity: 1;
+  --input-color-placeholder: var(--color-text);
+}
+
+.k-field-name-og_image.k-field-type-meta-files[data-disabled="true"] .k-empty {
+  display: none;
+}

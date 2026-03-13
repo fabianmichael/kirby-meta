@@ -1,4 +1,4 @@
-type: range
+type: meta-range
 label: fabianmichael.meta.sitemap.priority.label
 min: 0
 max: 1
