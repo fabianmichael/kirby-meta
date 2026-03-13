@@ -71,13 +71,11 @@ class Sitemap
         $url->appendChild($doc->createElement('loc', $page->url()));
 
         if ($this->kirby->option('fabianmichael.meta.sitemap.detailSettings') !== false) {
-            $priority = $meta->priority();
-
-            if ($priority !== null) { // could be 0.0, so has to be checked against NULL
+            if (($priority = $meta->sitemapPriority())&& $priority !== null) { // could be 0.0, so has to be checked against NULL
                 $url->appendChild($doc->createElement('priority', number_format($priority, 1, '.', '')));
             }
 
-            if ($changefreq = $meta->changefreq()) {
+            if ($changefreq = $meta->sitemapChangefreq()) {
                 $url->appendChild($doc->createElement('changefreq', $changefreq));
             }
         }

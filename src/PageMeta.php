@@ -68,7 +68,7 @@ class PageMeta
      *
      * @return ?string The changefreq.
      */
-    public function changefreq(): ?string
+    public function sitemapChangefreq(): ?string
     {
         return $this->get('sitemap_changefreq',
                 defaultFallback: true,
@@ -291,7 +291,7 @@ class PageMeta
      *
      * @return ?float The priority.
      */
-    public function priority(): ?float
+    public function sitemapPriority(): ?float
     {
         $priority = $this->get('sitemap_priority', true, true, false, 0.5)->toFloat();
 
