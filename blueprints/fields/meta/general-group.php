@@ -15,7 +15,7 @@ return function (Kirby $kirby) {
         'meta_description' => [
             'type'        => 'meta-text',
             'label'       => t('fabianmichael.meta.description.label'),
-            'placeholder' => '{{ page.meta.get("meta_description", true, true) }}',
+            'placeholder' => '{{ page.meta.description(false) }}',
             'help'        => t('fabianmichael.meta.description.help'),
         ],
         'meta_title' => [
