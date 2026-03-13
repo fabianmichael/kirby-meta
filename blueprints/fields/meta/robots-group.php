@@ -1,10 +1,9 @@
 <?php
 
-use FabianMichael\Meta\Helper;
-use Kirby\Cms\App as Kirby;
+use Kirby\Cms\App;
 
 return function (Kirby $kirby): array {
-    $getOptions = function (string $name) use ($kirby): array {
+return function (App $kirby): array {
         $globalValue = $kirby
             ->site()
             ->content()
