@@ -464,8 +464,7 @@ class PageMeta
 
         $social[] = [
             'property' => 'og:site_name',
-            'content'  => $this->site->content()->get('og_site_name')
-                ->or($this->site->title())->toString(),
+            'content'  => $this->ogSiteName(),
         ];
 
         $social[] = [
@@ -572,6 +571,12 @@ class PageMeta
         }
 
         return implode(' ', $title);
+    }
+
+    public function ogSiteName(): string
+    {
+        return $this->site->content()->get('og_site_name')
+        ->or($this->site->title())->value();
     }
 
     public function ogDescription(bool $content = true): string
