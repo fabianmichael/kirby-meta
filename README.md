@@ -15,32 +15,25 @@ browsers and beyond.
 - 💻 Extensive panel UI including social media previews
 - 🦊 Easy-to-understand language in the panel, providing a good middle ground between simplicity and extensive control options.
 - 🧙‍♂️ Most features can be enabled/disabled in config, panel UI only shows enabled features (thanks to dynamic blueprints)
-- 🪝 Hooks for altering the plugin's behavior
 - 🤖 Automatic `robots.txt` generation
+- 🏎️ Supports non-editable overrides of values for special pages
+- 🕵️‍♀️ Stealth mode for staging servers
 - 🌍 All blueprints are fully translatable (*English, German, French, Swedish and Dutch translations are included*)
 
-**Future plans:**
-
-- ✅ Live-check of metadata with hints in the panel
-
+> [!NOTE]
 > This plugin is completely free and published under the MIT license. However, if you are using it in a commercial project and want to help me keep up with maintenance, please consider to **[❤️ sponsor me](https://github.com/sponsors/fabianmichael)** for securing the continued development of the plugin.
 
 ## Requirements
 
-- PHP 8.14+
+- PHP 8.4+
 - Kirby 5.3.0+
 
 ## How it works
 
-The plugin looks for metadata from a page's content file (e.g. `article.txt`) by
-the corresponding key. If the page does not contain the specific field, it looks for a metadata
-method on the current page model, which can return an array of metadata for the current page.
-If that also fails, it will fall back to default metadata, as stored in the
-`site.txt` file at the top-level of the content directory.
-
-That way, every page will always be able to serve default values, even if the specific
-page or its model does not contain information like e.g. a thumbnail or a dedicated
-description.
+The plugin tries to fetch metadata from overrides, page content and default
+values and for some values from global and even config defaults. This ensures
+that proper metadata is almost always available. This gives editors much freedom
+for setting up metadata while giving you full control as a developer.
 
 ## Installation & Setup
 
@@ -67,13 +60,13 @@ The options below have to be set in your `config.php`. Please note that every op
 | `social` | `bool` | `true` | Generates [OpenGraph](https://ogp.me/) markup.
 | `robots` | `bool` | `true` | Generates the `robots` metatag and serve [robots.txt](https://developers.google.com/search/docs/advanced/robots/intro) at `http(s)://yourdomain.com/robots.txt`.
 | `robots.canonical` | `bool` | `true` | Generates canonical url meta tag. Requires `robots` option to be `true`. |
-| `robots.index` | `bool` | `true` | Allows crawlers to index pages. Can be overriden in global or page-specific settings from the panel. Requires `robots` option to be `true` for having an effect. If a page is excluded from the sitemap or unlisted, the robots meta tag will always contain `noindex`. |
+| `robots.index` | `bool` | `true` | Allows crawlers to index pages. Can be overriden in global or page-specific settings from the panel. Requires `robots` option to be `true` for having an effect. If a page is excluded from the sitemap or unlisted, the robots meta tag will always contain `noindex` or `none. |
 | `robots.follow` | `bool` | `true` | Allows crawlers to follow links on pages. Can be overriden in global or page-specific settings from the panel. Requires `robots` option to be `true` for having an effect. |
 | `robots.archive` | `bool` | `true` | Allows crawlers to serve a cached version of pages. Can be overriden in global or page-specific settings from the panel. Requires `robots` option to be `true` for having an effect. |
 | `robots.imageindex` | `bool` | `true` | Allows crawlers to include images to appear in search results. Can be overriden in global or page-specific settings from the panel. Requires `robots` option to be `true` for having an effect. |
 | `robots.snippet` | `bool` | `true` | Allows crawlers to generate snippets from page content. Can be overriden in global or page-specific settings from the panel. Requires `robots` option to be `true` for having an effect. |
 | `robots.translate` | `bool` | `true` | Allows crawlers offer automated translation of your content. Can be overriden in global or page-specific settings from the panel. Requires `robots` option to be `true` for having an effect. |
-| `title.separator` | `string` | `'|'` | Separator options for the `<title>` tag. |
+| `title.separator` | `string` | `'\|'` | Separator options for the `<title>` tag. |
 | `theme.color` | `string\|null` | `null` | If not empty, will generate a corresponding meta tag used by some browsers for coloring the UI. |
 | `panel.view.filter` | Provides a filter function for hiding certain pages from the metadata debug view in the panel. See the Kirby docs on [`$pages->filter()`](https://getkirby.com/docs/reference/objects/cms/pages/filter) for details. |
 | `stealthMode` | `bool` | `false` | This will force-override all robots settings. You will still get a proper preview in the panel and everything will look like normal, but the robots meta tag will always have a content of none. This is useful for staging servers, where users want to edit content like normal, but you want to ensure that pages will not appear in search engines. The plugin will still generate a sitemap for debugging purposes. |
@@ -126,68 +119,77 @@ Now you are ready to add/edit metadata from the panel.
 
 Sometimes, you want special behavior for certain templates. The easiest way to achieve this is by creating a page model and implementing a `$page->metaDefaults()` method, that returns an array some or even all of the following keys:
 
-| Key | Type | Description |
-|:----|:-----|:------------|
-| `robots.*` | `bool` | Override the default indexing status of a page. |
-| `meta_description` | `string` | Provide a default description that is used, when the user had not entered a dedicated description for this page. This could e.g. be a truncated version of the page's text content. |
-| `og_title_prefix` | `string` | Will be put in front of the page's OpenGraph title, e.g. `'ℹ️ '` or `'[Recipe ]` |
-| `og_image File` | `Kirby\Cms\File` | A `File` object, that sets the default OpenGraph image for this page. You can even generate custom images programatically and Wrap them in a `File` object, e.g. for the docs of your product (getkirby.com does this for the reference pages).
-| `@graph` | `array` | Things to add to the JSON-LD metadata in the page's head. If you need to reference the organization or person behind the website, use `url('/#owner')`. If you need to reference the website itself, use `url('/#website')`. |
-| `@social` | `array` | Extend the social meta tags generated by the plugin. |
+| Property            | Type               | Default | Description |
+|:--------------------|:-------------------|:--------|:------------|
+| meta_title        | `string`           | `$page->title()` | Provide a default meta title for the page if not set or entered by the user. |
+| meta_canonical_url| `string`           | `$page->url()` | Override the default canonical URL for the page. |
+| meta_description  | `string`           | `$site->meta_description()` | Provide a default description that is used when the user has not entered a dedicated description for this page. This could e.g. be a truncated version of the page's text content. |
+| sitemap_changefreq | `string`           | - | Change frequency for this page in the XML sitemap (e.g. `daily`, `monthly`). |
+| sitemap_priority  | `float`            | `0.5` | Sitemap priority, a number between `0.0` and `1.0`. |
+| robots_index        | `bool`            | `true` | Whether search engines should index the page. Will fallback to `$site` value or config value if not set. |
+| robots_follow       | `bool`            | `true` | Whether search engines should follow links on the page. . Will fallback to `$site` value or config value if not set. |
+| robots_archive      | `bool`            | `true` | Whether search engines should archive a cached copy of the page. . Will fallback to `$site` value or config value if not set. |
+| robots_imageindex   | `bool`            | `true` | Whether images on the page should be indexed by search engines. . Will fallback to `$site` value or config value if not set. |
+| robots_snippet      | `bool`            | `true` | Whether a text snippet of the page is allowed in search results. . Will fallback to `$site` value or config value if not set. |
+| robots_translate    | `bool`            | `true` | Whether search engines can offer translation of the page. . Will fallback to `$site` value or config value if not set. |
+| og_title          | `string`           | `$page->title()` | Provide a default OpenGraph title for this page. |
+| og_description    | `string`           | `meta_description` | Provide a default OpenGraph description. |
+| og_image          | `Kirby\Cms\File`   | global `og:image` | A `File` object that sets the default OpenGraph image for this page. You can even generate custom images programatically and wrap them in a `File` object, e.g. for the docs of your product (getkirby.com does this for the reference pages). |
+| @graph            | `array`            | - | Things to add to the JSON-LD metadata in the page's head. If you need to reference the organization or person behind the website, use `url('/#owner')`. If you need to reference the website itself, use `url('/#website')`. |
+| @social           | `array`            | - | Extend the social meta tags generated by the plugin. |
+| lastmod           | `int`              | `$page->modified()` | Override the last modified date used for sitemaps. Unix timestamp expected. |
+
+Here is a starting point for your own page model:
+
+```php
+<?php
+
+class ArticlePage extends Page {
+  public function metaDefaults(?string $lang = null): array {
+       return [
+            'meta_title' => null,
+            'meta_canonical_url' => null,
+            'meta_description' => null,
+
+            'sitemap_priority' => null,
+            'sitemap_changefreq' => null,
+
+            'robots_index' => null,
+            'robots_follow' => null,
+            'robots_archive' => null,
+            'robots_imageindex' => null,
+            'robots_snippet' => null,
+            'robots_translate' => null,
+
+            'og_title' => null,
+            'og_description' => null,
+            'og_image' => null,
+
+            '@graph' => [],
+            '@social' => [],
+
+            'lastmod' => null, // unix timestamp expected
+        ];
+    },
+}
+```
 
 ### Overrides from page models
 
-If you want to disable certain settings, you can implement a `$page->metaOverrides()` method for that. If you provide an override, this forces a certain behavior for a page. Currently, the following settings are supported:
+Overrides allow you to enforce certain values for specific page models. E.g. you can enforce that a page will always have a certain title or robots setting. Just implement a `metaOverrides()` method on your page model:
 
-| Key | Type | Description |
-|:----|:-----|:------------|
-| `robots.index` | `bool` | Force the indexing status of a page and disable the corresponding setting for that page. |
-
-
-#### Example
-
-The following example will disable the user setting for indexing indexing in the metadata tab and will result in a `noindex` robots meta tag and also exclude the page from the sitemap.
 
 ```php
-# site/models/legal.php
+<?php
 
 class LegalPage extends Page {
-  public function metaOverrides(): array
+  public function metaOverrides(?string $lang = null): array
   {
     return [
-      'robots.index' => false,
+      'robots_index' => false, // this will disble the robots index setting in the panel and always exclude this page from being indexed.
     ];
   }
 }
-
-
-```
-
-### Using hooks
-
-the meta plugin provides a set of handy hooks, allowing you to further add/remove/modify metadata without overriding the built-in snippets or having to set up a page model for every template.
-
-⚠️ Hooks are a powerful tool that can break the plugin's expected behavior for editors working on the panel. Use with care!
-
-#### `meta.load:after`
-
-After metadata has been loaded by calling the `$page->metaDefaults()` method on a model. This allows you to inject additional data.
-
-```php
-return [
-  'meta.load:after' => function (
-    array $metadata,
-    Kirby\Cms\Page $page,
-    ?string $languageCode
-  ) {
-    // set `thumbnail.png` as default share image for all pages,
-    // if not other image was already set by a page model
-    if (empty($metadata['og_image']) === true) {
-      $metadata['og_image'] = $page->image('thumbnail.png');
-    }
-    return $metadata;
-  },
-];
 ```
 
 #### `meta.jsonld:after` hook
