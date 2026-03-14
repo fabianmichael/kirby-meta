@@ -138,13 +138,7 @@ class PageMeta
 
         // Look in page model defaults
         if ($defaultFallback === true && $this->hasDefault($key)) {
-            $value = $this->default($key);
-
-            if (is_callable($value) === true) {
-                $value = $value->call($this->page);
-            }
-
-            return $value;
+            return $this->default($key);
         }
 
         // From site as fallback ...
