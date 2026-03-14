@@ -90,8 +90,8 @@ return [
     'fabianmichael.meta.description_missing' => '[Share Description and fallback Description Missing]',
     'fabianmichael.meta.source.override' => 'Source: Programmatically overridden',
     'fabianmichael.meta.source.og_image' => 'Source: Share Image',
-    'fabianmichael.meta.source.metadata' => 'Source: Page thumbnail',
-    'fabianmichael.meta.source.site' => 'Source: Fallback thumbnail',
+    'fabianmichael.meta.source.default' => 'Source: Default thumbnail',
+    'fabianmichael.meta.source.site' => 'Source: Global share image',
     'fabianmichael.meta.og_image.missing' => 'Image missing',
 
     'fabianmichael.meta.schema.headline' => 'Structured data',

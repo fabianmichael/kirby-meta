@@ -164,6 +164,85 @@ class PageMeta
     }
 
     /**
+     * Get a file object for a meta value for this page by key. The value can
+     * be retrieved from overrides, content, defaults, site or config or
+     * fallback value in that particular order.
+     *
+     * @param string $key The key of the meta value.
+     * @param bool $defaultFallback Whether to use the default fallback value.
+     * @param bool $siteFallback Whether to use the site fallback value.
+     * @param bool $configFallback Whether to use the config fallback value.
+     * @param bool $respectOverrides Whether to respect overrides.
+     * @param bool $content Whether to use the content value if available.
+     * @param mixed $fallback The fallback value.
+     * @return ?File The file object.
+     */
+    public function getFile(
+        string $key,
+        bool $defaultFallback = true,
+        bool $siteFallback = false,
+        bool $configFallback = false,
+        bool $respectOverrides = true,
+        bool $content = true,
+        mixed $fallback = null
+    ): ?File {
+        // Overrides always take precedence over other values
+        if ($respectOverrides === true && $this->hasOverride($key)) {
+            $file = $this->override($key);
+
+            if ($file instanceof File) {
+                return $file;
+            }
+
+            if ($file instanceof Field && ($file = $file->toFile())) {
+                return $file;
+            }
+        }
+
+        // Look in page content
+        if ($content === true && ($file = $this->page->content($this->languageCode)->get($key)->toFile())) {
+            return $file;
+        }
+
+        // Look in page model defaults
+        if ($defaultFallback === true && $this->hasDefault($key)) {
+            $file = $this->default($key);
+
+            if ($file instanceof File) {
+                return $file;
+            }
+
+            if ($file instanceof Field && ($file = $file->toFile())) {
+                return $file;
+            }
+        }
+
+        // From site as fallback ...
+        if ($siteFallback === true) {
+            $file = $this->site->content($this->languageCode)->get($key)->toFile();
+
+            if ($file !== null) {
+                return $file;
+            }
+        }
+
+        // From config as fallback ...
+        if ($configFallback === true) {
+            $file = option('fabianmichael.meta.' . str_replace('_', '.', $key));
+
+            if ($file !== null) {
+                return $file;
+            }
+        }
+
+        // Nothing found, return final fallback value
+        return $fallback;
+    }
+
+
+
+
+    /**
      * Get the JSON-LD data for this page.
      *
      * @return array The JSON-LD data.
@@ -540,9 +619,9 @@ class PageMeta
     }
 
     /**
-     * Get the title for this page to be used in the title tag.
+     * Get the computed title for this page to be used in the title tag.
      *
-     * @return Field The title field.
+     * @return string The computed title.
      */
     public function title(): string
     {
@@ -567,70 +646,86 @@ class PageMeta
         return implode(' ', $title);
     }
 
+    /**
+     * Get the OpenGraph site name for this page.
+     *
+     * @return string The OpenGraph site name.
+     */
     public function ogSiteName(): string
     {
         return $this->site->content()->get('og_site_name')
         ->or($this->site->title())->value();
     }
 
-    public function ogDescription(bool $content = true): string
+    /**
+     * Get the OpenGraph description for this page.
+     *
+     * @param bool $content Whether to use the content value if available.
+     * @return string The OpenGraph description.
+     */
+    public function ogDescription(
+        bool $defaultFallback = true,
+        bool $siteFallback = true,
+        bool $respectOverrides = true,
+        bool $content = true
+    ): string
     {
         return $this->get('og_description',
-            defaultFallback: true,
-            siteFallback: true,
+            defaultFallback: $defaultFallback,
+            siteFallback: $siteFallback,
             configFallback: false,
-            respectOverrides: true,
-            content: $content,
-            fallback: $this->description()
-        );
+            respectOverrides: $respectOverrides,
+            content: $content
+        ) ?: $this->description();
     }
 
-    public function ogImage(bool $fallback = true): ?File
+
+    /**
+     * Get the OpenGraph image for this page.
+     *
+     * @param bool $defaultFallback Whether to use the default fallback value.
+     * @param bool $siteFallback Whether to use the site fallback value.
+     * @param bool $respectOverrides Whether to respect overrides.
+     * @param bool $content Whether to use the content value if available.
+     * @return ?File The OpenGraph image.
+     */
+    public function ogImage(
+        bool $defaultFallback = true,
+        bool $siteFallback = true,
+        bool $respectOverrides = true,
+        bool $content = true,
+    ): ?File
     {
-        if ($image = $this->get('og_image',
-            siteFallback: true,
-        )) {
-            if ($image instanceof File) {
-                return $image;
-            }
-
-            if ($image instanceof Field && ($image = $image->toFile())) {
-                return $image;
-            }
-        }
-
-        // Search in page model ...
-        if ($image = $this->default('og_image')) {
-            if ($image instanceof File) {
-                return $image;
-            } elseif ($image instanceof Field && ($image = $image->toFile())) {
-                return $image;
-            }
-        }
-
-        // Fallback to global thumbnail
-        if ($fallback === true && ($image = $this->page->site()->content($this->languageCode)->get('og_image')->toFile())) {
-            return $image;
-        }
-
-        return null;
+        return $this->getFile(
+            'og_image',
+            defaultFallback: $defaultFallback,
+            siteFallback: $siteFallback,
+            respectOverrides: $respectOverrides,
+            content: $content
+        );
     }
 
     /**
      * Get the OpenGraph title for this page.
      *
-     * @param bool $content Whether to lookup in page content.
+     * @param bool $defaultFallback Whether to use the default fallback value.
+     * @param bool $respectOverrides Whether to respect overrides.
+     * @param bool $content Whether to use the content value if available.
      * @return string The OpenGraph title.
      */
-    public function ogTitle(bool $content = true): ?string
+    public function ogTitle(
+        bool $defaultFallback = true,
+        bool $respectOverrides = true,
+        bool $content = true,
+    ): ?string
     {
-        return $this->get('og_title',
-            defaultFallback: true,
-            siteFallback: true,
+        return $this->get(
+            'og_title',
+            defaultFallback: $defaultFallback,
+            siteFallback: false,
             configFallback: false,
-            respectOverrides: true,
-            content: $content,
-            fallback: null
+            respectOverrides: $respectOverrides,
+            content: $content
         ) ?: $this->page->title()->toString();
     }
 
@@ -683,6 +778,7 @@ class PageMeta
                     ? t('fabianmichael.meta.search_engines.visibility.visible')
                     : t('fabianmichael.meta.search_engines.visibility.hidden'),
                 'label' => 'fabianmichael.meta.search_engines.visibility.label',
+                'icon' => $isIndexible ? 'meta-eye' : 'meta-eye-off',
                 'info'  => $isIndexible
                     ? t('fabianmichael.meta.search_engines.visibility.yes')
                     : t('fabianmichael.meta.search_engines.visibility.no'),

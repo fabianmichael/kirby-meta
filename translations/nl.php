@@ -90,8 +90,8 @@ return [
     'fabianmichael.meta.description_missing' => '[Deelbeschrijving en reservebeschrijving ontbreekt]',
     'fabianmichael.meta.source.override' => 'Bron: Programmatisch overschreden',
     'fabianmichael.meta.source.og_image' => 'Bron: deel afbeelding',
-    'fabianmichael.meta.source.metadata' => 'Bron: Paginaminiatuur',
-    'fabianmichael.meta.source.site' => 'Bron: Terugvalminiatuur',
+    'fabianmichael.meta.source.default' => 'Bron: Paginaminiatuur',
+    'fabianmichael.meta.source.site' => 'Bron: Globale deelafbeelding',
     'fabianmichael.meta.og_image.missing' => 'Afbeelding ontbreekt',
 
     'fabianmichael.meta.schema.headline' => 'Gestructureerde gegevens',

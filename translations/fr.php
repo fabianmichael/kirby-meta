@@ -90,7 +90,7 @@ return [
     'fabianmichael.meta.description_missing'                => '[Aucune description, ni de description de repli]',
     'fabianmichael.meta.source.override'                    => 'Source: Programmatiquement surchargé',
     'fabianmichael.meta.source.og_image'                    => 'Source: Image pour les partages',
-    'fabianmichael.meta.source.metadata'                    => 'Source: Image de la page',
+    'fabianmichael.meta.source.default'                    => 'Source: Image de la page',
     'fabianmichael.meta.source.site'                        => 'Source: Image globale du site',
     'fabianmichael.meta.og_image.missing'                   => 'Image Manquante',
 

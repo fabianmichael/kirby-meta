@@ -8,12 +8,12 @@ fields:
   og_title:
     type: meta-text
     label: fabianmichael.meta.og_title.label
-    placeholder: "{{ page.meta.ogTitle(false) }}"
+    placeholder: "{{ page.meta.ogTitle(true, false, false) }}"
     help: fabianmichael.meta.og_title.help
   og_description:
     type: meta-text
     label: fabianmichael.meta.og_description.label
-    placeholder: "{{ page.meta.ogDescription(false) }}"
+    placeholder: "{{ page.meta.ogDescription(true, true, false, false) }}"
     help: fabianmichael.meta.og_description.help
   og_image:
     extends: fields/meta/og-image

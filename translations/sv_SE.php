@@ -90,8 +90,8 @@ return [
     'fabianmichael.meta.description_missing' => '[Delbeskrivning och fallback-beskrivning saknas]',
     'fabianmichael.meta.source.override' => 'Källa: Programmatiskt överstyr',
     'fabianmichael.meta.source.og_image' => 'Källa: Delbild',
-    'fabianmichael.meta.source.metadata' => 'Källa: Sidminiatyr',
-    'fabianmichael.meta.source.site' => 'Källa: Fallback-miniatyr',
+    'fabianmichael.meta.source.default' => 'Källa: Sidminiatyr',
+    'fabianmichael.meta.source.site' => 'Källa: Globalt delningsbild',
     'fabianmichael.meta.og_image.missing' => 'Bild saknas',
 
     'fabianmichael.meta.schema.headline' => 'Strukturerad data',

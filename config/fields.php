@@ -245,7 +245,7 @@ return [
                 /** @var Site|Page $model */
                 $model = $this->model;
 
-                if ($model->meta()->hasOverride($this->name)) {
+                if ($model instanceof Page && $model->meta()->hasOverride($this->name)) {
                     return true;
                 }
 

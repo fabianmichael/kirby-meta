@@ -90,8 +90,8 @@ return [
     'fabianmichael.meta.description_missing' => '[Delingsbeskrivelse og fallback-beskrivelse mangler]',
     'fabianmichael.meta.source.override' => 'Kilde: Programmatisk tilsidesat',
     'fabianmichael.meta.source.og_image' => 'Kilde: Delingsbillede',
-    'fabianmichael.meta.source.metadata' => 'Kilde: Side miniaturebillede',
-    'fabianmichael.meta.source.site' => 'Kilde: Fallback miniaturebillede',
+    'fabianmichael.meta.source.default' => 'Kilde: Side miniaturebillede',
+    'fabianmichael.meta.source.site' => 'Kilde: Globalt delingsbillede',
     'fabianmichael.meta.og_image.missing' => 'Billede mangler',
 
     'fabianmichael.meta.schema.headline' => 'Strukturerede data',

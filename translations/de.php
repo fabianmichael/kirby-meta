@@ -91,8 +91,8 @@ return [
     'fabianmichael.meta.description_missing' => '[Beschreibung für Teilen und globale Beschreibung fehlen]',
     'fabianmichael.meta.source.override' => 'Quelle: Programmatisch überschrieben',
     'fabianmichael.meta.source.og_image' => 'Quelle: Bild für Teilen',
-    'fabianmichael.meta.source.metadata' => 'Quelle: Seiten-Thumbnail',
-    'fabianmichael.meta.source.site' => 'Quelle: globale Standard-Thumbnail',
+    'fabianmichael.meta.source.default' => 'Quelle: Standard-Thumbnail',
+    'fabianmichael.meta.source.site' => 'Quelle: Globales Standard-Thumbnail',
     'fabianmichael.meta.og_image.missing' => 'Bild fehlt',
 
     'fabianmichael.meta.schema.headline' => 'Strukturierte Daten',
