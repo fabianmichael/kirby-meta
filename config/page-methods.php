@@ -20,7 +20,7 @@ return [
      * @param ?string $lang The language code to get the defaults for. If null, the current language will be used.
      * @return array The default meta values.
      */
-    'metaDefaults' => function(?string $lang = null): array {
+    'metaDefaults' => function (?string $lang = null): array {
         /** @var Page $this */
 
         return [
@@ -41,6 +41,11 @@ return [
             // 'og_title' => null,
             // 'og_description' => null,
             // 'og_image' => null,
+
+            // '@graph' => [],
+            // '@social' => [],
+
+            // 'lastmod' => null, // unix timestamp expected
         ];
     },
 
@@ -51,7 +56,7 @@ return [
      * @param ?string $lang The language code to get the overrides for. If null, the current language will be used.
      * @return array The override meta values.
      */
-    'metaOverrides' => function(?string $lang = null): array {
+    'metaOverrides' => function (?string $lang = null): array {
         /** @var Page $this */
 
         return [
