@@ -78,7 +78,7 @@ class PageMeta
                 respectOverrides: true,
                 content: $content,
                 fallback: null
-            )->or(null)->value();
+            );
     }
 
     /**
@@ -280,7 +280,14 @@ class PageMeta
      */
     public function lastmod()
     {
-        return (int) $this->default('lastmod', $this->page->modified('U', 'date'));
+        return (int)$this->get('lastmod',
+            defaultFallback: true,
+            siteFallback: false,
+            configFallback: false,
+            respectOverrides: true,
+            content: false,
+            fallback: $this->page->modified('U', 'date')
+        );
     }
 
     /**
@@ -390,54 +397,49 @@ class PageMeta
         if (is_string($name)) {
             // single robots value of page as boolean
 
-            if ($name === 'index' && ($this->page->isDraft() || $this->page->isErrorPage())) {
+            if ($name === 'index' && $this->page->isDraft() || $this->page->isErrorPage()) {
                 // if page is a draft or error, always return false
                 return false;
             }
 
-            // load from overrrides
-            if ($name === 'index') {
-                if ($this->hasOverride("robots_{$name}")) {
-                    return (bool)$this->override("robots_{$name}");
-                }
+            // from overrides
+            if ($this->hasOverride("robots_{$name}")) {
+                return (bool)$this->override("robots_{$name}");
             }
 
-            // load from content
+            // from content
             $field = $this->page->content($this->languageCode)->get("robots_{$name}");
 
             if ($field->isNotEmpty()) {
                 return $field->toBool();
             }
 
-            // load from model
-            $default = $this->default("robots_{$name}");
-
-            if (!is_null($default)) {
-                return $default;
+            // from defaults
+            if ($this->hasDefault("robots_{$name}")) {
+                return $this->default("robots_{$name}");
             }
 
             return SiteMeta::robots($name);
-
-        } else {
-            // robots value for meta tag as string
-            $robots = [];
-
-            foreach (['index', 'follow', 'archive', 'imageindex', 'snippet', 'translate'] as $prop) {
-                if ($this->robots($prop) === false) {
-                    $robots[] = "no{$prop}";
-                }
-            }
-
-            $result = sizeof($robots) > 0
-                ? implode(', ', $robots)
-                : 'all';
-
-            if ($result === 'noindex, nofollow') {
-                return 'none';
-            }
-
-            return $result;
         }
+
+        // robots value for meta tag as string
+        $robots = [];
+
+        foreach (['index', 'follow', 'archive', 'imageindex', 'snippet', 'translate'] as $prop) {
+            if ($this->robots($prop) === false) {
+                $robots[] = "no{$prop}";
+            }
+        }
+
+        $result = sizeof($robots) > 0
+            ? implode(', ', $robots)
+            : 'all';
+
+        if ($result === 'noindex, nofollow') {
+            return 'none';
+        }
+
+        return $result;
     }
 
     /**
