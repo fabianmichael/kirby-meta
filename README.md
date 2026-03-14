@@ -5,7 +5,7 @@
 This piece of code handles the generation of meta tags for search engines, social networks,
 browsers and beyond.
 
-![Screenshot 2022-01-14 at 09-57-24 Mirin Avo’s Kitchen](https://user-images.githubusercontent.com/395617/149487743-576e7dca-0f66-41d0-821d-42f3581f5e7f.png)
+![Screenshot of the panel](./docs/screenshot.png)
 
 **Key features:**
 
