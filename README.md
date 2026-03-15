@@ -1,7 +1,6 @@
-# Kirby Meta
+# Meta(data) for Kirby CMS
 
-This piece of code handles the generation of meta tags for search engines, social networks,
-browsers and beyond.
+[Kirby](https://getkirby.com) plugin that handles the generation of meta tags for search engines, social networks, browsers, and beyond. It offers editor-friendly panel controls for your editors while prociding powerful APIs for customizing your developer experience.
 
 ![Screenshot of the panel](./docs/screenshot.png)
 
