@@ -1,7 +1,5 @@
 # Kirby Meta
 
-⚠️ **Warning:** This plugin is in beta state. Documentation and implementation are still incomplete.
-
 This piece of code handles the generation of meta tags for search engines, social networks,
 browsers and beyond.
 
