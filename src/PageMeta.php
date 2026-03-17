@@ -89,7 +89,7 @@ class PageMeta
      */
     public function description(bool $content = true): ?string
     {
-        return $this->get('meta_description',
+        $description = $this->get('meta_description',
             defaultFallback: true,
             siteFallback: true,
             configFallback: false,
@@ -97,6 +97,12 @@ class PageMeta
             content: $content,
             fallback: null
         );
+
+        if (!empty($description) && $this->kirby->option('smartypants', false) !== false) {
+            $description = smartypants($description);
+        }
+
+        return $description;
     }
 
     /**
@@ -643,7 +649,13 @@ class PageMeta
             $title[] = $siteTitle->toString();
         }
 
-        return implode(' ', $title);
+        $title = implode(' ', $title);
+
+        if ($this->kirby->option('smartypants', false) !== false) {
+            $title = smartypants($title);
+        }
+
+        return $title;
     }
 
     /**
@@ -670,13 +682,19 @@ class PageMeta
         bool $content = true
     ): string
     {
-        return $this->get('og_description',
+        $description = $this->get('og_description',
             defaultFallback: $defaultFallback,
             siteFallback: $siteFallback,
             configFallback: false,
             respectOverrides: $respectOverrides,
             content: $content
-        ) ?: $this->description();
+        );
+
+        if (!empty($description) && $this->kirby->option('smartypants', false) !== false) {
+            $description = smartypants($description);
+        }
+
+        return $description ?: $this->description();
     }
 
 
@@ -719,7 +737,7 @@ class PageMeta
         bool $content = true,
     ): ?string
     {
-        return $this->get(
+        $title = $this->get(
             'og_title',
             defaultFallback: $defaultFallback,
             siteFallback: false,
@@ -727,6 +745,12 @@ class PageMeta
             respectOverrides: $respectOverrides,
             content: $content
         ) ?: $this->page->title()->toString();
+
+        if (!empty($title) && $this->kirby->option('smartypants', false) !== false) {
+            $title = smartypants($title);
+        }
+
+        return $title;
     }
 
     /**
