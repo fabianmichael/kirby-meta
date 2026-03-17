@@ -99,7 +99,7 @@ class PageMeta
         );
 
         if (!empty($description) && $this->kirby->option('smartypants', false) !== false) {
-            $description = smartypants($description);
+            $description = html_entity_decode(smartypants($description));
         }
 
         return $description;
@@ -652,7 +652,7 @@ class PageMeta
         $title = implode(' ', $title);
 
         if ($this->kirby->option('smartypants', false) !== false) {
-            $title = smartypants($title);
+            $title = html_entity_decode(smartypants($title));
         }
 
         return $title;
@@ -691,7 +691,7 @@ class PageMeta
         );
 
         if (!empty($description) && $this->kirby->option('smartypants', false) !== false) {
-            $description = smartypants($description);
+            $description = html_entity_decode(smartypants($description));
         }
 
         return $description ?: $this->description();
@@ -747,7 +747,7 @@ class PageMeta
         ) ?: $this->page->title()->toString();
 
         if (!empty($title) && $this->kirby->option('smartypants', false) !== false) {
-            $title = smartypants($title);
+            $title = html_entity_decode(smartypants($title));
         }
 
         return $title;
