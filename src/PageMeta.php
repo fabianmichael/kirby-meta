@@ -663,7 +663,7 @@ class PageMeta
      *
      * @return string The OpenGraph site name.
      */
-    public function ogSiteName(): string
+    public function ogSiteName(): ?string
     {
         return $this->site->content()->get('og_site_name')
         ->or($this->site->title())->value();
@@ -680,7 +680,7 @@ class PageMeta
         bool $siteFallback = true,
         bool $respectOverrides = true,
         bool $content = true
-    ): string
+    ): ?string
     {
         $description = $this->get('og_description',
             defaultFallback: $defaultFallback,
