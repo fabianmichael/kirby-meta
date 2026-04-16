@@ -18,7 +18,7 @@ return [
             foreach ($index as $page) {
                 $meta = $page->meta();
 
-                if ($og_image = $meta->og_image()) {
+                if ($og_image = $meta->ogImage()) {
                     if ($og_image->exists() === true) {
                         // Only resize, if given image does actually exists
                         // and is accessible
@@ -33,7 +33,7 @@ return [
 
                 $pages[] = [
                     'title' => $page->title()->value(),
-                    'meta_title' => $meta->get('meta_title')->value(),
+                    'meta_title' => $meta->get('meta_title')?->value(),
                     'icon'  => $page->blueprint()->icon(),
                     'status'  => $page->status(),
                     'id' => $page->id(),
@@ -41,12 +41,12 @@ return [
                     'shortUrl' => Url::short($page->url()),
                     'template' => $page->template()->name(),
                     'panelUrl' => $page->panel()->url(),
-                    'meta_description' => $meta->meta_description()->value(),
+                    'meta_description' => $meta->description()?->value(),
                     'is_indexible' => $page->isIndexible(),
-                    'og_title' => $meta->og_title()->value(),
-                    'og_description' => $meta->get('og_description', true, false)->value(),
+                    'og_title' => $meta->ogTitle(),
+                    'og_description' => $meta->get('og_description', true, false)?->value(),
                     'og_image_url' => $og_image_url,
-                    'og_image_alt' => $og_image?->alt()->value(),
+                    'og_image_alt' => $og_image?->alt()?->value(),
                 ];
             }
 
