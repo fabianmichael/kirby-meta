@@ -4,5 +4,6 @@ composer.lock
 /node_modules
 .php-cs-fixer.cache
 .idea
+.nova
 
 /vendor
