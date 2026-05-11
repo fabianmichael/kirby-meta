@@ -323,7 +323,7 @@ return [
 A few helpers are available for manipulating pages:
 
 ### Page Method
-If you'd like to know if a page is indexed in the sitemap, you can use `$page->isIndexible()` (returns a `bool`).
+If you'd like to know if a page is indexed in the sitemap, you can use `$page->isIndexable()` (returns a `bool`). Warning: This method was name `isIndexible()` in earlier versions of the plugins an the spelling was only fixed recently.
 
 ### Site Method
 To get all indexed pages according to your settings, you can use : `$site->indexedPages()` (returns a `Kirby\Cms\Collection` of pages).

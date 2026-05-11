@@ -18,6 +18,6 @@ return [
         }
     },
     'indexedPages' => function () {
-        return $this->index()->filterBy('isIndexible', '==', true);
+        return $this->index()->filterBy('isIndexable', '==', true);
     },
 ];

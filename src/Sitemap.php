@@ -63,7 +63,7 @@ class Sitemap
     ): void {
         $meta = $page->meta();
 
-        if ($page->isIndexible() === false) {
+        if ($page->isIndexable() === false) {
             return;
         }
 

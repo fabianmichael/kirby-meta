@@ -72,7 +72,7 @@ return [
      *
      * @return bool True if the page is indexible, false otherwise.
      */
-    'isIndexible' => function (): bool {
+    'isIndexable' => function (): bool {
         /** @var Page $this */
 
         return $this->meta()->robots('index');
@@ -83,10 +83,10 @@ return [
      *
      * @return string The status text.
      */
-    'isIndexibleStatusText' => function (): string {
+    'isIndexableStatusText' => function (): string {
         /** @var Page $this */
 
-        return r($this->isIndexible(), 'indexible', 'not indexible');
+        return r($this->isIndexable(), 'indexible', 'not indexible');
     },
 
     /**
@@ -94,10 +94,10 @@ return [
      *
      * @return string The status icon.
      */
-    'isIndexibleStatusIcon' => function (): string {
+    'isIndexableStatusIcon' => function (): string {
         /** @var Page $this */
 
-        return r($this->isIndexible(), 'meta-eye', 'meta-eye-off');
+        return r($this->isIndexable(), 'meta-eye', 'meta-eye-off');
     },
 
     /**
@@ -105,9 +105,9 @@ return [
      *
      * @return string The status theme.
      */
-    'isIndexibleTheme' => function (): string {
+    'isIndexableTheme' => function (): string {
         /** @var Page $this */
 
-        return r($this->isIndexible(), 'positive-icon', 'empty');
+        return r($this->isIndexable(), 'positive-icon', 'empty');
     },
 ];

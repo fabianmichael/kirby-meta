@@ -102,9 +102,9 @@ App::plugin('fabianmichael/meta', [
                     'panel.viewButtons.page' => [
                         ...option('panel.viewButtons.page', ['preview', 'settings', 'languages', 'status']),
                         'meta' => [
-                            'icon' => '{{ page.isIndexibleStatusIcon }}',
-                            'text' => '{{ page.isIndexibleStatusText }}',
-                            'theme' => '{{ page.isIndexibleTheme }}',
+                            'icon' => '{{ page.isIndexableStatusIcon }}',
+                            'text' => '{{ page.isIndexableStatusText }}',
+                            'theme' => '{{ page.isIndexableTheme }}',
                             'link'   => '{{ model.panel.url }}?tab=meta'
                         ],
                     ],
