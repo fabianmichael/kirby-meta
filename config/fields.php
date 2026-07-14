@@ -168,7 +168,7 @@ return [
                     }
 
                     $option['text'] = tt('fabianmichael.meta.robots_index.auto', [
-                        'state' => $model->isIndexible()
+                        'state' => $model->isIndexable()
                             ? t('fabianmichael.meta.state.on')
                             : t('fabianmichael.meta.state.off')
                     ]);

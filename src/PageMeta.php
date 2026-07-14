@@ -794,19 +794,19 @@ class PageMeta
      */
     public function reports(): array
     {
-        $isIndexible = $this->page->isIndexible();
+        $isIndexable = $this->page->isIndexable();
 
         return [
             [
-                'value' => $isIndexible
+                'value' => $isIndexable
                     ? t('fabianmichael.meta.search_engines.visibility.visible')
                     : t('fabianmichael.meta.search_engines.visibility.hidden'),
                 'label' => 'fabianmichael.meta.search_engines.visibility.label',
-                'icon' => $isIndexible ? 'meta-eye' : 'meta-eye-off',
-                'info'  => $isIndexible
+                'icon' => $isIndexable ? 'meta-eye' : 'meta-eye-off',
+                'info'  => $isIndexable
                     ? t('fabianmichael.meta.search_engines.visibility.yes')
                     : t('fabianmichael.meta.search_engines.visibility.no'),
-                'theme' => $isIndexible ? 'positive' : 'negative',
+                'theme' => $isIndexable ? 'positive' : 'negative',
             ],
         ];
     }
