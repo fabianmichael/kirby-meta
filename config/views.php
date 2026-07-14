@@ -41,7 +41,7 @@ return [
                     'shortUrl' => Url::short($page->url()),
                     'template' => $page->template()->name(),
                     'panelUrl' => $page->panel()->url(),
-                    'meta_description' => $meta->description()?->value(),
+                    'meta_description' => $meta->description(),
                     'is_indexible' => $page->isIndexable(),
                     'og_title' => $meta->ogTitle(),
                     'og_description' => $meta->get('og_description', true, false)?->value(),
