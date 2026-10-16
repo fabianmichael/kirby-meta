@@ -11,10 +11,6 @@ App::plugin('fabianmichael/meta', [
 
         'sitemap' => true,
         'sitemap.detailSettings' => false,
-        'sitemap.pages.exclude' => [],
-        'sitemap.pages.includeUnlisted' => [],
-        'sitemap.templates.exclude' => [],
-        'sitemap.templates.includeUnlisted' => [],
 
         'schema' => true,
         'social' => true,
@@ -36,6 +32,10 @@ App::plugin('fabianmichael/meta', [
     ],
 
     'api' => require __DIR__ . '/config/api.php',
+
+    'commands' => [
+        'meta:upgrade' => require __DIR__ . '/commands/upgrade.php',
+    ],
 
     'areas' => [
         'meta' => fn () => [
@@ -100,7 +100,7 @@ App::plugin('fabianmichael/meta', [
             kirby()->extend([
                 'options' => [
                     'panel.viewButtons.page' => [
-                        ...option('panel.viewButtons.page', ['preview', 'settings', 'languages', 'status']),
+                        ...option('panel.viewButtons.page', ['open', 'preview', '-', 'settings', 'languages', 'status']),
                         'meta' => [
                             'icon' => '{{ page.isIndexableStatusIcon }}',
                             'text' => '{{ page.isIndexableStatusText }}',
