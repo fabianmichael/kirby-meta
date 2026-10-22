@@ -100,7 +100,7 @@ App::plugin('fabianmichael/meta', [
             kirby()->extend([
                 'options' => [
                     'panel.viewButtons.page' => [
-                        ...option('panel.viewButtons.page', ['preview', 'settings', 'languages', 'status']),
+                        ...option('panel.viewButtons.page', ['open', 'preview', '-', 'settings', 'languages', 'status']),
                         'meta' => [
                             'icon' => '{{ page.isIndexableStatusIcon }}',
                             'text' => '{{ page.isIndexableStatusText }}',
