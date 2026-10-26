@@ -25,6 +25,105 @@
 - PHP 8.4+
 - Kirby 5.3.0+
 
+## Upgrading from 2.x
+
+3.0 requires PHP 8.4+ and Kirby 5.3+. Update the plugin with Composer, then migrate content and config as described below.
+
+```
+composer update fabianmichael/kirby-meta
+```
+
+### Automatic content conversion
+
+Install the [Kirby CLI](https://github.com/getkirby/cli), then run:
+
+```
+kirby meta:upgrade
+```
+
+That prints a dry-run report of content changes and of PHP/config that still needs a manual edit. Apply the content updates with:
+
+```
+kirby meta:upgrade --apply
+```
+
+The command only writes content files. By default it:
+
+- Removes obsolete `twitter_site` and `twitter_creator` fields from site and page content.
+- Reports title separator, stealth mode, obsolete sitemap options, and PHP that still needs a manual rename.
+
+It does **not** change `robots_index` unless you opt in (see below).
+
+### Indexing behavior
+
+In 2.x, sitemap inclusion and `robots` indexing followed template/page exclude lists and treated unlisted pages as non-indexable unless you opted them in. In 3.0, indexing is driven only by the `robots_index` field (plus drafts and the error page). **Unlisted pages are indexable by default** unless `robots_index` is turned off.
+
+That is intentional: page status and indexing are separate concerns in 3.0. After upgrading, review unlisted pages in the panel if you relied on “unlisted = noindex”.
+
+To keep “unlisted = noindex” for specific templates without migrating every page, use [`metaDefaults()`](#default-values-from-page-models) on those page models:
+
+```php
+public function metaDefaults(?string $lang = null): array
+{
+  return [
+    'robots_index' => $this->isListed(), // unlisted pages default to noindex
+  ];
+}
+```
+
+Editors can still override this per page in the panel. Use `metaOverrides()` instead if the value must be forced.
+
+#### Optional: preserve 2.x indexing rules
+
+If you want content to keep the old sitemap behavior (unlisted pages, `sitemap.pages.exclude` / `sitemap.templates.exclude`, and non-indexable parents staying out of the index), run the upgrade with `--migrate-indexing`:
+
+```
+kirby meta:upgrade --migrate-indexing
+kirby meta:upgrade --migrate-indexing --apply
+```
+
+That sets `robots_index` to `0` on pages that version 2 would have excluded. Unlisted pages that matched `sitemap.pages.includeUnlisted` or `sitemap.templates.includeUnlisted` are left alone.
+
+The old options `sitemap.pages.exclude`, `sitemap.pages.includeUnlisted`, `sitemap.templates.exclude`, and `sitemap.templates.includeUnlisted` are no longer used. After you have run `--migrate-indexing` (if you need it), delete those keys from your project config.
+
+### Config changes
+
+Update your `config.php` by hand:
+
+| 2.x | 3.0 |
+|:----|:----|
+| `fabianmichael.meta.robots.forceNoIndex` | `fabianmichael.meta.stealthMode` |
+| Site field `meta_title_separator` | `fabianmichael.meta.title.separator` |
+| `fabianmichael.meta.title.separators` | Removed |
+| `fabianmichael.meta.twitter` | Removed |
+| `fabianmichael.meta.darkvisitors.*` | Removed |
+| `fabianmichael.meta.sitemap.pages.*` / `sitemap.templates.*` | Removed (after running `meta:upgrade`) |
+
+If the site still stores a custom `meta_title_separator` value, copy it into `fabianmichael.meta.title.separator`, then remove the field from the site content file(s). The upgrade command prints any stored separator values so you can copy them.
+
+### Code and hook renames
+
+| 2.x | 3.0 |
+|:----|:----|
+| `$page->metadata()` | `$page->metaDefaults()` (and `$page->metaOverrides()` for forced values) |
+| `meta.load:after` hook | Removed; use `metaDefaults()` / `metaOverrides()` or other hooks |
+| `$page->isIndexible()` | `$page->isIndexable()` |
+| `$meta->changefreq()` / `$meta->priority()` | `$meta->sitemapChangefreq()` / `$meta->sitemapPriority()` |
+| `$meta->og_title()` / `og_description()` / `og_image()` | `$meta->ogTitle()` / `ogDescription()` / `ogImage()` |
+| `$meta->title()` / `$meta->description()` returning a `Field` | Return `string` |
+| `$meta->meta_description()` and other magic `__call` lookups | `$meta->get('meta_description')` or dedicated methods |
+| Model key `canonical_url` | `meta_canonical_url` |
+| Model key `og_title_prefix` | Removed |
+| Callable values in metadata defaults | Removed; return resolved values from `metaDefaults()` |
+
+`metadata()` values in 2.x were defaults. Forced values that editors must not override belong in `metaOverrides()` in 3.0.
+
+### Removed features
+
+- Twitter / X meta tags, options, and blueprints (`twitter_site`, `twitter_creator`, …)
+- Experimental Dark Visitors robots.txt integration
+- Site field and panel preview for the title separator (config only)
+
 ## How it works
 
 The plugin tries to fetch metadata from overrides, page content and default
@@ -51,13 +150,13 @@ The options below have to be set in your `config.php`. Please note that every op
 
 | Key | Type | Default | Description |
 |:----|:-----|:--------|:------------|
-| `sitemap` | `bool` | `true` | When `true`, will generate an XML sitemap for search engines. The sitemap includes all listed pages by default. ⚠️ If you disable the `robots` setting, no robots.txt will be served to tell search engines where your sitemap is located. |
+| `sitemap` | `bool` | `true` | When `true`, will generate an XML sitemap for search engines. The sitemap includes all pages that are indexable according to the robots settings. ⚠️ If you disable the `robots` setting, no robots.txt will be served to tell search engines where your sitemap is located. |
 | `sitemap.detailSettings` | `bool` | `false` | When `true`, the `<changefreq>` and `<priority>` tags are included in the sitemap and their corresponding fields are displayed in the panel. |
 | `schema` | `bool` | `true` | Generates [Schema.org](https://schema.org/) markup as [JSON-LD](https://json-ld.org/).
 | `social` | `bool` | `true` | Generates [OpenGraph](https://ogp.me/) markup.
 | `robots` | `bool` | `true` | Generates the `robots` metatag and serve [robots.txt](https://developers.google.com/search/docs/advanced/robots/intro) at `http(s)://yourdomain.com/robots.txt`.
 | `robots.canonical` | `bool` | `true` | Generates canonical url meta tag. Requires `robots` option to be `true`. |
-| `robots.index` | `bool` | `true` | Allows crawlers to index pages. Can be overriden in global or page-specific settings from the panel. Requires `robots` option to be `true` for having an effect. If a page is excluded from the sitemap or unlisted, the robots meta tag will always contain `noindex` or `none. |
+| `robots.index` | `bool` | `true` | Allows crawlers to index pages. Can be overriden in global or page-specific settings from the panel. Requires `robots` option to be `true` for having an effect. Drafts and the error page are never indexed. |
 | `robots.follow` | `bool` | `true` | Allows crawlers to follow links on pages. Can be overriden in global or page-specific settings from the panel. Requires `robots` option to be `true` for having an effect. |
 | `robots.archive` | `bool` | `true` | Allows crawlers to serve a cached version of pages. Can be overriden in global or page-specific settings from the panel. Requires `robots` option to be `true` for having an effect. |
 | `robots.imageindex` | `bool` | `true` | Allows crawlers to include images to appear in search results. Can be overriden in global or page-specific settings from the panel. Requires `robots` option to be `true` for having an effect. |
@@ -323,7 +422,7 @@ return [
 A few helpers are available for manipulating pages:
 
 ### Page Method
-If you'd like to know if a page is indexed in the sitemap, you can use `$page->isIndexable()` (returns a `bool`). Warning: This method was name `isIndexible()` in earlier versions of the plugins an the spelling was only fixed recently.
+If you'd like to know if a page is indexed in the sitemap, you can use `$page->isIndexable()` (returns a `bool`). This method was named `isIndexible()` in 2.x; see [Upgrading from 2.x](#upgrading-from-2x).
 
 ### Site Method
 To get all indexed pages according to your settings, you can use : `$site->indexedPages()` (returns a `Kirby\Cms\Collection` of pages).
