@@ -56,12 +56,12 @@ App::plugin('fabianmichael/meta', [
         'fields/meta/og-image'                  => __DIR__ . '/blueprints/fields/meta/og-image.yml',
         'fields/meta/opengraph-group'           => __DIR__ . '/blueprints/fields/meta/opengraph-group.yml',
         'fields/meta/robots-group'              => require __DIR__ . '/blueprints/fields/meta/robots-group.php',
+        'fields/meta/share-preview'             => __DIR__ . '/blueprints/fields/meta/share-preview.yml',
         'fields/meta/sitemap-changefreq'        => require __DIR__ . '/blueprints/fields/meta/sitemap-changefreq.php',
         'fields/meta/sitemap-priority'          => __DIR__ . '/blueprints/fields/meta/sitemap-priority.yml',
         'files/meta-logo'                       => __DIR__ . '/blueprints/files/meta-logo.yml',
         'files/meta-og-image'                   => __DIR__ . '/blueprints/files/meta-og-image.yml',
         'sections/meta/files'                   => __DIR__ . '/blueprints/sections/files.yml',
-        'sections/meta/share-preview'           => __DIR__ . '/blueprints/sections/share-preview.yml',
         'sections/meta/status'                  => __DIR__ . '/blueprints/sections/status.yml',
         'tabs/meta/page'                        => require __DIR__ . '/blueprints/tabs/page.php',
         'tabs/meta/site'                        => require __DIR__ . '/blueprints/tabs/site.php',
@@ -73,7 +73,6 @@ App::plugin('fabianmichael/meta', [
     'pageModels' => [
         'sitemap' => SitemapPage::class,
     ],
-    'sections' => require __DIR__ . '/config/sections.php',
     'siteMethods' => require __DIR__ . '/config/site-methods.php',
     'snippets' => [
         'meta' => __DIR__ . '/snippets/meta.php',

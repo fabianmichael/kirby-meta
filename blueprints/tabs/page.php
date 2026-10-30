@@ -5,6 +5,7 @@ use Kirby\Cms\App as Kirby;
 return function (Kirby $kirby) {
     $columns = [];
     $fields = [];
+    $sidebarFields = [];
     $sections = [];
 
     // main column
@@ -13,7 +14,7 @@ return function (Kirby $kirby) {
 
     if ($kirby->option('fabianmichael.meta.social') !== false) {
         $fields  ['meta_opengraph'] = 'fields/meta/opengraph-group';
-        $sections['meta_sharing_preview'] = 'sections/meta/share-preview';
+        $sidebarFields['meta_sharing_preview'] = 'fields/meta/share-preview';
         $sections['meta_files'] = 'sections/meta/files';
     }
 
@@ -40,6 +41,7 @@ return function (Kirby $kirby) {
         $columns['meta_sidebar'] = [
             'sticky' => true,
             'width' => '1/3',
+            'fields' => $sidebarFields,
             'sections' => $sections,
         ];
     }

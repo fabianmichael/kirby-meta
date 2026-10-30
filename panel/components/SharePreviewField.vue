@@ -37,59 +37,64 @@
 <script>
 
 export default {
+  inheritAttrs: false,
   props: {
-    blueprint: String,
-    lock: [Boolean, Object],
-    help: String,
-    name: String,
-    parent: String,
-    timestamp: Number
+    label: String,
+
+    is_homepage: {
+      type: Boolean,
+      default: null,
+    },
+    title_separator: {
+      type: String,
+      default: null,
+    },
+
+    override_og_title: {
+      type: String,
+      default: null,
+    },
+    override_og_description: {
+      type: String,
+      default: null,
+    },
+    override_og_image: {
+      type: Object,
+      default: null,
+    },
+
+    default_og_title: {
+      type: String,
+      default: null,
+    },
+    default_og_description: {
+      type: String,
+      default: null,
+    },
+    default_og_image: {
+      type: Object,
+      default: null,
+    },
+
+    site_og_description: {
+      type: String,
+      default: null,
+    },
+    og_site_name: {
+      type: String,
+      default: null,
+    },
+    site_og_image: {
+      type: Object,
+      default: null,
+    },
   },
   data() {
     return {
-      label: "Basic Meta Information",
-
-      is_homepage: null,
-      title_separator: null,
-
-      override_og_title: null,
-      override_og_description: null,
-      override_og_image: null,
-
-      default_og_title: null,
-      default_og_description: null,
-      default_og_image: null,
-
-      site_og_description: null,
-      og_site_name: null,
-      site_og_image: null,
-
       // computed values
       og_image_source: null,
       og_image: null,
     };
-  },
-  async created() {
-    const response = await this.load();
-
-    this.label = response.label;
-
-    this.is_homepage = response.is_homepage;
-    this.title_separator = response.title_separator;
-
-    this.override_og_title = response.override_og_title;
-    this.override_og_description = response.override_og_description;
-    this.override_og_image = response.override_og_image;
-
-    this.default_og_title = response.default_og_title;
-    this.default_og_description = response.default_og_description;
-    this.default_og_image = response.default_og_image;
-
-    this.site_og_description = response.site_og_description;
-    this.og_site_name = response.og_site_name;
-    this.site_og_image = response.site_og_image;
-
-    this.updateOgImage();
   },
   computed: {
     title() {
@@ -113,20 +118,14 @@ export default {
     },
   },
   methods: {
-    load() {
-      return this.$api.get(this.parent + "/sections/" + this.name);
-    },
     updateOgImage() {
       if (this.override_og_image !== null) {
         this.og_image = this.og_image_override.url;
         this.og_image_source = this.$t("fabianmichael.meta.source.override");
       } else if (this.store_image.length > 0) {
-        this.$api.files
-          .get(
-            this.parent,
-            this.store_image[0].filename,
-            { view: "compact", }
-          ).then((response) => {
+        this.$helper
+          .items("items/files", this.store_image[0])
+          .then((response) => {
             this.og_image = response.url;
             this.og_image_source = this.$t("fabianmichael.meta.source.og_image");
           });
