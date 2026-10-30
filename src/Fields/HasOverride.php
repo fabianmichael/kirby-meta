@@ -24,7 +24,7 @@ trait HasOverride
     {
         if ($this->hasOverride() === true) {
             return new HtmlString($this->kirby()->kirbytext(
-                '<span><svg class="k-icon" aria-hidden="true" data-type="lock" style="display: inline-block; --icon-size: 1em; vertical-align: -.1em;"><use xlink:href="#icon-lock"/></svg> ' .
+                '<span><svg class="k-icon" aria-hidden="true" data-type="lock" style="display: inline-block; --icon-size: 1em; vertical-align: -.1em;"><use xlink:href="' . $this->kirby()->panel()->assets()->icons() . '#icon-lock"/></svg> ' .
                 t('fabianmichael.meta.override.help') . '</span>'
             ));
         }
