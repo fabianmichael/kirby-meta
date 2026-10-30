@@ -1,7 +1,7 @@
 <?php
 
 use Kirby\Cms\Url;
-use Kirby\Panel\Ui\Buttons\LanguagesDropdown;
+use Kirby\Panel\Ui\Button\LanguagesButton;
 
 return [
     [
@@ -55,7 +55,7 @@ return [
                 'props' => [
                     'pages' => $pages,
                     'buttons' => [
-                        'languages' => fn () => new LanguagesDropdown(site()),
+                        'languages' => fn () => new LanguagesButton(site()),
                     ]
                 ],
             ];
