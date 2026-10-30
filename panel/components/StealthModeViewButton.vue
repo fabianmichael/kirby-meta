@@ -23,7 +23,7 @@ export default {
         props: {
           class: 'k-meta-stealth-mode-view-button-dialog',
           size: 'medium',
-          text: this.$t('fabianmichael.meta.stealthMode.infoText'),
+          text: this.$th('fabianmichael.meta.stealthMode.infoText'),
           cancelButton: {
             text: this.$t('fabianmichael.meta.stealthMode.close'),
           },

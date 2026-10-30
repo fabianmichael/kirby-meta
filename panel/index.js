@@ -27,7 +27,7 @@ panel.plugin('fabianmichael/meta', {
       extends: 'k-url-field'
     },
     'meta-files': {
-      extends: 'k-files-field'
+      extends: 'k-filepicker-field'
     },
     'meta-share-preview': SharePreviewField
   },
