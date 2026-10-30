@@ -24,7 +24,7 @@
     },
     "require": {
         "php": ">=8.4.0",
-        "getkirby/cms": "^5.3.0",
+        "getkirby/cms": "^6.0",
         "getkirby/composer-installer": "^1.2.1"
     },
     "require-dev": {
@@ -32,7 +32,10 @@
     },
     "extra": {
         "kirby-cms-path": false,
-        "installer-name": "meta"
+        "installer-name": "meta",
+        "kirby": {
+            "compatible": "^6.0"
+        }
     },
     "scripts": {
         "cs-fixer": "vendor/bin/php-cs-fixer fix --dry-run --diff",

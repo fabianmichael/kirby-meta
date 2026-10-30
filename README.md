@@ -23,7 +23,7 @@
 ## Requirements
 
 - PHP 8.4+
-- Kirby 5.3.0+
+- Kirby 6.0+ (for Kirby 5, use version 3.x)
 
 ## Upgrading from 2.x
 

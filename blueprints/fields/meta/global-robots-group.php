@@ -26,7 +26,7 @@ return function (Kirby $kirby): array {
                     'icon' => 'cancel',
                 ],
             ],
-            'reset' => false,
+            'resettable' => false,
             'grow' => false,
             'type' => 'toggles',
             'translate' => false,

@@ -2,7 +2,7 @@
 
 import './panel.css'
 
-import SharePreviewSection from './components/SharePreviewSection.vue'
+import SharePreviewField from './components/SharePreviewField.vue'
 import MetaView from './components/MetaView.vue'
 import StealthModeViewButton from './components/StealthModeViewButton.vue'
 
@@ -27,11 +27,9 @@ panel.plugin('fabianmichael/meta', {
       extends: 'k-url-field'
     },
     'meta-files': {
-      extends: 'k-files-field'
-    }
-  },
-  sections: {
-    'meta-share-preview': SharePreviewSection
+      extends: 'k-filepicker-field'
+    },
+    'meta-share-preview': SharePreviewField
   },
   icons: {
     'meta-true': '<path d="M10 15.2 19.2 6l1.4 1.4L10 18l-6.4-6.4L5 10.2l5 5Z"/>',

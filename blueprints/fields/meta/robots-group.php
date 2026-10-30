@@ -35,7 +35,7 @@ return function (App $kirby): array {
                 ],
             ],
             'type' => 'meta-robots-index-toggles',
-            'reset' => false,
+            'resettable' => false,
             'translate' => false,
             'width' => '1/2',
         ];
@@ -53,7 +53,7 @@ return function (App $kirby): array {
             'robots_index' => [
                 'label' => t('fabianmichael.meta.robots_index.label'),
                 'type' => 'meta-robots-index-toggles',
-                'reset' => false,
+                'resettable' => false,
                 'options' => [
                     [
                         'value' => '',

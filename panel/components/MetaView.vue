@@ -59,9 +59,8 @@
         </tr>
       </thead>
       <tbody>
-        <template v-for="(page, id) in pages" >
+        <template v-for="(page, id) in pages" :key="id">
           <tr
-            :key="id + '_head'"
             :data-is-indexable="page.is_indexable"
           >
             <th colspan="8" class="k-meta-page-header-col">
@@ -82,7 +81,6 @@
             </th>
           </tr>
           <tr
-            :key="id + '_content'"
             :data-is-indexable="page.is_indexable"
           >
             <td>
@@ -132,7 +130,6 @@
             </td>
           </tr>
           <tr
-            :key="id + '_internal_links_result'"
             v-if="page.internalLinksResult && page.internalLinksResult.message"
           >
             <td colspan="8" class="k-meta-result">
@@ -178,7 +175,6 @@ export default {
       for (let i = 0, l = this.pages.length; i < l; i++) {
         const page = this.pages[i];
         page.internalLinksResult = null;
-        this.$set(this.pages, i, page);
       }
 
       // Get new results
@@ -190,7 +186,6 @@ export default {
           language: window.panel.language?.code,
         });
         page.internalLinksResult = result;
-        this.$set(this.pages, i, page);
       }
       this.isBusy = false;
     },
@@ -243,7 +238,7 @@ export default {
 
 .k-meta td:nth-child(odd),
 .k-meta th:nth-child(odd) {
-  background: var(--color-background);
+  background: var(--panel-color-back);
 }
 
 .k-meta tbody tr:not([data-is-indexable="true"]) {
