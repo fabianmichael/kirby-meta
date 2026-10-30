@@ -24,11 +24,9 @@ return function (Kirby $kirby) {
         $fields['meta_robots'] = 'fields/meta/robots-group';
     }
 
-    // stats (only Kirby 3.7+)
+    // stats
 
-    if ($kirby->extension('sections', 'stats')) {
-        $sections['meta_status'] = 'sections/meta/status';
-    }
+    $sections['meta_status'] = 'sections/meta/status';
 
     // compose columns
 
