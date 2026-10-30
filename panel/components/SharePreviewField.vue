@@ -156,7 +156,7 @@ export default {
 
 .k-meta-sharing-preview__label > * + * {
   margin-left: var(--spacing-2);
-  padding-top: var(--spacing-px);
+  padding-top: 1px;
 }
 
 .k-meta-sharing-preview__source-badge {
@@ -226,7 +226,7 @@ export default {
 
 .k-meta-sharing-preview__preview-headline {
   color: var(--color-text);
-  font-size: var(--text-base);
+  font-size: var(--text-md);
   line-height: var(--leading-tight);
   margin: var(--spacing-1) 0;
   padding: 0;

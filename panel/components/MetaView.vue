@@ -238,7 +238,7 @@ export default {
 
 .k-meta td:nth-child(odd),
 .k-meta th:nth-child(odd) {
-  background: var(--color-background);
+  background: var(--panel-color-back);
 }
 
 .k-meta tbody tr:not([data-is-indexable="true"]) {
