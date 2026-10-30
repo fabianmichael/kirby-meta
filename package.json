@@ -7,7 +7,7 @@
   "devDependencies": {
     "eslint": "^10.0.2",
     "eslint-config-xo": "^0.50.0",
-    "kirbyup": "^3.4.1",
+    "kirbyup": "^4.0.0-beta.1",
     "prettier": "^3.8.1",
     "standard": "^17.1.2",
     "stylelint": "^17.4.0",
